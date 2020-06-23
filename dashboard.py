@@ -6,6 +6,7 @@ rpm = 0
 limit = False
 speed_limit = False
 temp_limit = False
+sports_mode = False
 
 #initialize the interface
 pygame.init()
@@ -266,12 +267,29 @@ gradient_img = pygame.image.load('Gradient.png')
 gradientX = 0
 gradientY = 0
 
+#Sports
+sport_img = pygame.image.load('sport.png')
+sportsX = 0
+sportsY = 0
+
 def gradient():
     screen.blit(gradient_img, (gradientX, gradientY))
 
+def sports():
+    screen.blit(sport_img, (sportsX, sportsY))
+
+def button():
+    button_img = pygame.image.load('Ellipse 6.png')
+    screen.blit(button_img, (90, 495))
+
+
 #Redraw
 def RedrawWindow():
-    gradient()
+    if sports_mode is False:
+        gradient()
+    else:
+        sports()
+    button()
     tachometer(rpm)
     framework()
     display_speed()
@@ -287,10 +305,14 @@ while app_running:
     #screen fill
     screen.fill((0, 0, 0))
 
-
+    mouse = pygame.mouse.get_pos()
+    print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if 90 < mouse[0] < 135 and 495 < mouse[1] < 675:
+                sports_mode = True
 
     RedrawWindow()
 
