@@ -295,12 +295,12 @@ def get_rpm(rpmRaw):
 def get_speed(speedRaw):
     if not speedRaw.is_null():
         global speed_value
-        speed_value = int(speedRaw.value.magnitude * .060934) #to MPH instead of KMH
+        speed_value = int(speedRaw.value.magnitude * 0.621371) #to MPH instead of KMH
 
 def get_temp(tempRaw):
     if not tempRaw.is_null():
         global temp_value
-        temp_value = int(tempRaw.value.magnitude)
+        temp_value = int((tempRaw.value.magnitude * 1.8) + 32)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -312,8 +312,7 @@ connection.start()
 app_running = True
 while app_running:
 
-#   clock.tick(60)
-#    sleep(0.05)
+   clock.tick(60)
 
     #screen fill
     screen.fill((0, 0, 0))
