@@ -24,6 +24,7 @@ pygame.display.set_caption("Dashboard 2.0")
 
 #OBD Initilization
 connection = obd.Async(fast=False, check_voltage=True)
+#connection = obd.Async(fast=False)
 #connection = obd.OBD()
 
 #Tachometer
