@@ -296,9 +296,15 @@ def get_speed(speedRaw):
         global speed_value
         speed_value = int(speedRaw.value.magnitude * .060934) #to MPH instead of KMH
 
+def get_temp(tempRaw):
+    if not tempRaw.is_null():
+        global temp_value
+        temp_value = int(tempRaw.value.magnitude)
+        
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
+connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
 connection.start()
 
 #Game Loop
