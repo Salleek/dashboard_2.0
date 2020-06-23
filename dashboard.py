@@ -204,6 +204,7 @@ def tachometer(rpm):
 speed_value = 0
 speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
 mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+button_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 
 speedtextX0 = 500   #one's place
 speedtextY0 = 255
@@ -216,6 +217,11 @@ speedtextY100 = 255
 
 mphtextX = 488
 mphtextY = 325
+
+sports_txt_X = 100
+sports_txt_Y = 520
+normal_txt_X = 95
+normal_txt_Y = 520
 
 def display_speed():
     speed = speed_font.render(str(speed_value), True, (255,255,255))
@@ -281,7 +287,12 @@ def sports():
 def button():
     button_img = pygame.image.load('Ellipse 6.png')
     screen.blit(button_img, (90, 495))
-
+    if sports_mode is False:
+        button_label = button_font.render('Sports', True, (255, 255, 255))
+        screen.blit(button_label, (sports_txt_X, sports_txt_Y))
+    else:
+        button_label = button_font.render('Normal', True, (255, 255, 255))
+        screen.blit(button_label, (normal_txt_X, normal_txt_Y))
 
 #Redraw
 def RedrawWindow():
@@ -311,7 +322,7 @@ while app_running:
         if event.type == pygame.QUIT:
             app_running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if 90 < mouse[0] < 135 and 495 < mouse[1] < 675:
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
                 sports_mode = True
 
     RedrawWindow()
