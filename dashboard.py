@@ -1,5 +1,6 @@
 import pygame
 import time
+import obd
 
 #globals
 rpm = 0
@@ -15,9 +16,13 @@ clock = pygame.time.Clock()
 
 #create screen
 screen = pygame.display.set_mode((1024, 600))
+#screen = pygame.display.set_mode((800, 480))
 
 #Title of app
 pygame.display.set_caption("Dashboard 2.0")
+
+#OBD Initilization
+connection = obd.Async(fast=False)
 
 #Tachometer
 tachometer_0 = [pygame.image.load('0-1000/Tach.png'), pygame.image.load('0-1000/Tach2.png'), pygame.image.load('0-1000/Tach3.png'), pygame.image.load('0-1000/Tach4.png'), pygame.image.load('0-1000/Tach5.png'),pygame.image.load('0-1000/Tach6.png'), pygame.image.load('0-1000/Tach7.png'), pygame.image.load('0-1000/Tach8.png')]
@@ -201,8 +206,8 @@ def tachometer(rpm):
 
 #Speed
 speed_value = 0
-speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
-mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+speed_font = pygame.font.Font('Fonts/LEELUISL.TTF', 50)
+mphfont = pygame.font.Font('Fonts/LEELUISL.TTF', 25)
 
 speedtextX0 = 500   #one's place
 speedtextY0 = 255
@@ -277,6 +282,20 @@ def RedrawWindow():
     display_speed()
     temp_gauge()
     pygame.display.update()
+    
+#OBD Callback Definitions
+def get_rpm(rpmRaw):
+    if not rpmRaw.is_null():
+        rpm = int(rpmRaw.value.mangitude)
+
+def get_speed(speedRaw):
+    if not speedRaw.is_null():
+        speed_value = int(speedRaw.value.mangitude * .060934) #to MPH instead of KMH
+
+#OBD Connection Callbacks
+connection.watch(obd.commands.RPM, callback=get_rpm)
+connection.watch(obd.commands.SPEED, callback=get_speed)
+connection.start()
 
 #Game Loop
 app_running = True
@@ -290,39 +309,42 @@ while app_running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            connection.stop()
+            connection.close()
             app_running = False
+                
 
     RedrawWindow()
 
-#rpm testing
-    if rpm < 5000 and limit == False:
-        rpm += 150
-        if rpm >= 5000:
-            limit = True
-    elif limit == True:
-        rpm -= 75
-        if rpm <= 450:
-            limit = False
-
-#speed testing
-    if speed_value < 175 and speed_limit == False:
-        speed_value += 1
-        if speed_value >= 175:
-            speed_limit = True
-    elif speed_limit == True:
-        speed_value -= 1
-        if speed_value <= 0:
-            speed_limit = False
-
-#temp gauge testing
-    if temp_value < 310 and temp_limit == False:
-        temp_value += 1
-        if temp_value >= 310:
-            temp_value = True
-    elif temp_value == True:
-        temp_value -= 1
-        if temp_value <= 0:
-            temp_value = False
+###rpm testing
+##    if rpm < 8500 and limit == False:
+##        rpm += 150
+##        if rpm >= 8500:
+##            limit = True
+##    elif limit == True:
+##        rpm -= 75
+##        if rpm <= 450:
+##            limit = False
+##
+###speed testing
+##    if speed_value < 175 and speed_limit == False:
+##        speed_value += 1
+##        if speed_value >= 175:
+##            speed_limit = True
+##    elif speed_limit == True:
+##        speed_value -= 1
+##        if speed_value <= 0:
+##            speed_limit = False
+##
+###temp gauge testing
+##    if temp_value < 310 and temp_limit == False:
+##        temp_value += 1
+##        if temp_value >= 310:
+##            temp_value = True
+##    elif temp_value == True:
+##        temp_value -= 1
+##        if temp_value <= 0:
+##            temp_value = False
 
 
 
