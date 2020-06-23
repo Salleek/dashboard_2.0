@@ -286,10 +286,12 @@ def RedrawWindow():
 #OBD Callback Definitions
 def get_rpm(rpmRaw):
     if not rpmRaw.is_null():
+        global rpm
         rpm = int(rpmRaw.value.mangitude)
 
 def get_speed(speedRaw):
     if not speedRaw.is_null():
+        global speed_value
         speed_value = int(speedRaw.value.mangitude * .060934) #to MPH instead of KMH
 
 #OBD Connection Callbacks
