@@ -287,6 +287,7 @@ def sports():
 def button():
     button_img = pygame.image.load('Ellipse 6.png')
     screen.blit(button_img, (90, 495))
+    # Checks the state and changes the text accordingly
     if sports_mode is False:
         button_label = button_font.render('Sports', True, (255, 255, 255))
         screen.blit(button_label, (sports_txt_X, sports_txt_Y))
@@ -321,10 +322,13 @@ while app_running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
+        # Checks if the mouse click was detected on the button
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+            # mouse[0] is the x coordinate, mouse[1] is the y
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and sports_mode is False:
                 sports_mode = True
-
+            elif 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and sports_mode is True:
+                sports_mode = False
     RedrawWindow()
 
 #rpm testing
