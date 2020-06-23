@@ -16,7 +16,12 @@ pygame.init()
 clock = pygame.time.Clock()
 
 #create screen
-screen = pygame.display.set_mode((1024, 600))
+infoObject = pygame.display.Info()
+display_width = infoObject.current_w
+display_height = infoObject.current_h
+
+screen = pygame.display.set_mode((display_width,display_height))
+#screen = pygame.display.set_mode((1024, 600))
 #screen = pygame.display.set_mode((800, 480))
 
 #Title of app
