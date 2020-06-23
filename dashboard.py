@@ -7,6 +7,7 @@ limit = False
 speed_limit = False
 temp_limit = False
 sports_mode = False
+button_press = False
 
 #initialize the interface
 pygame.init()
@@ -274,7 +275,7 @@ gradientX = 0
 gradientY = 0
 
 #Sports
-sport_img = pygame.image.load('sport.png')
+sport_img = pygame.image.load('Gradient_red.png')
 sportsX = 0
 sportsY = 0
 
@@ -285,8 +286,11 @@ def sports():
     screen.blit(sport_img, (sportsX, sportsY))
 
 def button():
-    button_img = pygame.image.load('Ellipse 6.png')
-    screen.blit(button_img, (90, 495))
+    if button_press is True:
+        button_img = pygame.image.load('Sport Button Pressed (no label).png')
+    else:
+        button_img = pygame.image.load('Sport button not pressed (no label).png')
+    screen.blit(button_img, (45, 450))
     # Checks the state and changes the text accordingly
     if sports_mode is False:
         button_label = button_font.render('Sports', True, (255, 255, 255))
@@ -324,11 +328,17 @@ while app_running:
             app_running = False
         # Checks if the mouse click was detected on the button
         if event.type == pygame.MOUSEBUTTONDOWN:
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                button_press = True
+        if event.type == pygame.MOUSEBUTTONUP:
+            button_press = False
             # mouse[0] is the x coordinate, mouse[1] is the y
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and sports_mode is False:
-                sports_mode = True
-            elif 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and sports_mode is True:
-                sports_mode = False
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                if sports_mode is False:
+                    sports_mode = True
+                else:
+                    sports_mode = False
+
     RedrawWindow()
 
 #rpm testing
