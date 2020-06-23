@@ -28,8 +28,8 @@ screen = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption("Dashboard 2.0")
 
 #OBD Initilization
-connection = obd.Async(fast=False, check_voltage=True)
-#connection = obd.Async(fast=False)
+#connection = obd.Async(fast=False, check_voltage=True)
+connection = obd.Async(fast=False)
 #connection = obd.OBD()
 
 #Tachometer
@@ -316,8 +316,7 @@ connection.start()
 #Game Loop
 app_running = True
 while app_running:
-
-   clock.tick(60)
+    clock.tick(60)
 
     #screen fill
     screen.fill((0, 0, 0))
