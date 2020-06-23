@@ -1,6 +1,7 @@
 import pygame
 import time
 import obd
+#obd.logger.setLevel(obd.logging.DEBUG)
 
 #globals
 rpm = 0
@@ -22,7 +23,8 @@ screen = pygame.display.set_mode((1024, 600))
 pygame.display.set_caption("Dashboard 2.0")
 
 #OBD Initilization
-connection = obd.Async(fast=False)
+connection = obd.Async(fast=False, check_voltage=True)
+#connection = obd.OBD()
 
 #Tachometer
 tachometer_0 = [pygame.image.load('0-1000/Tach.png'), pygame.image.load('0-1000/Tach2.png'), pygame.image.load('0-1000/Tach3.png'), pygame.image.load('0-1000/Tach4.png'), pygame.image.load('0-1000/Tach5.png'),pygame.image.load('0-1000/Tach6.png'), pygame.image.load('0-1000/Tach7.png'), pygame.image.load('0-1000/Tach8.png')]
@@ -206,8 +208,8 @@ def tachometer(rpm):
 
 #Speed
 speed_value = 0
-speed_font = pygame.font.Font('Fonts/LEELUISL.TTF', 50)
-mphfont = pygame.font.Font('Fonts/LEELUISL.TTF', 25)
+speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
+mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 
 speedtextX0 = 500   #one's place
 speedtextY0 = 255
@@ -287,12 +289,12 @@ def RedrawWindow():
 def get_rpm(rpmRaw):
     if not rpmRaw.is_null():
         global rpm
-        rpm = int(rpmRaw.value.mangitude)
+        rpm = int(rpmRaw.value.magnitude)
 
 def get_speed(speedRaw):
     if not speedRaw.is_null():
         global speed_value
-        speed_value = int(speedRaw.value.mangitude * .060934) #to MPH instead of KMH
+        speed_value = int(speedRaw.value.magnitude * .060934) #to MPH instead of KMH
 
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -303,8 +305,8 @@ connection.start()
 app_running = True
 while app_running:
 
-    clock.tick(60)
-    sleep(0.05)
+#   clock.tick(60)
+#    sleep(0.05)
 
     #screen fill
     screen.fill((0, 0, 0))
