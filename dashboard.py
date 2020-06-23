@@ -304,6 +304,7 @@ app_running = True
 while app_running:
 
     clock.tick(60)
+    sleep(0.05)
 
     #screen fill
     screen.fill((0, 0, 0))
