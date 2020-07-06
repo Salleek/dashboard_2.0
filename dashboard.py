@@ -6,6 +6,9 @@ rpm = 0
 limit = False
 speed_limit = False
 temp_limit = False
+sports_mode = False
+sports_button_press = False
+colors_button_press = False
 
 #initialize the interface
 pygame.init()
@@ -199,7 +202,7 @@ def tachometer(rpm):
     else:
         screen.blit(tachometer_0[0], (tachometerX, tachometerY))
 
-#Speed
+# Speed
 speed_value = 0
 speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
 mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
@@ -217,8 +220,8 @@ mphtextX = 488
 mphtextY = 325
 
 def display_speed():
-    speed = speed_font.render(str(speed_value), True, (255,255,255))
-    mph = mphfont.render("MPH", True, (255,255, 255))
+    speed = speed_font.render(str(speed_value), True, (255, 255, 255))
+    mph = mphfont.render("MPH", True, (255, 255, 255))
 
     if speed_value <= 9:
         screen.blit(speed, (speedtextX0, speedtextY0))
@@ -232,8 +235,13 @@ def display_speed():
 #Temp Gauge
 temp_value = 0
 
+temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
+
+temp_txt_X = 110
+temp_txt_Y = 420
+
 temp_indicator_img = pygame.image.load('temp_gauge/indicator.png')
-temp_indicatorX = 135  #135 = middle, 240 = max, 30 = min
+temp_indicatorX = 115  #135 = middle, 240 = max, 30 = min
 temp_indicatorY = 399
 
 def temp_gauge():
@@ -253,6 +261,11 @@ def temp_gauge():
     elif temp_value > 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 105, temp_indicatorY))
 
+def display_temp():
+    temp = temp_font.render((str(temp_value) + ' °F'), True, (255, 255, 255))
+
+    screen.blit(temp, (temp_txt_X, temp_txt_Y))
+
 #Framework
 framework_img = pygame.image.load('framework.png')
 frameworkX = 8
@@ -266,16 +279,67 @@ gradient_img = pygame.image.load('Gradient.png')
 gradientX = 0
 gradientY = 0
 
+#Sports
+sport_img = pygame.image.load('Gradient_red.png')
+sportsX = 0
+sportsY = 0
+
 def gradient():
     screen.blit(gradient_img, (gradientX, gradientY))
 
+def sports():
+    screen.blit(sport_img, (sportsX, sportsY))
+
+# Buttons
+normal_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+sports_font = pygame.font.Font('Fonts/pirulen rg.ttf', 13)
+
+# Sports button
+sports_txt_X = 98
+sports_txt_Y = 530
+normal_txt_X = 97
+normal_txt_Y = 530
+
+def sports_button():
+    if sports_button_press is True:
+        button_img = pygame.image.load('Sport Button Pressed (no label).png')
+    else:
+        button_img = pygame.image.load('Sport button not pressed (no label).png')
+    screen.blit(button_img, (45, 450))
+    # Checks the state and changes the text accordingly
+    if sports_mode is False:
+        button_label = sports_font.render('Sports', True, (255, 255, 255))
+        screen.blit(button_label, (sports_txt_X, sports_txt_Y))
+    else:
+        button_label = sports_font.render('Normal', True, (255, 255, 255))
+        screen.blit(button_label, (normal_txt_X, normal_txt_Y))
+
+# Colors button
+colors_txt_X = 809
+colors_txt_Y = 530
+
+def colors_button():
+    if colors_button_press is True:
+        colors_img = pygame.image.load('Sport Button Pressed (no label).png')
+    else:
+        colors_img = pygame.image.load('Sport button not pressed (no label).png')
+    screen.blit(colors_img, (754, 450))
+    colors_label = sports_font.render('Colors', True, (255, 255, 255))
+    screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
+
 #Redraw
 def RedrawWindow():
-    gradient()
+    if sports_mode is False:
+        gradient()
+    else:
+        sports()
+        colors_button()
+    sports_button()
     tachometer(rpm)
     framework()
     display_speed()
     temp_gauge()
+    display_temp()
     pygame.display.update()
 
 #Game Loop
@@ -287,10 +351,25 @@ while app_running:
     #screen fill
     screen.fill((0, 0, 0))
 
-
+    mouse = pygame.mouse.get_pos()
+    print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
+        # Checks for when we press the mouse button down
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            # Checks if the mouse click was where the button is
+            # mouse[0] is the x coordinate, mouse[1] is the y
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                sports_button_press = True
+        # Checks for when we let go of the mouse button
+        if event.type == pygame.MOUSEBUTTONUP:
+            sports_button_press = False
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                if sports_mode is False:
+                    sports_mode = True
+                else:
+                    sports_mode = False
 
     RedrawWindow()
 
