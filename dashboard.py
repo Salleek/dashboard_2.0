@@ -324,7 +324,7 @@ def back_button():
         back_img = pygame.image.load('Back Button Pressed.png')
     else:
         back_img = pygame.image.load('Back Button.png')
-    screen.blit(back_img,(10, 425))
+    screen.blit(back_img, (10, 425))
 
 def reset_button():
     if reset_button_press is True:
@@ -368,13 +368,15 @@ def RedrawWindow():
         sports()
     else:
         gradient()
+
     # Checks if the current screen needs the gauges and normal information
     if current_page < 3:
         displays()
     else:
         back_button()
-        reset_button()
-        interval_button()
+        if current_page == 3:
+            reset_button()
+            interval_button()
 
     pygame.display.update()
 
@@ -396,16 +398,17 @@ while app_running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Checks if the mouse click was where the button is
             # mouse[0] is the x coordinate, mouse[1] is the y
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
                 sports_button_press = True
-            if 55 < mouse[0] < 146 and 471 < mouse[1] < 561:
+            elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
                 back_button_press = True
+            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                reset_button_press = True
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                interval_button_press = True
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
-            sports_button_press = False
-            back_button_press = False
-            maintenance_press = False
-            diagnostic_press = False
+            interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -419,9 +422,18 @@ while app_running:
             # Goes to vehicle diagnostics
             elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 3:
                 current_page = 5
-            elif 56 < mouse[0] < 145 and 471 < mouse[1] < 560 and current_page > 2:
-                current_page = 1
-
+            # Back button
+            elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
+                if current_page == 3 or current_page == 5:
+                    current_page = 1
+                else:
+                    current_page -= 1
+            # Reset button
+            # elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                # Reset the mileage
+            # Interval button
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                current_page = 4
     RedrawWindow()
 
 #rpm testing
