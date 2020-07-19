@@ -206,10 +206,191 @@ def tachometer(rpm):
     else:
         screen.blit(tachometer_0[0], (tachometerX, tachometerY))
 
+#sports mode tach
+stachometer_0 = [pygame.image.load('sport_mode/0-1000/Tach1.png'), pygame.image.load('sport_mode/0-1000/Tach2.png'), pygame.image.load('sport_mode/0-1000/Tach3.png'), pygame.image.load('sport_mode/0-1000/Tach4.png'), pygame.image.load('sport_mode/0-1000/Tach5.png'),pygame.image.load('sport_mode/0-1000/Tach6.png'), pygame.image.load('sport_mode/0-1000/Tach7.png'), pygame.image.load('sport_mode/0-1000/Tach8.png')]
+stachometer_1 = [pygame.image.load('sport_mode/1000-2000/Tach1.png'), pygame.image.load('sport_mode/1000-2000/Tach2.png'), pygame.image.load('sport_mode/1000-2000/Tach3.png'), pygame.image.load('sport_mode/1000-2000/Tach4.png'), pygame.image.load('sport_mode/1000-2000/Tach5.png'),pygame.image.load('sport_mode/1000-2000/Tach6.png'), pygame.image.load('sport_mode/1000-2000/Tach7.png'), pygame.image.load('sport_mode/1000-2000/Tach8.png')]
+stachometer_2 = [pygame.image.load('sport_mode/2000-3000/Tach1.png'), pygame.image.load('sport_mode/2000-3000/Tach2.png'), pygame.image.load('sport_mode/2000-3000/Tach3.png'), pygame.image.load('sport_mode/2000-3000/Tach4.png'), pygame.image.load('sport_mode/2000-3000/Tach5.png'),pygame.image.load('sport_mode/2000-3000/Tach6.png'), pygame.image.load('sport_mode/2000-3000/Tach7.png'), pygame.image.load('sport_mode/2000-3000/Tach8.png'), pygame.image.load('sport_mode/2000-3000/Tach9.png')]
+stachometer_3 = [pygame.image.load('sport_mode/3000-4000/Tach1.png'), pygame.image.load('sport_mode/3000-4000/Tach2.png'), pygame.image.load('sport_mode/3000-4000/Tach3.png'), pygame.image.load('sport_mode/3000-4000/Tach4.png'), pygame.image.load('sport_mode/3000-4000/Tach5.png'),pygame.image.load('sport_mode/3000-4000/Tach6.png'), pygame.image.load('sport_mode/3000-4000/Tach7.png')]
+stachometer_4 = [pygame.image.load('sport_mode/4000-5000/Tach1.png'), pygame.image.load('sport_mode/4000-5000/Tach2.png'), pygame.image.load('sport_mode/4000-5000/Tach3.png'), pygame.image.load('sport_mode/4000-5000/Tach4.png'), pygame.image.load('sport_mode/4000-5000/Tach5.png'),pygame.image.load('sport_mode/4000-5000/Tach6.png'), pygame.image.load('sport_mode/4000-5000/Tach7.png'), pygame.image.load('sport_mode/4000-5000/Tach8.png')]
+stachometer_5 = [pygame.image.load('sport_mode/5000-6000/Tach1.png'), pygame.image.load('sport_mode/5000-6000/Tach2.png'), pygame.image.load('sport_mode/5000-6000/Tach3.png'), pygame.image.load('sport_mode/5000-6000/Tach4.png'), pygame.image.load('sport_mode/5000-6000/Tach5.png'),pygame.image.load('sport_mode/5000-6000/Tach6.png'), pygame.image.load('sport_mode/5000-6000/Tach7.png'), pygame.image.load('sport_mode/5000-6000/Tach8.png'), pygame.image.load('sport_mode/5000-6000/Tach9.png')]
+stachometer_6 = [pygame.image.load('sport_mode/6000-7000/Tach1.png'), pygame.image.load('sport_mode/6000-7000/Tach2.png'), pygame.image.load('sport_mode/6000-7000/Tach3.png'), pygame.image.load('sport_mode/6000-7000/Tach4.png'), pygame.image.load('sport_mode/6000-7000/Tach5.png'),pygame.image.load('sport_mode/6000-7000/Tach6.png'), pygame.image.load('sport_mode/6000-7000/Tach7.png')]
+stachometer_7 = [pygame.image.load('sport_mode/7000-8000/Tach1.png'), pygame.image.load('sport_mode/7000-8000/Tach2.png'), pygame.image.load('sport_mode/7000-8000/Tach3.png'), pygame.image.load('sport_mode/7000-8000/Tach4.png'), pygame.image.load('sport_mode/7000-8000/Tach5.png'),pygame.image.load('sport_mode/7000-8000/Tach6.png'), pygame.image.load('sport_mode/7000-8000/Tach7.png'), pygame.image.load('sport_mode/7000-8000/Tach8.png'), pygame.image.load('sport_mode/7000-8000/Tach9.png')]
+stachometer_8 = [pygame.image.load('sport_mode/8000-9000/Tach1.png'), pygame.image.load('sport_mode/8000-9000/Tach2.png'), pygame.image.load('sport_mode/8000-9000/Tach3.png'), pygame.image.load('sport_mode/8000-9000/Tach4.png'), pygame.image.load('sport_mode/8000-9000/Tach5.png'),pygame.image.load('sport_mode/8000-9000/Tach6.png'), pygame.image.load('sport_mode/8000-9000/Tach7.png')]
+
+def stachometer(rpm):
+
+    #0-1000
+    if rpm > 0 and rpm <=142:
+        screen.blit(stachometer_0[1], (tachometerX, tachometerY))
+    elif rpm > 142 and rpm <= 284:
+        screen.blit(stachometer_0[2], (tachometerX, tachometerY))
+    elif rpm > 284 and rpm <= 426:
+        screen.blit(stachometer_0[3], (tachometerX, tachometerY))
+    elif rpm > 426 and rpm <= 568:
+        screen.blit(stachometer_0[4], (tachometerX, tachometerY))
+    elif rpm > 568 and rpm <= 710:
+        screen.blit(stachometer_0[5], (tachometerX, tachometerY))
+    elif rpm > 710 and rpm <= 852:
+        screen.blit(stachometer_0[6], (tachometerX, tachometerY))
+    elif rpm > 852 and rpm <= 1000:
+        screen.blit(stachometer_0[7], (tachometerX, tachometerY))
+
+    #1000-2000
+    elif rpm > 1000 and rpm <= 1125:
+        screen.blit(stachometer_1[0], (tachometerX, tachometerY))
+    elif rpm > 1125 and rpm <= 1250:
+        screen.blit(stachometer_1[1], (tachometerX, tachometerY))
+    elif rpm > 1250 and rpm <= 1375:
+        screen.blit(stachometer_1[2], (tachometerX, tachometerY))
+    elif rpm > 1375 and rpm <= 1500:
+        screen.blit(stachometer_1[3], (tachometerX, tachometerY))
+    elif rpm > 1500 and rpm <= 1625:
+        screen.blit(stachometer_1[4], (tachometerX, tachometerY))
+    elif rpm > 1625 and rpm <= 1750:
+        screen.blit(stachometer_1[5], (tachometerX, tachometerY))
+    elif rpm > 1750 and rpm <= 1875:
+        screen.blit(stachometer_1[6], (tachometerX, tachometerY))
+    elif rpm > 1875 and rpm <= 2000:
+        screen.blit(stachometer_1[7], (tachometerX, tachometerY))
+
+    #2000-3000
+    elif rpm > 2000 and rpm <= 2111:
+        screen.blit(stachometer_2[0], (tachometerX, tachometerY))
+    elif rpm > 2111 and rpm <= 2222:
+        screen.blit(stachometer_2[1], (tachometerX, tachometerY))
+    elif rpm > 2222 and rpm <= 2333:
+        screen.blit(stachometer_2[2], (tachometerX, tachometerY))
+    elif rpm > 2333 and rpm <= 2444:
+        screen.blit(stachometer_2[3], (tachometerX, tachometerY))
+    elif rpm > 2444 and rpm <= 2555:
+        screen.blit(stachometer_2[4], (tachometerX, tachometerY))
+    elif rpm > 2555 and rpm <= 2666:
+        screen.blit(stachometer_2[5], (tachometerX, tachometerY))
+    elif rpm > 2666 and rpm <= 2777:
+        screen.blit(stachometer_2[6], (tachometerX, tachometerY))
+    elif rpm > 2777 and rpm <= 2888:
+        screen.blit(stachometer_2[7], (tachometerX, tachometerY))
+    elif rpm > 2888 and rpm <= 3000:
+        screen.blit(stachometer_2[8], (tachometerX, tachometerY))
+
+    #3000-4000
+    elif rpm > 3000 and rpm <= 3142:
+        screen.blit(stachometer_3[0], (tachometerX, tachometerY))
+    elif rpm > 3142 and rpm <= 3284:
+        screen.blit(stachometer_3[1], (tachometerX, tachometerY))
+    elif rpm > 3284 and rpm <= 3426:
+        screen.blit(stachometer_3[2], (tachometerX, tachometerY))
+    elif rpm > 3426 and rpm <= 3568:
+        screen.blit(stachometer_3[3], (tachometerX, tachometerY))
+    elif rpm > 3568 and rpm <= 3710:
+        screen.blit(stachometer_3[4], (tachometerX, tachometerY))
+    elif rpm > 3710 and rpm <= 3852:
+        screen.blit(stachometer_3[5], (tachometerX, tachometerY))
+    elif rpm > 3852 and rpm <= 4000:
+        screen.blit(stachometer_3[6], (tachometerX, tachometerY))
+
+    #4000-5000
+    elif rpm > 4000 and rpm <= 4125:
+        screen.blit(stachometer_4[0], (tachometerX, tachometerY))
+    elif rpm > 4125 and rpm <= 4250:
+        screen.blit(stachometer_4[1], (tachometerX, tachometerY))
+    elif rpm > 4250 and rpm <= 4375:
+        screen.blit(stachometer_4[2], (tachometerX, tachometerY))
+    elif rpm > 4375 and rpm <= 4500:
+        screen.blit(stachometer_4[3], (tachometerX, tachometerY))
+    elif rpm > 4500 and rpm <= 4625:
+        screen.blit(stachometer_4[4], (tachometerX, tachometerY))
+    elif rpm > 4625 and rpm <= 4750:
+        screen.blit(stachometer_4[5], (tachometerX, tachometerY))
+    elif rpm > 4750 and rpm <= 4875:
+        screen.blit(stachometer_4[6], (tachometerX, tachometerY))
+    elif rpm > 4875 and rpm <= 5000:
+        screen.blit(stachometer_4[7], (tachometerX, tachometerY))
+
+    #5000-6000
+    elif rpm > 5000 and rpm <= 5111:
+        screen.blit(stachometer_5[0], (tachometerX, tachometerY))
+    elif rpm > 5111 and rpm <= 5222:
+        screen.blit(stachometer_5[1], (tachometerX, tachometerY))
+    elif rpm > 5222 and rpm <= 5333:
+        screen.blit(stachometer_5[2], (tachometerX, tachometerY))
+    elif rpm > 5333 and rpm <= 5444:
+        screen.blit(stachometer_5[3], (tachometerX, tachometerY))
+    elif rpm > 5444 and rpm <= 5555:
+        screen.blit(stachometer_5[4], (tachometerX, tachometerY))
+    elif rpm > 5555 and rpm <= 5666:
+        screen.blit(stachometer_5[5], (tachometerX, tachometerY))
+    elif rpm > 5666 and rpm <= 5777:
+        screen.blit(stachometer_5[6], (tachometerX, tachometerY))
+    elif rpm > 5777 and rpm <= 5888:
+        screen.blit(stachometer_5[7], (tachometerX, tachometerY))
+    elif rpm > 5888 and rpm <= 6000:
+        screen.blit(stachometer_5[8], (tachometerX, tachometerY))
+
+    #6000-7000
+    elif rpm > 6000 and rpm <= 6142:
+        screen.blit(stachometer_6[0], (tachometerX, tachometerY))
+    elif rpm > 6142 and rpm <= 6284:
+        screen.blit(stachometer_6[1], (tachometerX, tachometerY))
+    elif rpm > 6284 and rpm <= 6426:
+        screen.blit(stachometer_6[2], (tachometerX, tachometerY))
+    elif rpm > 6426 and rpm <= 6568:
+        screen.blit(stachometer_6[3], (tachometerX, tachometerY))
+    elif rpm > 6568 and rpm <= 6710:
+        screen.blit(stachometer_6[4], (tachometerX, tachometerY))
+    elif rpm > 6710 and rpm <= 6852:
+        screen.blit(stachometer_6[5], (tachometerX, tachometerY))
+    elif rpm > 6852 and rpm <= 7000:
+        screen.blit(stachometer_6[6], (tachometerX, tachometerY))
+
+    #7000-8000
+    elif rpm > 7000 and rpm <= 7111:
+        screen.blit(stachometer_7[0], (tachometerX, tachometerY))
+    elif rpm > 7111 and rpm <= 7222:
+        screen.blit(stachometer_7[1], (tachometerX, tachometerY))
+    elif rpm > 7222 and rpm <= 7333:
+        screen.blit(stachometer_7[2], (tachometerX, tachometerY))
+    elif rpm > 7333 and rpm <= 7444:
+        screen.blit(stachometer_7[3], (tachometerX, tachometerY))
+    elif rpm > 7444 and rpm <= 7555:
+        screen.blit(stachometer_7[4], (tachometerX, tachometerY))
+    elif rpm > 7555 and rpm <= 7666:
+        screen.blit(stachometer_7[5], (tachometerX, tachometerY))
+    elif rpm > 7666 and rpm <= 7777:
+        screen.blit(stachometer_7[6], (tachometerX, tachometerY))
+    elif rpm > 7777 and rpm <= 7888:
+        screen.blit(stachometer_7[7], (tachometerX, tachometerY))
+    elif rpm > 7888 and rpm <= 8000:
+        screen.blit(stachometer_7[8], (tachometerX, tachometerY))
+
+    #8000-9000
+    elif rpm > 8000 and rpm <= 8142:
+        screen.blit(stachometer_8[0], (tachometerX, tachometerY))
+    elif rpm > 8142 and rpm <= 8284:
+        screen.blit(stachometer_8[1], (tachometerX, tachometerY))
+    elif rpm > 8284 and rpm <= 8426:
+        screen.blit(stachometer_8[2], (tachometerX, tachometerY))
+    elif rpm > 8426 and rpm <= 8568:
+        screen.blit(stachometer_8[3], (tachometerX, tachometerY))
+    elif rpm > 8568 and rpm <= 8710:
+        screen.blit(stachometer_8[4], (tachometerX, tachometerY))
+    elif rpm > 8710 and rpm <= 8852:
+        screen.blit(stachometer_8[5], (tachometerX, tachometerY))
+    elif rpm > 8852 and rpm <= 8000:
+        screen.blit(stachometer_8[6], (tachometerX, tachometerY))
+
+    else:
+        screen.blit(stachometer_0[0], (tachometerX, tachometerY))
+
+
 # Speed
 speed_value = 0
 speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
 mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+
+sspeed_font = pygame.font.Font('Fonts/pirulen rg.ttf', 50)
+smphfont = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
+
 
 speedtextX0 = 500   #one's place
 speedtextY0 = 255
@@ -236,16 +417,30 @@ def display_speed():
 
     screen.blit(mph, (mphtextX, mphtextY))
 
+def sdisplay_speed():
+    speed = sspeed_font.render(str(speed_value), True, (255, 255, 255))
+    mph = smphfont.render("MPH", True, (255, 255, 255))
+
+    if speed_value <= 9:
+        screen.blit(speed, (speedtextX0-10, speedtextY0))
+    elif speed_value >= 10 and speed_value <= 99:
+        screen.blit(speed, (speedtextX10-18, speedtextY10))
+    elif speed_value >= 100:
+        screen.blit(speed, (speedtextX100-18, speedtextY100))
+
+    screen.blit(mph, (mphtextX-13, mphtextY))
+
 #Temp Gauge
 temp_value = 0
 
-temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
+temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
 
-temp_txt_X = 110
+temp_txt_X = 30
 temp_txt_Y = 420
 
 temp_indicator_img = pygame.image.load('temp_gauge/indicator.png')
-temp_indicatorX = 115  #135 = middle, 240 = max, 30 = min
+temp_indicatorX = 140  #135 = middle, 240 = max, 30 = min
 temp_indicatorY = 399
 
 def temp_gauge():
@@ -263,20 +458,32 @@ def temp_gauge():
     elif temp_value > 250 and temp_value <= 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 70, temp_indicatorY))
     elif temp_value > 300:
-        screen.blit(temp_indicator_img, (temp_indicatorX + 105, temp_indicatorY))
+        screen.blit(temp_indicator_img, (temp_indicatorX + 95, temp_indicatorY))
 
 def display_temp():
-    temp = temp_font.render((str(temp_value) + ' °F'), True, (255, 255, 255))
+    temp = temp_font.render(('Coolant Temp ' + str(temp_value) + ' °F'), True, (255, 255, 255))
 
     screen.blit(temp, (temp_txt_X, temp_txt_Y))
+
+def sdisplay_temp():
+    temp = stemp_font.render(('Coolant ' + str(temp_value) + ' °F'), True, (255, 255, 255))
+
+    screen.blit(temp, (temp_txt_X-5, temp_txt_Y))
 
 #Framework
 framework_img = pygame.image.load('framework.png')
 frameworkX = 8
 frameworkY = 95
 
+sframework_img = pygame.image.load('sport_mode/framework/Framework.png')
+frameworkX = 8
+frameworkY = 95
+
 def framework():
     screen.blit(framework_img, (frameworkX, frameworkY))
+
+def sframework():
+    screen.blit(sframework_img, (frameworkX, frameworkY))
 
 #Gradient
 gradient_img = pygame.image.load('Gradient.png')
@@ -361,22 +568,37 @@ def displays():
     temp_gauge()
     display_temp()
 
+def sports_display():
+    stachometer(rpm)
+    sports_button()
+    sframework()
+    sdisplay_speed()
+    temp_gauge()
+    sdisplay_temp()
+
 #Redraw
 def RedrawWindow():
     # Checks which background image to use
     if current_page == 2:
         sports()
+
     else:
         gradient()
 
     # Checks if the current screen needs the gauges and normal information
-    if current_page < 3:
+    if current_page < 3 and current_page != 2:
         displays()
     else:
-        back_button()
-        if current_page == 3:
+        if current_page == 2:
+            sports_display()
+        elif current_page == 3:
             reset_button()
             interval_button()
+            back_button()
+        elif current_page == 4:
+            back_button()
+        elif current_page == 5:
+            back_button()
 
     pygame.display.update()
 
