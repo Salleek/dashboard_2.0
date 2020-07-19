@@ -6,9 +6,13 @@ rpm = 0
 limit = False
 speed_limit = False
 temp_limit = False
-sports_mode = False
+current_page = 1
 sports_button_press = False
-colors_button_press = False
+back_button_press = False
+reset_button_press = False
+interval_button_press = False
+
+# colors_button_press = False
 
 #initialize the interface
 pygame.init()
@@ -307,39 +311,73 @@ def sports_button():
         button_img = pygame.image.load('Sport button not pressed (no label).png')
     screen.blit(button_img, (45, 450))
     # Checks the state and changes the text accordingly
-    if sports_mode is False:
+    if current_page != 2:
         button_label = sports_font.render('Sports', True, (255, 255, 255))
         screen.blit(button_label, (sports_txt_X, sports_txt_Y))
     else:
         button_label = sports_font.render('Normal', True, (255, 255, 255))
         screen.blit(button_label, (normal_txt_X, normal_txt_Y))
 
+
+def back_button():
+    if back_button_press is True:
+        back_img = pygame.image.load('Back Button Pressed.png')
+    else:
+        back_img = pygame.image.load('Back Button.png')
+    screen.blit(back_img, (10, 425))
+
+def reset_button():
+    if reset_button_press is True:
+        reset_img = pygame.image.load('Reset Interval Button Pressed.png')
+    else:
+        reset_img = pygame.image.load('Reset Interval Button.png')
+    screen.blit(reset_img, (700, 425))
+
+def interval_button():
+    if interval_button_press is True:
+        interval_img = pygame.image.load('Interval Button Pressed.png')
+    else:
+        interval_img = pygame.image.load('Interval Button.png')
+    screen.blit(interval_img, (825, 425))
+
 # Colors button
-colors_txt_X = 809
-colors_txt_Y = 530
+# colors_txt_X = 809
+# colors_txt_Y = 530
+#
+# def colors_button():
+#     if colors_button_press is True:
+#         colors_img = pygame.image.load('Sport Button Pressed (no label).png')
+#     else:
+#         colors_img = pygame.image.load('Sport button not pressed (no label).png')
+#     screen.blit(colors_img, (754, 450))
+#     colors_label = sports_font.render('Colors', True, (255, 255, 255))
+#     screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
 
-def colors_button():
-    if colors_button_press is True:
-        colors_img = pygame.image.load('Sport Button Pressed (no label).png')
-    else:
-        colors_img = pygame.image.load('Sport button not pressed (no label).png')
-    screen.blit(colors_img, (754, 450))
-    colors_label = sports_font.render('Colors', True, (255, 255, 255))
-    screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
-
-#Redraw
-def RedrawWindow():
-    if sports_mode is False:
-        gradient()
-    else:
-        sports()
-        colors_button()
+def displays():
     sports_button()
     tachometer(rpm)
     framework()
     display_speed()
     temp_gauge()
     display_temp()
+
+#Redraw
+def RedrawWindow():
+    # Checks which background image to use
+    if current_page == 2:
+        sports()
+    else:
+        gradient()
+
+    # Checks if the current screen needs the gauges and normal information
+    if current_page < 3:
+        displays()
+    else:
+        back_button()
+        if current_page == 3:
+            reset_button()
+            interval_button()
+
     pygame.display.update()
 
 #Game Loop
@@ -360,17 +398,42 @@ while app_running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Checks if the mouse click was where the button is
             # mouse[0] is the x coordinate, mouse[1] is the y
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
                 sports_button_press = True
+            elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
+                back_button_press = True
+            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                reset_button_press = True
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                interval_button_press = True
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
-            sports_button_press = False
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
-                if sports_mode is False:
-                    sports_mode = True
+            interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
+            # current_page condition is used to prevent users from going to pages in the wrong order
+            # ex. Going from maintenance to sports mode
+            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
+                if current_page != 2:
+                    current_page = 2
                 else:
-                    sports_mode = False
-
+                    current_page = 1
+            # Goes to vehicle maintenance
+            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page < 3:
+                current_page = 3
+            # Goes to vehicle diagnostics
+            elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 3:
+                current_page = 5
+            # Back button
+            elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
+                if current_page == 3 or current_page == 5:
+                    current_page = 1
+                else:
+                    current_page -= 1
+            # Reset button
+            # elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                # Reset the mileage
+            # Interval button
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                current_page = 4
     RedrawWindow()
 
 #rpm testing
