@@ -704,10 +704,10 @@ while app_running:
                 else:
                     current_page = 1
             # Goes to vehicle maintenance
-            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page < 3:
+            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page < 2:
                 current_page = 3
             # Goes to vehicle diagnostics
-            elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 3:
+            elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 2:
                 current_page = 5
             # Back button
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
