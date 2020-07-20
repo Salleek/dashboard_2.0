@@ -20,7 +20,6 @@ five_thousand_press = False
 seven_thousand_five_press = False
 ten_thousand_press = False
 fifteen_thousand_press = False
-current_interval = 1
 # colors_button_press = False
 
 #initialize the interface
@@ -575,16 +574,9 @@ interval_txt_Y = 200
 interval_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
 
 def interval_text():
-    if current_interval == 1:
-        interval_message = interval_font.render('Current Oil Change Interval: 3000', True, (255, 255, 255))
-    elif current_interval == 2:
-        interval_message = interval_font.render('Current Oil Change Interval: 5000', True, (255, 255, 255))
-    elif current_interval == 3:
-        interval_message = interval_font.render('Current Oil Change Interval: 7500', True, (255, 255, 255))
-    elif current_interval == 4:
-        interval_message = interval_font.render('Current Oil Change Interval: 10000', True, (255, 255, 255))
-    else:
-        interval_message = interval_font.render('Current Oil Change Interval: 15000', True, (255, 255, 255))
+
+    interval_message = interval_font.render('Current Oil Change Interval: ' + str(oil_change_interval), True, (255, 255, 255))
+
     screen.blit(interval_message, (interval_txt_X, interval_txt_Y))
 
 # Oil change interval buttons
@@ -798,15 +790,25 @@ while app_running:
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
                 current_page = 4
             elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
-                current_interval = 1
+                oil_change_interval = 3000
+                with open('maintenance/interval.txt', 'w') as interval_file:
+                    interval_file.write(str(oil_change_interval))
             elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
-                current_interval = 2
+                oil_change_interval = 5000
+                with open('maintenance/interval.txt', 'w') as interval_file:
+                    interval_file.write(str(oil_change_interval))
             elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
-                current_interval = 3
+                oil_change_interval = 7500
+                with open('maintenance/interval.txt', 'w') as interval_file:
+                    interval_file.write(str(oil_change_interval))
             elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
-                current_interval = 4
+                oil_change_interval = 10000
+                with open('maintenance/interval.txt', 'w') as interval_file:
+                    interval_file.write(str(oil_change_interval))
             elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
-                current_interval = 5
+                oil_change_interval = 15000
+                with open('maintenance/interval.txt', 'w') as interval_file:
+                    interval_file.write(str(oil_change_interval))
 
 #Mileage/Oil Change Interval Functions
 
