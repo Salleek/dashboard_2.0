@@ -15,6 +15,11 @@ sports_button_press = False
 back_button_press = False
 reset_button_press = False
 interval_button_press = False
+three_thousand_press = False
+five_thousand_press = False
+seven_thousand_five_press = False
+ten_thousand_press = False
+fifteen_thousand_press = False
 
 # colors_button_press = False
 
@@ -564,6 +569,42 @@ def interval_button():
 #     colors_label = sports_font.render('Colors', True, (255, 255, 255))
 #     screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
 
+# Oil change interval buttons
+def three_thousand():
+    if three_thousand_press is True:
+        three_thousand_img = pygame.image.load('3000_P.png')
+    else:
+        three_thousand_img = pygame.image.load('3000_NP.png')
+    screen.blit(three_thousand_img, (115, 260))
+
+def five_thousand():
+    if five_thousand_press is True:
+        five_thousand_img = pygame.image.load('5000_P.png')
+    else:
+        five_thousand_img = pygame.image.load('5000_NP.png')
+    screen.blit(five_thousand_img, (265, 260))
+
+def seven_thousand_five():
+    if seven_thousand_five_press is True:
+        seven_thousand_five_img = pygame.image.load('7500_P.png')
+    else:
+        seven_thousand_five_img = pygame.image.load('7500_NP.png')
+    screen.blit(seven_thousand_five_img, (415, 260))
+
+def ten_thousand():
+    if ten_thousand_press is True:
+        ten_thousand_img = pygame.image.load('10000_P.png')
+    else:
+        ten_thousand_img = pygame.image.load('10000_NP.png')
+    screen.blit(ten_thousand_img, (565, 260))
+
+def fifteen_thousand():
+    if fifteen_thousand_press is True:
+        fifteen_thousand_img = pygame.image.load('15000_P.png')
+    else:
+        fifteen_thousand_img = pygame.image.load('15000_NP.png')
+    screen.blit(fifteen_thousand_img, (715, 260))
+
 #Maintenance Display
 
 #File Objects and Maintenance and Mileage Tracking
@@ -636,6 +677,11 @@ def maintenance_display():
 
 def interval_display():
     display_oil_int_heading()
+    three_thousand()
+    five_thousand()
+    seven_thousand_five()
+    ten_thousand()
+    fifteen_thousand()
     back_button()
 
 def diag_display():
@@ -693,9 +739,20 @@ while app_running:
                 reset_button_press = True
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
                 interval_button_press = True
+            elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
+                three_thousand_press = True
+            elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
+                five_thousand_press = True
+            elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
+                seven_thousand_five_press = True
+            elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
+                ten_thousand_press = True
+            elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
+                fifteen_thousand_press = True
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
             interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
+            three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
