@@ -688,8 +688,8 @@ while app_running:
                 else:
                     current_page -= 1
             # Reset button
-            # elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
-                # Reset the mileage
+            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                mileage = 0
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
                 current_page = 4
@@ -737,7 +737,7 @@ while app_running:
             temp_value = False
 
 #mileage increment testing
-    mileage = mileage + 1
+    #mileage = mileage + 1
 
 
 
