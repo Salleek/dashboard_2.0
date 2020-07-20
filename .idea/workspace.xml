@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/maintenance/everything_ok.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/maintenance/everything_ok_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/maintenance/warning_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/maintenance/warning_small.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maintenance/interval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/interval.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/everything_ok_small.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maintenance/everything_ok_big.png" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/everything_ok_big.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/mileage.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,22 +118,22 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1429" y="278" key="#dashboard/0.0.3440.1400@0.0.3440.1400" timestamp="1594072011895" />
-    <state width="1696" height="118" key="GridCell.Tab.0.bottom" timestamp="1595287015966">
+    <state width="1696" height="118" key="GridCell.Tab.0.bottom" timestamp="1595287344493">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595287015966" />
-    <state width="1696" height="118" key="GridCell.Tab.0.center" timestamp="1595287015966">
+    <state width="1696" height="118" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595287344493" />
+    <state width="1696" height="118" key="GridCell.Tab.0.center" timestamp="1595287344492">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595287015966" />
-    <state width="1696" height="118" key="GridCell.Tab.0.left" timestamp="1595287015966">
+    <state width="1696" height="118" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595287344492" />
+    <state width="1696" height="118" key="GridCell.Tab.0.left" timestamp="1595287344492">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595287015966" />
-    <state width="1696" height="118" key="GridCell.Tab.0.right" timestamp="1595287015966">
+    <state width="1696" height="118" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595287344492" />
+    <state width="1696" height="118" key="GridCell.Tab.0.right" timestamp="1595287344492">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595287015966" />
+    <state width="1696" height="118" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595287344492" />
     <state width="948" height="491" key="GridCell.Tab.1.bottom" timestamp="1595135537429">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
