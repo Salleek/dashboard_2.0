@@ -636,6 +636,11 @@ def maintenance_display():
 
 def interval_display():
     display_oil_int_heading()
+    back_button()
+
+def diag_display():
+    display_diag_heading()
+    back_button()
 
 
 #Redraw
@@ -656,11 +661,9 @@ def RedrawWindow():
         elif current_page == 3:
             maintenance_display()
         elif current_page == 4:
-            back_button()
             interval_display()
         elif current_page == 5:
-            display_diag_heading()
-            back_button()
+            diag_display()
 
     pygame.display.update()
 
