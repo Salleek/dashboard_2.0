@@ -20,6 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/diagnostics/vehicle_diagnostics_heading.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/maintenance_heading.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/oil_change_interval_heading.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,15 +47,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sport_mode/framework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/diagnostics" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode\framework" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\diagnostics" />
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\maintenance" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode\framework" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode\framework" />
     </key>
   </component>
   <component name="RunManager">
@@ -114,22 +120,22 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1429" y="278" key="#dashboard/0.0.3440.1400@0.0.3440.1400" timestamp="1594072011895" />
-    <state width="1696" height="119" key="GridCell.Tab.0.bottom" timestamp="1595223689626">
+    <state width="1696" height="119" key="GridCell.Tab.0.bottom" timestamp="1595225114864">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="119" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595223689626" />
-    <state width="1696" height="119" key="GridCell.Tab.0.center" timestamp="1595223689626">
+    <state width="1696" height="119" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595225114864" />
+    <state width="1696" height="119" key="GridCell.Tab.0.center" timestamp="1595225114864">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="119" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595223689626" />
-    <state width="1696" height="119" key="GridCell.Tab.0.left" timestamp="1595223689626">
+    <state width="1696" height="119" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595225114864" />
+    <state width="1696" height="119" key="GridCell.Tab.0.left" timestamp="1595225114864">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="119" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595223689626" />
-    <state width="1696" height="119" key="GridCell.Tab.0.right" timestamp="1595223689626">
+    <state width="1696" height="119" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595225114864" />
+    <state width="1696" height="119" key="GridCell.Tab.0.right" timestamp="1595225114864">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="119" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595223689626" />
+    <state width="1696" height="119" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595225114864" />
     <state width="948" height="491" key="GridCell.Tab.1.bottom" timestamp="1595135537429">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

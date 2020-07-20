@@ -472,7 +472,7 @@ def display_temp():
 def sdisplay_temp():
     temp = stemp_font.render(('Coolant ' + str(temp_value) + ' °F'), True, (255, 255, 255))
 
-    screen.blit(temp, (temp_txt_X-5, temp_txt_Y))
+    screen.blit(temp, (temp_txt_X-5, temp_txt_Y+5))
 
 #Framework
 framework_img = pygame.image.load('framework.png')
@@ -590,10 +590,27 @@ def display_oilchange_distance(oil_change_count):
     oil_change = oil_change_font.render(('Oil Change Due ' + str(oil_change_count) + ' Miles'), True, (255, 255, 255))
     screen.blit(oil_change, (oil_txt_X, oil_txt_Y))
 
+#Maintenance Headings
+vehicle_maint_heading_img = pygame.image.load('maintenance/maintenance_heading.png')
+maint_headingX = 210
+maint_headingY = 65
+
+oil_change_int_heading_img = pygame.image.load('maintenance/oil_change_interval_heading.png')
+
+def display_maint_heading():
+    screen.blit(vehicle_maint_heading_img, (maint_headingX, maint_headingY))
+
+def display_oil_int_heading():
+    screen.blit(oil_change_int_heading_img, (maint_headingX, maint_headingY))
 
 
+#Diagnostic Display
+diag_heading_img = pygame.image.load('diagnostics/vehicle_diagnostics_heading.png')
 
-#display functions
+def display_diag_heading():
+    screen.blit(diag_heading_img, (maint_headingX, maint_headingY))
+
+#Display functions for UI
 def displays():
     sports_button()
     tachometer(rpm)
@@ -615,6 +632,11 @@ def maintenance_display():
     reset_button()
     interval_button()
     back_button()
+    display_maint_heading()
+
+def interval_display():
+    display_oil_int_heading()
+
 
 #Redraw
 def RedrawWindow():
@@ -635,7 +657,9 @@ def RedrawWindow():
             maintenance_display()
         elif current_page == 4:
             back_button()
+            interval_display()
         elif current_page == 5:
+            display_diag_heading()
             back_button()
 
     pygame.display.update()
