@@ -6,6 +6,7 @@ rpm = 0
 oil_change_interval = 0
 oil_change_count = 0
 mileage = 0
+trip_distance = 0
 limit = False
 speed_limit = False
 temp_limit = False
@@ -736,8 +737,8 @@ while app_running:
         if temp_value <= 0:
             temp_value = False
 
-#mileage increment testing
-    #mileage = mileage + 1
+#Where mileage should increment
+    mileage = mileage + trip_distance
 
 
 
