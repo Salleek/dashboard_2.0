@@ -634,12 +634,56 @@ def oil_change_counter(mileage, interval):
 oil_change_count = oil_change_counter(mileage, oil_change_interval)
 
 def display_oilchange_distance(oil_change_count):
-    oil_txt_X = 265
-    oil_txt_Y = 290
+    oil_txt_X = 255
+    oil_txt_Y = 260
 
     oil_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
-    oil_change = oil_change_font.render(('Oil Change Due ' + str(oil_change_count) + ' Miles'), True, (255, 255, 255))
+    oil_change = oil_change_font.render(('Oil Change Due In ' + str(oil_change_count) + ' Miles'), True, (255, 255, 255))
     screen.blit(oil_change, (oil_txt_X, oil_txt_Y))
+
+#Warning Indicator
+
+warning_big_img = pygame.image.load('maintenance/warning_big.png')
+ok_big_img = pygame.image.load('maintenance/everything_ok_big.png')
+
+def display_warning_indicator(oil_change_count):
+
+    warning_bigX = 470
+    warning_bigY = 165
+
+    if oil_change_count < 500:
+        screen.blit(warning_big_img, (warning_bigX, warning_bigY))
+    else:
+        screen.blit(ok_big_img, (warning_bigX, warning_bigY))
+
+#Main Page Maintenance Indicators
+
+warning_small_img = pygame.image.load('maintenance/warning_small.png')
+everything_ok_small_img = pygame.image.load('maintenance/everything_ok.png')
+
+def display_warning_indicator_small(oil_change_count):
+
+    warning_smallX = 120
+    warning_smallY = 240
+
+    oil_txt_X = 50
+    oil_txt_Y = 165
+
+    if oil_change_count < 500:
+        screen.blit(warning_small_img, (warning_smallX, warning_smallY))
+        oil_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+        oil_change_line1 = oil_change_font.render(('Oil Change Due In '), True, (255, 255, 255))
+        oil_change_line2 =  oil_change_font.render((str(oil_change_count) + ' Miles'), True, (255, 255, 255))
+        screen.blit(oil_change_line1, (oil_txt_X, oil_txt_Y))
+        screen.blit(oil_change_line2, (oil_txt_X+50, oil_txt_Y+30))
+    else:
+        screen.blit(everything_ok_small_img, (warning_smallX, warning_smallY-5))
+        maintenance_ok = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+        maintenance_ok_line1 = maintenance_ok.render(('All Maintenance'), True, (255, 255, 255))
+        maintenance_ok_line2 = maintenance_ok.render(('Up to Date'), True, (255, 255, 255))
+        screen.blit(maintenance_ok_line1, (oil_txt_X+15, oil_txt_Y-10))
+        screen.blit(maintenance_ok_line2, (oil_txt_X + 40, oil_txt_Y + 20))
+
 
 #Maintenance Headings
 vehicle_maint_heading_img = pygame.image.load('maintenance/maintenance_heading.png')
@@ -669,6 +713,7 @@ def displays():
     display_speed()
     temp_gauge()
     display_temp()
+    display_warning_indicator_small(oil_change_count)
 
 def sports_display():
     stachometer(rpm)
@@ -680,6 +725,7 @@ def sports_display():
 
 def maintenance_display():
     display_oilchange_distance(oil_change_count)
+    display_warning_indicator(oil_change_count)
     reset_button()
     interval_button()
     back_button()
@@ -853,7 +899,8 @@ while app_running:
             temp_value = False
 
 #Where mileage should increment
-    mileage = mileage + trip_distance
+    #mileage = mileage + trip_distance
+    mileage = mileage + 5
 
 
 
