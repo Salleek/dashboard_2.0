@@ -3,6 +3,9 @@ import time
 
 #globals
 rpm = 0
+oil_change_interval = 0
+oil_change_count = 0
+mileage = 0
 limit = False
 speed_limit = False
 temp_limit = False
@@ -505,7 +508,7 @@ def sports():
 normal_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 sports_font = pygame.font.Font('Fonts/pirulen rg.ttf', 13)
 
-# Sports button
+#Button Text
 sports_txt_X = 98
 sports_txt_Y = 530
 normal_txt_X = 97
@@ -560,6 +563,36 @@ def interval_button():
 #     colors_label = sports_font.render('Colors', True, (255, 255, 255))
 #     screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
 
+#Maintenance Display
+
+#File Objects and Maintenance and Mileage Tracking
+with open('maintenance/interval.txt', 'r+') as int_file:
+    oil_change_string = int_file.readline()
+    oil_change_interval = int(oil_change_string)
+
+
+with open('maintenance/mileage.txt', 'r+') as mileage_file:
+    mileage_string = mileage_file.readline()
+    mileage = int(mileage_string)
+
+def oil_change_counter(mileage, interval):
+    oil_change_count = interval - mileage
+    return oil_change_count
+
+oil_change_count = oil_change_counter(mileage, oil_change_interval)
+
+def display_oilchange_distance(oil_change_count):
+    oil_txt_X = 265
+    oil_txt_Y = 290
+
+    oil_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
+    oil_change = oil_change_font.render(('Oil Change Due ' + str(oil_change_count) + ' Miles'), True, (255, 255, 255))
+    screen.blit(oil_change, (oil_txt_X, oil_txt_Y))
+
+
+
+
+#display functions
 def displays():
     sports_button()
     tachometer(rpm)
@@ -575,6 +608,12 @@ def sports_display():
     sdisplay_speed()
     temp_gauge()
     sdisplay_temp()
+
+def maintenance_display():
+    display_oilchange_distance(oil_change_count)
+    reset_button()
+    interval_button()
+    back_button()
 
 #Redraw
 def RedrawWindow():
@@ -592,9 +631,7 @@ def RedrawWindow():
         if current_page == 2:
             sports_display()
         elif current_page == 3:
-            reset_button()
-            interval_button()
-            back_button()
+            maintenance_display()
         elif current_page == 4:
             back_button()
         elif current_page == 5:
@@ -656,6 +693,17 @@ while app_running:
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
                 current_page = 4
+
+#Mileage/Oil Change Interval Functions
+
+    oil_change_count = oil_change_counter(mileage, oil_change_interval)
+    convert_mileage = str(mileage)
+
+    with open('maintenance/mileage.txt', 'w') as mileage_file:
+        mileage_file.write(convert_mileage)
+
+
+#Redraw UI
     RedrawWindow()
 
 #rpm testing
@@ -687,6 +735,10 @@ while app_running:
         temp_value -= 1
         if temp_value <= 0:
             temp_value = False
+
+#mileage increment testing
+    mileage = mileage + 1
+
 
 
 
