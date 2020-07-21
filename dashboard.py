@@ -20,6 +20,8 @@ five_thousand_press = False
 seven_thousand_five_press = False
 ten_thousand_press = False
 fifteen_thousand_press = False
+dtc_code_present = False
+dtc_code ='N/A'
 # colors_button_press = False
 
 #initialize the interface
@@ -35,369 +37,673 @@ screen = pygame.display.set_mode((1024, 600))
 pygame.display.set_caption("Dashboard 2.0")
 
 #Tachometer
-tachometer_0 = [pygame.image.load('0-1000/Tach.png'), pygame.image.load('0-1000/Tach2.png'), pygame.image.load('0-1000/Tach3.png'), pygame.image.load('0-1000/Tach4.png'), pygame.image.load('0-1000/Tach5.png'),pygame.image.load('0-1000/Tach6.png'), pygame.image.load('0-1000/Tach7.png'), pygame.image.load('0-1000/Tach8.png')]
-tachometer_1 = [pygame.image.load('1000-2000/Tach1.png'), pygame.image.load('1000-2000/Tach2.png'), pygame.image.load('1000-2000/Tach3.png'), pygame.image.load('1000-2000/Tach4.png'), pygame.image.load('1000-2000/Tach5.png'),pygame.image.load('1000-2000/Tach6.png'), pygame.image.load('1000-2000/Tach7.png'), pygame.image.load('1000-2000/Tach8.png')]
-tachometer_2 = [pygame.image.load('2000-3000/Tach1.png'), pygame.image.load('2000-3000/Tach2.png'), pygame.image.load('2000-3000/Tach3.png'), pygame.image.load('2000-3000/Tach4.png'), pygame.image.load('2000-3000/Tach5.png'),pygame.image.load('2000-3000/Tach6.png'), pygame.image.load('2000-3000/Tach7.png'), pygame.image.load('2000-3000/Tach8.png')]
-tachometer_3 = [pygame.image.load('3000-4000/Tach0.png'), pygame.image.load('3000-4000/Tach1.png'), pygame.image.load('3000-4000/Tach2.png'), pygame.image.load('3000-4000/Tach3.png'), pygame.image.load('3000-4000/Tach4.png'),pygame.image.load('3000-4000/Tach5.png'), pygame.image.load('3000-4000/Tach6.png'), pygame.image.load('3000-4000/Tach7.png')]
-tachometer_4 = [pygame.image.load('4000-5000/Tach1.png'), pygame.image.load('4000-5000/Tach2.png'), pygame.image.load('4000-5000/Tach3.png'), pygame.image.load('4000-5000/Tach4.png'), pygame.image.load('4000-5000/Tach5.png'),pygame.image.load('4000-5000/Tach6.png'), pygame.image.load('4000-5000/Tach7.png'), pygame.image.load('4000-5000/Tach8.png')]
-tachometer_5 = [pygame.image.load('5000-6000/Tach1.png'), pygame.image.load('5000-6000/Tach2.png'), pygame.image.load('5000-6000/Tach3.png'), pygame.image.load('5000-6000/Tach4.png'), pygame.image.load('5000-6000/Tach5.png'),pygame.image.load('5000-6000/Tach6.png'), pygame.image.load('5000-6000/Tach7.png'), pygame.image.load('5000-6000/Tach8.png'), pygame.image.load('5000-6000/Tach9.png')]
-tachometer_6 = [pygame.image.load('6000-7000/Tach1.png'), pygame.image.load('6000-7000/Tach2.png'), pygame.image.load('6000-7000/Tach3.png'), pygame.image.load('6000-7000/Tach4.png'), pygame.image.load('6000-7000/Tach5.png'),pygame.image.load('6000-7000/Tach6.png'), pygame.image.load('6000-7000/Tach7.png'), pygame.image.load('6000-7000/Tach8.png')]
-tachometer_7 = [pygame.image.load('7000-8000/Tach1.png'), pygame.image.load('7000-8000/Tach2.png'), pygame.image.load('7000-8000/Tach3.png'), pygame.image.load('7000-8000/Tach4.png'), pygame.image.load('7000-8000/Tach5.png'),pygame.image.load('7000-8000/Tach6.png'), pygame.image.load('7000-8000/Tach7.png'), pygame.image.load('7000-8000/Tach8.png')]
-tachometer_8 = [pygame.image.load('8000-9000/Tach1.png'), pygame.image.load('8000-9000/Tach2.png'), pygame.image.load('8000-9000/Tach3.png'), pygame.image.load('8000-9000/Tach4.png'), pygame.image.load('8000-9000/Tach5.png'),pygame.image.load('8000-9000/Tach6.png'), pygame.image.load('8000-9000/Tach7.png'), pygame.image.load('8000-9000/Tach8.png')]
 tachometerX = 205
 tachometerY = 0
 
-def tachometer(rpm):
+blank_tach_img = pygame.image.load('needle_tach/Tach.png')
+sport_tach_img = pygame.image.load('sport_mode/Tach_sports.png')
+needle_img = pygame.image.load('needle_tach/needle.png')
+inner_tach = pygame.image.load('needle_tach/inner_tach.png')
 
-    #0-1000
-    if rpm > 0 and rpm <=142:
-        screen.blit(tachometer_0[1], (tachometerX, tachometerY))
-    elif rpm > 142 and rpm <= 284:
-        screen.blit(tachometer_0[2], (tachometerX, tachometerY))
-    elif rpm > 284 and rpm <= 426:
-        screen.blit(tachometer_0[3], (tachometerX, tachometerY))
-    elif rpm > 426 and rpm <= 568:
-        screen.blit(tachometer_0[4], (tachometerX, tachometerY))
-    elif rpm > 568 and rpm <= 710:
-        screen.blit(tachometer_0[5], (tachometerX, tachometerY))
-    elif rpm > 710 and rpm <= 852:
-        screen.blit(tachometer_0[6], (tachometerX, tachometerY))
-    elif rpm > 852 and rpm <= 1000:
-        screen.blit(tachometer_0[7], (tachometerX, tachometerY))
+def display_blank_tach():
+    screen.blit(blank_tach_img, (tachometerX, tachometerY))
 
-    #1000-2000
-    elif rpm > 1000 and rpm <= 1125:
-        screen.blit(tachometer_1[0], (tachometerX, tachometerY))
-    elif rpm > 1125 and rpm <= 1250:
-        screen.blit(tachometer_1[1], (tachometerX, tachometerY))
-    elif rpm > 1250 and rpm <= 1375:
-        screen.blit(tachometer_1[2], (tachometerX, tachometerY))
-    elif rpm > 1375 and rpm <= 1500:
-        screen.blit(tachometer_1[3], (tachometerX, tachometerY))
-    elif rpm > 1500 and rpm <= 1625:
-        screen.blit(tachometer_1[4], (tachometerX, tachometerY))
-    elif rpm > 1625 and rpm <= 1750:
-        screen.blit(tachometer_1[5], (tachometerX, tachometerY))
-    elif rpm > 1750 and rpm <= 1875:
-        screen.blit(tachometer_1[6], (tachometerX, tachometerY))
-    elif rpm > 1875 and rpm <= 2000:
-        screen.blit(tachometer_1[7], (tachometerX, tachometerY))
+def display_blank_sports_tach():
+    screen.blit(sport_tach_img, (tachometerX, tachometerY))
 
-    #2000-3000
-    elif rpm > 2000 and rpm <= 2125:
-        screen.blit(tachometer_2[0], (tachometerX, tachometerY))
-    elif rpm > 2125 and rpm <= 2250:
-        screen.blit(tachometer_2[1], (tachometerX, tachometerY))
-    elif rpm > 2250 and rpm <= 2375:
-        screen.blit(tachometer_2[2], (tachometerX, tachometerY))
-    elif rpm > 2375 and rpm <= 2500:
-        screen.blit(tachometer_2[3], (tachometerX, tachometerY))
-    elif rpm > 2500 and rpm <= 2625:
-        screen.blit(tachometer_2[4], (tachometerX, tachometerY))
-    elif rpm > 2625 and rpm <= 2750:
-        screen.blit(tachometer_2[5], (tachometerX, tachometerY))
-    elif rpm > 2750 and rpm <= 2875:
-        screen.blit(tachometer_2[6], (tachometerX, tachometerY))
-    elif rpm > 2875 and rpm <= 3000:
-        screen.blit(tachometer_2[7], (tachometerX, tachometerY))
+def display_inner_tach():
+    mx, my = pygame.mouse.get_pos()
+    screen.blit(inner_tach, (433, 225))
 
-    #3000-4000
-    elif rpm > 3000 and rpm <= 3125:
-        screen.blit(tachometer_3[0], (tachometerX, tachometerY))
-    elif rpm > 3125 and rpm <= 3250:
-        screen.blit(tachometer_3[1], (tachometerX, tachometerY))
-    elif rpm > 3250 and rpm <= 3375:
-        screen.blit(tachometer_3[2], (tachometerX, tachometerY))
-    elif rpm > 3375 and rpm <= 3500:
-        screen.blit(tachometer_3[3], (tachometerX, tachometerY))
-    elif rpm > 3500 and rpm <= 3625:
-        screen.blit(tachometer_3[4], (tachometerX, tachometerY))
-    elif rpm > 3625 and rpm <= 3750:
-        screen.blit(tachometer_3[5], (tachometerX, tachometerY))
-    elif rpm > 3750 and rpm <= 3875:
-        screen.blit(tachometer_3[6], (tachometerX, tachometerY))
-    elif rpm > 3875 and rpm <= 4000:
-        screen.blit(tachometer_3[7], (tachometerX, tachometerY))
+def display_needle(rotation_angle):
+    mx, my = pygame.mouse.get_pos()
 
-    #4000-5000
-    elif rpm > 4000 and rpm <= 4125:
-        screen.blit(tachometer_4[0], (tachometerX, tachometerY))
-    elif rpm > 4125 and rpm <= 4250:
-        screen.blit(tachometer_4[1], (tachometerX, tachometerY))
-    elif rpm > 4250 and rpm <= 4375:
-        screen.blit(tachometer_4[2], (tachometerX, tachometerY))
-    elif rpm > 4375 and rpm <= 4500:
-        screen.blit(tachometer_4[3], (tachometerX, tachometerY))
-    elif rpm > 4500 and rpm <= 4625:
-        screen.blit(tachometer_4[4], (tachometerX, tachometerY))
-    elif rpm > 4625 and rpm <= 4750:
-        screen.blit(tachometer_4[5], (tachometerX, tachometerY))
-    elif rpm > 4750 and rpm <= 4875:
-        screen.blit(tachometer_4[6], (tachometerX, tachometerY))
-    elif rpm > 4875 and rpm <= 5000:
-        screen.blit(tachometer_4[7], (tachometerX, tachometerY))
+    img_copy = pygame.transform.rotate(needle_img, rotation_angle)
+    screen.blit(img_copy, (515 - int(img_copy.get_width() / 2), int(305 - img_copy.get_height() /2)))
 
-    #5000-6000
-    elif rpm > 5000 and rpm <= 5111:
-        screen.blit(tachometer_5[0], (tachometerX, tachometerY))
-    elif rpm > 5111 and rpm <= 5222:
-        screen.blit(tachometer_5[1], (tachometerX, tachometerY))
-    elif rpm > 5222 and rpm <= 5333:
-        screen.blit(tachometer_5[2], (tachometerX, tachometerY))
-    elif rpm > 5333 and rpm <= 5444:
-        screen.blit(tachometer_5[3], (tachometerX, tachometerY))
-    elif rpm > 5444 and rpm <= 5555:
-        screen.blit(tachometer_5[4], (tachometerX, tachometerY))
-    elif rpm > 5555 and rpm <= 5666:
-        screen.blit(tachometer_5[5], (tachometerX, tachometerY))
-    elif rpm > 5666 and rpm <= 5777:
-        screen.blit(tachometer_5[6], (tachometerX, tachometerY))
-    elif rpm > 5777 and rpm <= 5888:
-        screen.blit(tachometer_5[7], (tachometerX, tachometerY))
-    elif rpm > 5888 and rpm <= 6000:
-        screen.blit(tachometer_5[8], (tachometerX, tachometerY))
-
-    #6000-7000
-    elif rpm > 6000 and rpm <= 6125:
-        screen.blit(tachometer_6[0], (tachometerX, tachometerY))
-    elif rpm > 6125 and rpm <= 6250:
-        screen.blit(tachometer_6[1], (tachometerX, tachometerY))
-    elif rpm > 6250 and rpm <= 6375:
-        screen.blit(tachometer_6[2], (tachometerX, tachometerY))
-    elif rpm > 6375 and rpm <= 6500:
-        screen.blit(tachometer_6[3], (tachometerX, tachometerY))
-    elif rpm > 6500 and rpm <= 6625:
-        screen.blit(tachometer_6[4], (tachometerX, tachometerY))
-    elif rpm > 6625 and rpm <= 6750:
-        screen.blit(tachometer_6[5], (tachometerX, tachometerY))
-    elif rpm > 6750 and rpm <= 6875:
-        screen.blit(tachometer_6[6], (tachometerX, tachometerY))
-    elif rpm > 6875 and rpm <= 7000:
-        screen.blit(tachometer_6[7], (tachometerX, tachometerY))
-
-    #7000-8000
-    elif rpm > 7000 and rpm <= 7125:
-        screen.blit(tachometer_7[0], (tachometerX, tachometerY))
-    elif rpm > 7125 and rpm <= 7250:
-        screen.blit(tachometer_7[1], (tachometerX, tachometerY))
-    elif rpm > 7250 and rpm <= 7375:
-        screen.blit(tachometer_7[2], (tachometerX, tachometerY))
-    elif rpm > 7375 and rpm <= 7500:
-        screen.blit(tachometer_7[3], (tachometerX, tachometerY))
-    elif rpm > 7500 and rpm <= 7625:
-        screen.blit(tachometer_7[4], (tachometerX, tachometerY))
-    elif rpm > 7625 and rpm <= 7750:
-        screen.blit(tachometer_7[5], (tachometerX, tachometerY))
-    elif rpm > 7750 and rpm <= 7875:
-        screen.blit(tachometer_7[6], (tachometerX, tachometerY))
-    elif rpm > 7875 and rpm <= 8000:
-        screen.blit(tachometer_7[7], (tachometerX, tachometerY))
-
-    #8000-9000
-    elif rpm > 8000 and rpm <= 8125:
-        screen.blit(tachometer_8[0], (tachometerX, tachometerY))
-    elif rpm > 8125 and rpm <= 8250:
-        screen.blit(tachometer_8[1], (tachometerX, tachometerY))
-    elif rpm > 8250 and rpm <= 8375:
-        screen.blit(tachometer_8[2], (tachometerX, tachometerY))
-    elif rpm > 8375 and rpm <= 8500:
-        screen.blit(tachometer_8[3], (tachometerX, tachometerY))
-    elif rpm > 8500 and rpm <= 8625:
-        screen.blit(tachometer_8[4], (tachometerX, tachometerY))
-    elif rpm > 8625 and rpm <= 8750:
-        screen.blit(tachometer_8[5], (tachometerX, tachometerY))
-    elif rpm > 8750 and rpm <= 8875:
-        screen.blit(tachometer_8[6], (tachometerX, tachometerY))
-    elif rpm > 8875 and rpm <= 9000:
-        screen.blit(tachometer_8[7], (tachometerX, tachometerY))
-
-    else:
-        screen.blit(tachometer_0[0], (tachometerX, tachometerY))
-
-#sports mode tach
-stachometer_0 = [pygame.image.load('sport_mode/0-1000/Tach1.png'), pygame.image.load('sport_mode/0-1000/Tach2.png'), pygame.image.load('sport_mode/0-1000/Tach3.png'), pygame.image.load('sport_mode/0-1000/Tach4.png'), pygame.image.load('sport_mode/0-1000/Tach5.png'),pygame.image.load('sport_mode/0-1000/Tach6.png'), pygame.image.load('sport_mode/0-1000/Tach7.png'), pygame.image.load('sport_mode/0-1000/Tach8.png')]
-stachometer_1 = [pygame.image.load('sport_mode/1000-2000/Tach1.png'), pygame.image.load('sport_mode/1000-2000/Tach2.png'), pygame.image.load('sport_mode/1000-2000/Tach3.png'), pygame.image.load('sport_mode/1000-2000/Tach4.png'), pygame.image.load('sport_mode/1000-2000/Tach5.png'),pygame.image.load('sport_mode/1000-2000/Tach6.png'), pygame.image.load('sport_mode/1000-2000/Tach7.png'), pygame.image.load('sport_mode/1000-2000/Tach8.png')]
-stachometer_2 = [pygame.image.load('sport_mode/2000-3000/Tach1.png'), pygame.image.load('sport_mode/2000-3000/Tach2.png'), pygame.image.load('sport_mode/2000-3000/Tach3.png'), pygame.image.load('sport_mode/2000-3000/Tach4.png'), pygame.image.load('sport_mode/2000-3000/Tach5.png'),pygame.image.load('sport_mode/2000-3000/Tach6.png'), pygame.image.load('sport_mode/2000-3000/Tach7.png'), pygame.image.load('sport_mode/2000-3000/Tach8.png'), pygame.image.load('sport_mode/2000-3000/Tach9.png')]
-stachometer_3 = [pygame.image.load('sport_mode/3000-4000/Tach1.png'), pygame.image.load('sport_mode/3000-4000/Tach2.png'), pygame.image.load('sport_mode/3000-4000/Tach3.png'), pygame.image.load('sport_mode/3000-4000/Tach4.png'), pygame.image.load('sport_mode/3000-4000/Tach5.png'),pygame.image.load('sport_mode/3000-4000/Tach6.png'), pygame.image.load('sport_mode/3000-4000/Tach7.png')]
-stachometer_4 = [pygame.image.load('sport_mode/4000-5000/Tach1.png'), pygame.image.load('sport_mode/4000-5000/Tach2.png'), pygame.image.load('sport_mode/4000-5000/Tach3.png'), pygame.image.load('sport_mode/4000-5000/Tach4.png'), pygame.image.load('sport_mode/4000-5000/Tach5.png'),pygame.image.load('sport_mode/4000-5000/Tach6.png'), pygame.image.load('sport_mode/4000-5000/Tach7.png'), pygame.image.load('sport_mode/4000-5000/Tach8.png')]
-stachometer_5 = [pygame.image.load('sport_mode/5000-6000/Tach1.png'), pygame.image.load('sport_mode/5000-6000/Tach2.png'), pygame.image.load('sport_mode/5000-6000/Tach3.png'), pygame.image.load('sport_mode/5000-6000/Tach4.png'), pygame.image.load('sport_mode/5000-6000/Tach5.png'),pygame.image.load('sport_mode/5000-6000/Tach6.png'), pygame.image.load('sport_mode/5000-6000/Tach7.png'), pygame.image.load('sport_mode/5000-6000/Tach8.png'), pygame.image.load('sport_mode/5000-6000/Tach9.png')]
-stachometer_6 = [pygame.image.load('sport_mode/6000-7000/Tach1.png'), pygame.image.load('sport_mode/6000-7000/Tach2.png'), pygame.image.load('sport_mode/6000-7000/Tach3.png'), pygame.image.load('sport_mode/6000-7000/Tach4.png'), pygame.image.load('sport_mode/6000-7000/Tach5.png'),pygame.image.load('sport_mode/6000-7000/Tach6.png'), pygame.image.load('sport_mode/6000-7000/Tach7.png')]
-stachometer_7 = [pygame.image.load('sport_mode/7000-8000/Tach1.png'), pygame.image.load('sport_mode/7000-8000/Tach2.png'), pygame.image.load('sport_mode/7000-8000/Tach3.png'), pygame.image.load('sport_mode/7000-8000/Tach4.png'), pygame.image.load('sport_mode/7000-8000/Tach5.png'),pygame.image.load('sport_mode/7000-8000/Tach6.png'), pygame.image.load('sport_mode/7000-8000/Tach7.png'), pygame.image.load('sport_mode/7000-8000/Tach8.png'), pygame.image.load('sport_mode/7000-8000/Tach9.png')]
-stachometer_8 = [pygame.image.load('sport_mode/8000-9000/Tach1.png'), pygame.image.load('sport_mode/8000-9000/Tach2.png'), pygame.image.load('sport_mode/8000-9000/Tach3.png'), pygame.image.load('sport_mode/8000-9000/Tach4.png'), pygame.image.load('sport_mode/8000-9000/Tach5.png'),pygame.image.load('sport_mode/8000-9000/Tach6.png'), pygame.image.load('sport_mode/8000-9000/Tach7.png')]
-
-def stachometer(rpm):
-
-    #0-1000
-    if rpm > 0 and rpm <=142:
-        screen.blit(stachometer_0[1], (tachometerX, tachometerY))
-    elif rpm > 142 and rpm <= 284:
-        screen.blit(stachometer_0[2], (tachometerX, tachometerY))
-    elif rpm > 284 and rpm <= 426:
-        screen.blit(stachometer_0[3], (tachometerX, tachometerY))
-    elif rpm > 426 and rpm <= 568:
-        screen.blit(stachometer_0[4], (tachometerX, tachometerY))
-    elif rpm > 568 and rpm <= 710:
-        screen.blit(stachometer_0[5], (tachometerX, tachometerY))
-    elif rpm > 710 and rpm <= 852:
-        screen.blit(stachometer_0[6], (tachometerX, tachometerY))
-    elif rpm > 852 and rpm <= 1000:
-        screen.blit(stachometer_0[7], (tachometerX, tachometerY))
+def needle_positioning():
+    # 0 -1000
+    rotation_angle = 0
+    if rpm > 0 and rpm <= 29:
+        rotation_angle = -1
+    elif rpm > 29 and rpm <= 58:
+        rotation_angle = -2
+    elif rpm > 58 and rpm <= 87:
+        rotation_angle = -3
+    elif rpm > 87 and rpm <= 116:
+        rotation_angle = -4
+    elif rpm > 116 and rpm <= 145:
+        rotation_angle = -5
+    elif rpm > 145 and rpm <= 174:
+        rotation_angle = -6
+    elif rpm > 174 and rpm <= 203:
+        rotation_angle = -7
+    elif rpm > 203 and rpm <= 232:
+        rotation_angle = -8
+    elif rpm > 232 and rpm <= 261:
+        rotation_angle = -9
+    elif rpm > 261 and rpm <= 290:
+        rotation_angle = -10
+    elif rpm > 290 and rpm <= 319:
+        rotation_angle = -11
+    elif rpm > 319 and rpm <= 348:
+        rotation_angle = -12
+    elif rpm > 348 and rpm <= 377:
+        rotation_angle = -13
+    elif rpm > 377 and rpm <= 406:
+        rotation_angle = -14
+    elif rpm > 406 and rpm <= 435:
+        rotation_angle = -15
+    elif rpm > 435 and rpm <= 464:
+        rotation_angle = -16
+    elif rpm > 464 and rpm <= 493:
+        rotation_angle = -17
+    elif rpm > 493 and rpm <= 522:
+        rotation_angle = -18
+    elif rpm > 522 and rpm <= 551:
+        rotation_angle = -19
+    elif rpm > 551 and rpm <= 580:
+        rotation_angle = -20
+    elif rpm > 580 and rpm <= 609:
+        rotation_angle = -21
+    elif rpm > 609 and rpm <= 638:
+        rotation_angle = -22
+    elif rpm > 638 and rpm <= 667:
+        rotation_angle = -23
+    elif rpm > 667 and rpm <= 696:
+        rotation_angle = -24
+    elif rpm > 696 and rpm <= 725:
+        rotation_angle = -25
+    elif rpm > 725 and rpm <= 754:
+        rotation_angle = -26
+    elif rpm > 754 and rpm <= 783:
+        rotation_angle = -27
+    elif rpm > 783 and rpm <= 812:
+        rotation_angle = -28
+    elif rpm > 812 and rpm <= 841:
+        rotation_angle = -29
+    elif rpm > 841 and rpm <= 870:
+        rotation_angle = -30
+    elif rpm > 870 and rpm <= 899:
+        rotation_angle = -31
+    elif rpm > 899 and rpm <= 928:
+        rotation_angle = -32
+    elif rpm > 928 and rpm <= 957:
+        rotation_angle = -33
+    elif rpm > 957 and rpm <= 986:
+        rotation_angle = -34
+    elif rpm > 986 and rpm <= 1000:
+        rotation_angle = -35
 
     #1000-2000
-    elif rpm > 1000 and rpm <= 1125:
-        screen.blit(stachometer_1[0], (tachometerX, tachometerY))
-    elif rpm > 1125 and rpm <= 1250:
-        screen.blit(stachometer_1[1], (tachometerX, tachometerY))
-    elif rpm > 1250 and rpm <= 1375:
-        screen.blit(stachometer_1[2], (tachometerX, tachometerY))
-    elif rpm > 1375 and rpm <= 1500:
-        screen.blit(stachometer_1[3], (tachometerX, tachometerY))
-    elif rpm > 1500 and rpm <= 1625:
-        screen.blit(stachometer_1[4], (tachometerX, tachometerY))
-    elif rpm > 1625 and rpm <= 1750:
-        screen.blit(stachometer_1[5], (tachometerX, tachometerY))
-    elif rpm > 1750 and rpm <= 1875:
-        screen.blit(stachometer_1[6], (tachometerX, tachometerY))
-    elif rpm > 1875 and rpm <= 2000:
-        screen.blit(stachometer_1[7], (tachometerX, tachometerY))
+    elif rpm > 1000 and rpm <= 1031:
+        rotation_angle = -36
+    elif rpm > 1031 and rpm <= 1061:
+        rotation_angle = -37
+    elif rpm > 1061 and rpm <= 1093:
+        rotation_angle = -38
+    elif rpm > 1093 and rpm <= 1124:
+        rotation_angle = -39
+    elif rpm > 1124 and rpm <= 1155:
+        rotation_angle = -40
+    elif rpm > 1155 and rpm <= 1186:
+        rotation_angle = -41
+    elif rpm > 1186 and rpm <= 1217:
+        rotation_angle = -42
+    elif rpm > 1217 and rpm <= 1248:
+        rotation_angle = -43
+    elif rpm > 1248 and rpm <= 1279:
+        rotation_angle = -44
+    elif rpm > 1279 and rpm <= 1310:
+        rotation_angle = -45
+    elif rpm > 1310 and rpm <= 1341:
+        rotation_angle = -46
+    elif rpm > 1341 and rpm <= 1372:
+        rotation_angle = -47
+    elif rpm > 1372 and rpm <= 1403:
+        rotation_angle = -48
+    elif rpm > 1403 and rpm <= 1434:
+        rotation_angle = -49
+    elif rpm > 1434 and rpm <= 1465:
+        rotation_angle = -50
+    elif rpm > 1465 and rpm <= 1496:
+        rotation_angle = -51
+    elif rpm > 1496 and rpm <= 1527:
+        rotation_angle = -52
+    elif rpm > 1527 and rpm <= 1558:
+        rotation_angle = -53
+    elif rpm > 1558 and rpm <= 1589:
+        rotation_angle = -54
+    elif rpm > 1589 and rpm <= 1620:
+        rotation_angle = -55
+    elif rpm > 1620 and rpm <= 1651:
+        rotation_angle = -56
+    elif rpm > 1651 and rpm <= 1682:
+        rotation_angle = -57
+    elif rpm > 1682 and rpm <= 1713:
+        rotation_angle = -58
+    elif rpm > 1713 and rpm <= 1744:
+        rotation_angle = -59
+    elif rpm > 1744 and rpm <= 1775:
+        rotation_angle = -60
+    elif rpm > 1775 and rpm <= 1806:
+        rotation_angle = -61
+    elif rpm > 1806 and rpm <= 1837:
+        rotation_angle = -62
+    elif rpm > 1837 and rpm <= 1868:
+        rotation_angle = -63
+    elif rpm > 1868 and rpm <= 1899:
+        rotation_angle = -64
+    elif rpm > 1899 and rpm <= 1930:
+        rotation_angle = -65
+    elif rpm > 1930 and rpm <= 1961:
+        rotation_angle = -66
+    elif rpm > 1961 and rpm <= 2000:
+        rotation_angle = -67
 
     #2000-3000
-    elif rpm > 2000 and rpm <= 2111:
-        screen.blit(stachometer_2[0], (tachometerX, tachometerY))
-    elif rpm > 2111 and rpm <= 2222:
-        screen.blit(stachometer_2[1], (tachometerX, tachometerY))
-    elif rpm > 2222 and rpm <= 2333:
-        screen.blit(stachometer_2[2], (tachometerX, tachometerY))
-    elif rpm > 2333 and rpm <= 2444:
-        screen.blit(stachometer_2[3], (tachometerX, tachometerY))
-    elif rpm > 2444 and rpm <= 2555:
-        screen.blit(stachometer_2[4], (tachometerX, tachometerY))
-    elif rpm > 2555 and rpm <= 2666:
-        screen.blit(stachometer_2[5], (tachometerX, tachometerY))
-    elif rpm > 2666 and rpm <= 2777:
-        screen.blit(stachometer_2[6], (tachometerX, tachometerY))
-    elif rpm > 2777 and rpm <= 2888:
-        screen.blit(stachometer_2[7], (tachometerX, tachometerY))
-    elif rpm > 2888 and rpm <= 3000:
-        screen.blit(stachometer_2[8], (tachometerX, tachometerY))
+    elif rpm > 2000 and rpm <= 2031:
+        rotation_angle = -68
+    elif rpm > 2031 and rpm <= 2061:
+        rotation_angle = -69
+    elif rpm > 2061 and rpm <= 2093:
+        rotation_angle = -70
+    elif rpm > 2093 and rpm <= 2124:
+        rotation_angle = -71
+    elif rpm > 2124 and rpm <= 2155:
+        rotation_angle = -72
+    elif rpm > 2155 and rpm <= 2186:
+        rotation_angle = -73
+    elif rpm > 2186 and rpm <= 2217:
+        rotation_angle = -74
+    elif rpm > 2217 and rpm <= 2248:
+        rotation_angle = -75
+    elif rpm > 2248 and rpm <= 2279:
+        rotation_angle = -76
+    elif rpm > 2279 and rpm <= 2310:
+        rotation_angle = -77
+    elif rpm > 2310 and rpm <= 2341:
+        rotation_angle = -78
+    elif rpm > 2341 and rpm <= 2372:
+        rotation_angle = -79
+    elif rpm > 2372 and rpm <= 2403:
+        rotation_angle = -80
+    elif rpm > 2403 and rpm <= 2434:
+        rotation_angle = -81
+    elif rpm > 2434 and rpm <= 2465:
+        rotation_angle = -82
+    elif rpm > 2465 and rpm <= 2496:
+        rotation_angle = -83
+    elif rpm > 2496 and rpm <= 2527:
+        rotation_angle = -84
+    elif rpm > 2527 and rpm <= 2558:
+        rotation_angle = -85
+    elif rpm > 2558 and rpm <= 2589:
+        rotation_angle = -86
+    elif rpm > 2589 and rpm <= 2620:
+        rotation_angle = -87
+    elif rpm > 2620 and rpm <= 2651:
+        rotation_angle = -88
+    elif rpm > 2651 and rpm <= 2682:
+        rotation_angle = -89
+    elif rpm > 2682 and rpm <= 2713:
+        rotation_angle = -90
+    elif rpm > 2713 and rpm <= 2744:
+        rotation_angle = -91
+    elif rpm > 2744 and rpm <= 2775:
+        rotation_angle = -92
+    elif rpm > 2775 and rpm <= 2806:
+        rotation_angle = -93
+    elif rpm > 2806 and rpm <= 2837:
+        rotation_angle = -94
+    elif rpm > 2837 and rpm <= 2868:
+        rotation_angle = -95
+    elif rpm > 2868 and rpm <= 2899:
+        rotation_angle = -96
+    elif rpm > 2899 and rpm <= 2930:
+        rotation_angle = -97
+    elif rpm > 2930 and rpm <= 2961:
+        rotation_angle = -98
+    elif rpm > 2961 and rpm <= 2992:
+        rotation_angle = -99
+    elif rpm > 2992 and rpm <= 3000:
+        rotation_angle = -100
 
     #3000-4000
-    elif rpm > 3000 and rpm <= 3142:
-        screen.blit(stachometer_3[0], (tachometerX, tachometerY))
-    elif rpm > 3142 and rpm <= 3284:
-        screen.blit(stachometer_3[1], (tachometerX, tachometerY))
-    elif rpm > 3284 and rpm <= 3426:
-        screen.blit(stachometer_3[2], (tachometerX, tachometerY))
-    elif rpm > 3426 and rpm <= 3568:
-        screen.blit(stachometer_3[3], (tachometerX, tachometerY))
-    elif rpm > 3568 and rpm <= 3710:
-        screen.blit(stachometer_3[4], (tachometerX, tachometerY))
-    elif rpm > 3710 and rpm <= 3852:
-        screen.blit(stachometer_3[5], (tachometerX, tachometerY))
-    elif rpm > 3852 and rpm <= 4000:
-        screen.blit(stachometer_3[6], (tachometerX, tachometerY))
+    elif rpm > 3000 and rpm <= 3029:
+        rotation_angle = -101
+    elif rpm > 3029 and rpm <= 3058:
+        rotation_angle = -102
+    elif rpm > 3058 and rpm <= 3087:
+        rotation_angle = -103
+    elif rpm > 3087 and rpm <= 3116:
+        rotation_angle = -104
+    elif rpm > 3116 and rpm <= 3145:
+        rotation_angle = -105
+    elif rpm > 3145 and rpm <= 3174:
+        rotation_angle = -106
+    elif rpm > 3174 and rpm <= 3203:
+        rotation_angle = -107
+    elif rpm > 3203 and rpm <= 3232:
+        rotation_angle = -108
+    elif rpm > 3232 and rpm <= 3261:
+        rotation_angle = -109
+    elif rpm > 3261 and rpm <= 3290:
+        rotation_angle = -110
+    elif rpm > 3290 and rpm <= 3319:
+        rotation_angle = -111
+    elif rpm > 3319 and rpm <= 3348:
+        rotation_angle = -112
+    elif rpm > 3348 and rpm <= 3377:
+        rotation_angle = -113
+    elif rpm > 3377 and rpm <= 3406:
+        rotation_angle = -114
+    elif rpm > 3406 and rpm <= 3435:
+        rotation_angle = -115
+    elif rpm > 3435 and rpm <= 3464:
+        rotation_angle = -116
+    elif rpm > 3464 and rpm <= 3493:
+        rotation_angle = -117
+    elif rpm > 3493 and rpm <= 3522:
+        rotation_angle = -118
+    elif rpm > 3522 and rpm <= 3551:
+        rotation_angle = -119
+    elif rpm > 3551 and rpm <= 3580:
+        rotation_angle = -120
+    elif rpm > 3580 and rpm <= 3609:
+        rotation_angle = -121
+    elif rpm > 3609 and rpm <= 3638:
+        rotation_angle = -122
+    elif rpm > 3638 and rpm <= 3667:
+        rotation_angle = -123
+    elif rpm > 3667 and rpm <= 3696:
+        rotation_angle = -124
+    elif rpm > 3696 and rpm <= 3725:
+        rotation_angle = -125
+    elif rpm > 3725 and rpm <= 3754:
+        rotation_angle = -126
+    elif rpm > 3754 and rpm <= 3783:
+        rotation_angle = -127
+    elif rpm > 3783 and rpm <= 3812:
+        rotation_angle = -128
+    elif rpm > 3812 and rpm <= 3841:
+        rotation_angle = -129
+    elif rpm > 3841 and rpm <= 3870:
+        rotation_angle = -130
+    elif rpm > 3870 and rpm <= 3899:
+        rotation_angle = -131
+    elif rpm > 3899 and rpm <= 3928:
+        rotation_angle = -132
+    elif rpm > 3928 and rpm <= 3957:
+        rotation_angle = -133
+    elif rpm > 3957 and rpm <= 3986:
+        rotation_angle = -134
+    elif rpm > 3986 and rpm <= 4000:
+        rotation_angle = -135
 
     #4000-5000
-    elif rpm > 4000 and rpm <= 4125:
-        screen.blit(stachometer_4[0], (tachometerX, tachometerY))
-    elif rpm > 4125 and rpm <= 4250:
-        screen.blit(stachometer_4[1], (tachometerX, tachometerY))
-    elif rpm > 4250 and rpm <= 4375:
-        screen.blit(stachometer_4[2], (tachometerX, tachometerY))
-    elif rpm > 4375 and rpm <= 4500:
-        screen.blit(stachometer_4[3], (tachometerX, tachometerY))
-    elif rpm > 4500 and rpm <= 4625:
-        screen.blit(stachometer_4[4], (tachometerX, tachometerY))
-    elif rpm > 4625 and rpm <= 4750:
-        screen.blit(stachometer_4[5], (tachometerX, tachometerY))
-    elif rpm > 4750 and rpm <= 4875:
-        screen.blit(stachometer_4[6], (tachometerX, tachometerY))
-    elif rpm > 4875 and rpm <= 5000:
-        screen.blit(stachometer_4[7], (tachometerX, tachometerY))
+    elif rpm > 4000 and rpm <= 4029:
+        rotation_angle = -136
+    elif rpm > 4029 and rpm <= 4058:
+        rotation_angle = -137
+    elif rpm > 4058 and rpm <= 4087:
+        rotation_angle = -138
+    elif rpm > 4087 and rpm <= 4116:
+        rotation_angle = -139
+    elif rpm > 4116 and rpm <= 4145:
+        rotation_angle = -140
+    elif rpm > 4145 and rpm <= 4174:
+        rotation_angle = -141
+    elif rpm > 4174 and rpm <= 4203:
+        rotation_angle = -142
+    elif rpm > 4203 and rpm <= 4232:
+        rotation_angle = -143
+    elif rpm > 4232 and rpm <= 4261:
+        rotation_angle = -144
+    elif rpm > 4261 and rpm <= 4290:
+        rotation_angle = -145
+    elif rpm > 4290 and rpm <= 4319:
+        rotation_angle = -146
+    elif rpm > 4319 and rpm <= 4348:
+        rotation_angle = -147
+    elif rpm > 4348 and rpm <= 4377:
+        rotation_angle = -148
+    elif rpm > 4377 and rpm <= 4406:
+        rotation_angle = -149
+    elif rpm > 4406 and rpm <= 4435:
+        rotation_angle = -150
+    elif rpm > 4435 and rpm <= 4464:
+        rotation_angle = -151
+    elif rpm > 4464 and rpm <= 4493:
+        rotation_angle = -152
+    elif rpm > 4493 and rpm <= 4522:
+        rotation_angle = -153
+    elif rpm > 4522 and rpm <= 4551:
+        rotation_angle = -154
+    elif rpm > 4551 and rpm <= 4580:
+        rotation_angle = -155
+    elif rpm > 4580 and rpm <= 4609:
+        rotation_angle = -156
+    elif rpm > 4609 and rpm <= 4638:
+        rotation_angle = -157
+    elif rpm > 4638 and rpm <= 4667:
+        rotation_angle = -158
+    elif rpm > 4667 and rpm <= 4696:
+        rotation_angle = -159
+    elif rpm > 4696 and rpm <= 4725:
+        rotation_angle = -160
+    elif rpm > 4725 and rpm <= 4754:
+        rotation_angle = -161
+    elif rpm > 4754 and rpm <= 4783:
+        rotation_angle = -162
+    elif rpm > 4783 and rpm <= 4812:
+        rotation_angle = -163
+    elif rpm > 4812 and rpm <= 4841:
+        rotation_angle = -164
+    elif rpm > 4841 and rpm <= 4870:
+        rotation_angle = -165
+    elif rpm > 4870 and rpm <= 4899:
+        rotation_angle = -166
+    elif rpm > 4899 and rpm <= 4928:
+        rotation_angle = -167
+    elif rpm > 4928 and rpm <= 4957:
+        rotation_angle = -168
+    elif rpm > 4957 and rpm <= 4986:
+        rotation_angle = -169
+    elif rpm > 4986 and rpm <= 5000:
+        rotation_angle = -170
 
     #5000-6000
-    elif rpm > 5000 and rpm <= 5111:
-        screen.blit(stachometer_5[0], (tachometerX, tachometerY))
-    elif rpm > 5111 and rpm <= 5222:
-        screen.blit(stachometer_5[1], (tachometerX, tachometerY))
-    elif rpm > 5222 and rpm <= 5333:
-        screen.blit(stachometer_5[2], (tachometerX, tachometerY))
-    elif rpm > 5333 and rpm <= 5444:
-        screen.blit(stachometer_5[3], (tachometerX, tachometerY))
-    elif rpm > 5444 and rpm <= 5555:
-        screen.blit(stachometer_5[4], (tachometerX, tachometerY))
-    elif rpm > 5555 and rpm <= 5666:
-        screen.blit(stachometer_5[5], (tachometerX, tachometerY))
-    elif rpm > 5666 and rpm <= 5777:
-        screen.blit(stachometer_5[6], (tachometerX, tachometerY))
-    elif rpm > 5777 and rpm <= 5888:
-        screen.blit(stachometer_5[7], (tachometerX, tachometerY))
-    elif rpm > 5888 and rpm <= 6000:
-        screen.blit(stachometer_5[8], (tachometerX, tachometerY))
+    elif rpm > 5000 and rpm <= 5029:
+        rotation_angle = -171
+    elif rpm > 5029 and rpm <= 5058:
+        rotation_angle = -172
+    elif rpm > 5058 and rpm <= 5087:
+        rotation_angle = -173
+    elif rpm > 5087 and rpm <= 5116:
+        rotation_angle = -174
+    elif rpm > 5116 and rpm <= 5145:
+        rotation_angle = -175
+    elif rpm > 5145 and rpm <= 5174:
+        rotation_angle = -176
+    elif rpm > 5174 and rpm <= 5203:
+        rotation_angle = -177
+    elif rpm > 5203 and rpm <= 5232:
+        rotation_angle = -178
+    elif rpm > 5232 and rpm <= 5261:
+        rotation_angle = -179
+    elif rpm > 5261 and rpm <= 5290:
+        rotation_angle = -180
+    elif rpm > 5290 and rpm <= 5319:
+        rotation_angle = -181
+    elif rpm > 5319 and rpm <= 5348:
+        rotation_angle = -182
+    elif rpm > 5348 and rpm <= 5377:
+        rotation_angle = -183
+    elif rpm > 5377 and rpm <= 5406:
+        rotation_angle = -184
+    elif rpm > 5406 and rpm <= 5435:
+        rotation_angle = -185
+    elif rpm > 5435 and rpm <= 5464:
+        rotation_angle = -186
+    elif rpm > 5464 and rpm <= 5493:
+        rotation_angle = -187
+    elif rpm > 5493 and rpm <= 5522:
+        rotation_angle = -188
+    elif rpm > 5522 and rpm <= 5551:
+        rotation_angle = -189
+    elif rpm > 5551 and rpm <= 5580:
+        rotation_angle = -190
+    elif rpm > 5580 and rpm <= 5609:
+        rotation_angle = -191
+    elif rpm > 5609 and rpm <= 5638:
+        rotation_angle = -192
+    elif rpm > 5638 and rpm <= 5667:
+        rotation_angle = -193
+    elif rpm > 5667 and rpm <= 5696:
+        rotation_angle = -194
+    elif rpm > 5696 and rpm <= 5725:
+        rotation_angle = -195
+    elif rpm > 5725 and rpm <= 5754:
+        rotation_angle = -196
+    elif rpm > 5754 and rpm <= 5783:
+        rotation_angle = -197
+    elif rpm > 5783 and rpm <= 5812:
+        rotation_angle = -198
+    elif rpm > 5812 and rpm <= 5841:
+        rotation_angle = -199
+    elif rpm > 5841 and rpm <= 5870:
+        rotation_angle = -200
+    elif rpm > 5870 and rpm <= 5899:
+        rotation_angle = -201
+    elif rpm > 5899 and rpm <= 5928:
+        rotation_angle = -202
+    elif rpm > 5928 and rpm <= 5957:
+        rotation_angle = -203
+    elif rpm > 5957 and rpm <= 5986:
+        rotation_angle = -204
+    elif rpm > 5986 and rpm <= 6000:
+        rotation_angle = -205
 
-    #6000-7000
-    elif rpm > 6000 and rpm <= 6142:
-        screen.blit(stachometer_6[0], (tachometerX, tachometerY))
-    elif rpm > 6142 and rpm <= 6284:
-        screen.blit(stachometer_6[1], (tachometerX, tachometerY))
-    elif rpm > 6284 and rpm <= 6426:
-        screen.blit(stachometer_6[2], (tachometerX, tachometerY))
-    elif rpm > 6426 and rpm <= 6568:
-        screen.blit(stachometer_6[3], (tachometerX, tachometerY))
-    elif rpm > 6568 and rpm <= 6710:
-        screen.blit(stachometer_6[4], (tachometerX, tachometerY))
-    elif rpm > 6710 and rpm <= 6852:
-        screen.blit(stachometer_6[5], (tachometerX, tachometerY))
-    elif rpm > 6852 and rpm <= 7000:
-        screen.blit(stachometer_6[6], (tachometerX, tachometerY))
+    # 6000-7000
+    elif rpm > 6000 and rpm <= 6029:
+        rotation_angle = -206
+    elif rpm > 6029 and rpm <= 6058:
+        rotation_angle = -207
+    elif rpm > 6058 and rpm <= 6087:
+        rotation_angle = -208
+    elif rpm > 6087 and rpm <= 6116:
+        rotation_angle = -209
+    elif rpm > 6116 and rpm <= 6145:
+        rotation_angle = -210
+    elif rpm > 6145 and rpm <= 6174:
+        rotation_angle = -211
+    elif rpm > 6174 and rpm <= 6203:
+        rotation_angle = -212
+    elif rpm > 6203 and rpm <= 6232:
+        rotation_angle = -213
+    elif rpm > 6232 and rpm <= 6261:
+        rotation_angle = -214
+    elif rpm > 6261 and rpm <= 6290:
+        rotation_angle = -215
+    elif rpm > 6290 and rpm <= 6319:
+        rotation_angle = -216
+    elif rpm > 6319 and rpm <= 6348:
+        rotation_angle = -217
+    elif rpm > 6348 and rpm <= 6377:
+        rotation_angle = -218
+    elif rpm > 6377 and rpm <= 6406:
+        rotation_angle = -219
+    elif rpm > 6406 and rpm <= 6435:
+        rotation_angle = -220
+    elif rpm > 6435 and rpm <= 6464:
+        rotation_angle = -221
+    elif rpm > 6464 and rpm <= 6493:
+        rotation_angle = -222
+    elif rpm > 6493 and rpm <= 6522:
+        rotation_angle = -223
+    elif rpm > 6522 and rpm <= 6551:
+        rotation_angle = -224
+    elif rpm > 6551 and rpm <= 6580:
+        rotation_angle = -225
+    elif rpm > 6580 and rpm <= 6609:
+        rotation_angle = -226
+    elif rpm > 6609 and rpm <= 6638:
+        rotation_angle = -227
+    elif rpm > 6638 and rpm <= 6667:
+        rotation_angle = -228
+    elif rpm > 6667 and rpm <= 6696:
+        rotation_angle = -229
+    elif rpm > 6696 and rpm <= 6725:
+        rotation_angle = -230
+    elif rpm > 6725 and rpm <= 6754:
+        rotation_angle = -231
+    elif rpm > 6754 and rpm <= 6783:
+        rotation_angle = -232
+    elif rpm > 6783 and rpm <= 6812:
+        rotation_angle = -233
+    elif rpm > 6812 and rpm <= 6841:
+        rotation_angle = -234
+    elif rpm > 6841 and rpm <= 6870:
+        rotation_angle = -235
+    elif rpm > 6870 and rpm <= 6899:
+        rotation_angle = -236
+    elif rpm > 6899 and rpm <= 6928:
+        rotation_angle = -237
+    elif rpm > 6928 and rpm <= 6957:
+        rotation_angle = -238
+    elif rpm > 6957 and rpm <= 6986:
+        rotation_angle = -239
+    elif rpm > 6986 and rpm <= 7000:
+        rotation_angle = -240
 
-    #7000-8000
-    elif rpm > 7000 and rpm <= 7111:
-        screen.blit(stachometer_7[0], (tachometerX, tachometerY))
-    elif rpm > 7111 and rpm <= 7222:
-        screen.blit(stachometer_7[1], (tachometerX, tachometerY))
-    elif rpm > 7222 and rpm <= 7333:
-        screen.blit(stachometer_7[2], (tachometerX, tachometerY))
-    elif rpm > 7333 and rpm <= 7444:
-        screen.blit(stachometer_7[3], (tachometerX, tachometerY))
-    elif rpm > 7444 and rpm <= 7555:
-        screen.blit(stachometer_7[4], (tachometerX, tachometerY))
-    elif rpm > 7555 and rpm <= 7666:
-        screen.blit(stachometer_7[5], (tachometerX, tachometerY))
-    elif rpm > 7666 and rpm <= 7777:
-        screen.blit(stachometer_7[6], (tachometerX, tachometerY))
-    elif rpm > 7777 and rpm <= 7888:
-        screen.blit(stachometer_7[7], (tachometerX, tachometerY))
-    elif rpm > 7888 and rpm <= 8000:
-        screen.blit(stachometer_7[8], (tachometerX, tachometerY))
+    # 7000-8000
+    elif rpm > 7000 and rpm <= 7029:
+        rotation_angle = -241
+    elif rpm > 7029 and rpm <= 7058:
+        rotation_angle = -242
+    elif rpm > 7058 and rpm <= 7087:
+        rotation_angle = -243
+    elif rpm > 7087 and rpm <= 7116:
+        rotation_angle = -244
+    elif rpm > 7116 and rpm <= 7145:
+        rotation_angle = -245
+    elif rpm > 7145 and rpm <= 7174:
+        rotation_angle = -246
+    elif rpm > 7174 and rpm <= 7203:
+        rotation_angle = -247
+    elif rpm > 7203 and rpm <= 7232:
+        rotation_angle = -248
+    elif rpm > 7232 and rpm <= 7261:
+        rotation_angle = -249
+    elif rpm > 7261 and rpm <= 7290:
+        rotation_angle = -250
+    elif rpm > 7290 and rpm <= 7319:
+        rotation_angle = -251
+    elif rpm > 7319 and rpm <= 7348:
+        rotation_angle = -252
+    elif rpm > 7348 and rpm <= 7377:
+        rotation_angle = -253
+    elif rpm > 7377 and rpm <= 7406:
+        rotation_angle = -254
+    elif rpm > 7406 and rpm <= 7435:
+        rotation_angle = -255
+    elif rpm > 7435 and rpm <= 7464:
+        rotation_angle = -256
+    elif rpm > 7464 and rpm <= 7493:
+        rotation_angle = -257
+    elif rpm > 7493 and rpm <= 7522:
+        rotation_angle = -258
+    elif rpm > 7522 and rpm <= 7551:
+        rotation_angle = -259
+    elif rpm > 7551 and rpm <= 7580:
+        rotation_angle = -260
+    elif rpm > 7580 and rpm <= 7609:
+        rotation_angle = -261
+    elif rpm > 7609 and rpm <= 7638:
+        rotation_angle = -262
+    elif rpm > 7638 and rpm <= 7667:
+        rotation_angle = -263
+    elif rpm > 7667 and rpm <= 7696:
+        rotation_angle = -264
+    elif rpm > 7696 and rpm <= 7725:
+        rotation_angle = -265
+    elif rpm > 7725 and rpm <= 7754:
+        rotation_angle = -266
+    elif rpm > 7754 and rpm <= 7783:
+        rotation_angle = -267
+    elif rpm > 7783 and rpm <= 7812:
+        rotation_angle = -268
+    elif rpm > 7812 and rpm <= 7841:
+        rotation_angle = -269
+    elif rpm > 7841 and rpm <= 7870:
+        rotation_angle = -270
+    elif rpm > 7870 and rpm <= 7899:
+        rotation_angle = -271
+    elif rpm > 7899 and rpm <= 7928:
+        rotation_angle = -272
+    elif rpm > 7928 and rpm <= 7957:
+        rotation_angle = -273
+    elif rpm > 7957 and rpm <= 7986:
+        rotation_angle = -274
+    elif rpm > 7986 and rpm <= 8000:
+        rotation_angle = -275
 
-    #8000-9000
-    elif rpm > 8000 and rpm <= 8142:
-        screen.blit(stachometer_8[0], (tachometerX, tachometerY))
-    elif rpm > 8142 and rpm <= 8284:
-        screen.blit(stachometer_8[1], (tachometerX, tachometerY))
-    elif rpm > 8284 and rpm <= 8426:
-        screen.blit(stachometer_8[2], (tachometerX, tachometerY))
-    elif rpm > 8426 and rpm <= 8568:
-        screen.blit(stachometer_8[3], (tachometerX, tachometerY))
-    elif rpm > 8568 and rpm <= 8710:
-        screen.blit(stachometer_8[4], (tachometerX, tachometerY))
-    elif rpm > 8710 and rpm <= 8852:
-        screen.blit(stachometer_8[5], (tachometerX, tachometerY))
-    elif rpm > 8852 and rpm <= 8000:
-        screen.blit(stachometer_8[6], (tachometerX, tachometerY))
+    # 8000-9000
+    elif rpm > 8000 and rpm <= 8031:
+        rotation_angle = -276
+    elif rpm > 8031 and rpm <= 8061:
+        rotation_angle = -277
+    elif rpm > 8061 and rpm <= 8093:
+        rotation_angle = -278
+    elif rpm > 8093 and rpm <= 8124:
+        rotation_angle = -279
+    elif rpm > 8124 and rpm <= 8155:
+        rotation_angle = -280
+    elif rpm > 8155 and rpm <= 8186:
+        rotation_angle = -281
+    elif rpm > 8186 and rpm <= 8217:
+        rotation_angle = -282
+    elif rpm > 8217 and rpm <= 8248:
+        rotation_angle = -283
+    elif rpm > 8248 and rpm <= 8279:
+        rotation_angle = -284
+    elif rpm > 8279 and rpm <= 8310:
+        rotation_angle = -285
+    elif rpm > 8310 and rpm <= 8341:
+        rotation_angle = -286
+    elif rpm > 8341 and rpm <= 8372:
+        rotation_angle = -287
+    elif rpm > 8372 and rpm <= 8403:
+        rotation_angle = -288
+    elif rpm > 8403 and rpm <= 8434:
+        rotation_angle = -289
+    elif rpm > 8434 and rpm <= 8465:
+        rotation_angle = -290
+    elif rpm > 8465 and rpm <= 8496:
+        rotation_angle = -291
+    elif rpm > 8496 and rpm <= 8527:
+        rotation_angle = -292
+    elif rpm > 8527 and rpm <= 8558:
+        rotation_angle = -293
+    elif rpm > 8558 and rpm <= 8589:
+        rotation_angle = -294
+    elif rpm > 8589 and rpm <= 8620:
+        rotation_angle = -295
+    elif rpm > 8620 and rpm <= 8651:
+        rotation_angle = -296
+    elif rpm > 8651 and rpm <= 8682:
+        rotation_angle = -297
+    elif rpm > 8682 and rpm <= 8713:
+        rotation_angle = -298
+    elif rpm > 8713 and rpm <= 8744:
+        rotation_angle = -299
+    elif rpm > 8744 and rpm <= 8775:
+        rotation_angle = -300
+    elif rpm > 8775 and rpm <= 8806:
+        rotation_angle = -301
+    elif rpm > 8806 and rpm <= 8837:
+        rotation_angle = -302
+    elif rpm > 8837 and rpm <= 8868:
+        rotation_angle = -303
+    elif rpm > 8868 and rpm <= 8899:
+        rotation_angle = -304
+    elif rpm > 8899 and rpm <= 8930:
+        rotation_angle = -305
+    elif rpm > 8930 and rpm <= 8961:
+        rotation_angle = -306
+    elif rpm > 8961 and rpm <= 9000:
+        rotation_angle = -307
 
-    else:
-        screen.blit(stachometer_0[0], (tachometerX, tachometerY))
-
+    return rotation_angle
 
 # Speed
 speed_value = 0
 speed_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 50)
 mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 
-sspeed_font = pygame.font.Font('Fonts/pirulen rg.ttf', 50)
-smphfont = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
+rpm_font = pygame.font.Font('Fonts/pirulen rg.ttf', 34)
+srpmfont = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
 
 
 speedtextX0 = 500   #one's place
@@ -425,18 +731,22 @@ def display_speed():
 
     screen.blit(mph, (mphtextX, mphtextY))
 
-def sdisplay_speed():
-    speed = sspeed_font.render(str(speed_value), True, (255, 255, 255))
-    mph = smphfont.render("MPH", True, (255, 255, 255))
+def sdisplay_rpm():
+    srpm = rpm_font.render(str(rpm), True, (255, 255, 255))
+    rpm_text = srpmfont.render("RPM", True, (255, 255, 255))
 
-    if speed_value <= 9:
-        screen.blit(speed, (speedtextX0-10, speedtextY0))
-    elif speed_value >= 10 and speed_value <= 99:
-        screen.blit(speed, (speedtextX10-18, speedtextY10))
-    elif speed_value >= 100:
-        screen.blit(speed, (speedtextX100-18, speedtextY100))
+    if rpm <= 9:
+        screen.blit(srpm, (speedtextX0, speedtextY0+15))
+    elif rpm >= 10 and rpm <= 99:
+        screen.blit(srpm, (speedtextX10-5, speedtextY10+15))
+    elif rpm >= 100 and rpm <= 999:
+        screen.blit(srpm, (speedtextX10 - 15, speedtextY10 + 15))
+    elif rpm >= 1000 and rpm <= 1999:
+        screen.blit(srpm, (speedtextX10 - 22, speedtextY10 + 15))
+    elif rpm >= 2000:
+        screen.blit(srpm, (speedtextX100-25, speedtextY100+15))
 
-    screen.blit(mph, (mphtextX-13, mphtextY))
+    screen.blit(rpm_text, (mphtextX-10, mphtextY-10))
 
 #Temp Gauge
 temp_value = 0
@@ -705,21 +1015,27 @@ diag_heading_img = pygame.image.load('diagnostics/vehicle_diagnostics_heading.pn
 def display_diag_heading():
     screen.blit(diag_heading_img, (maint_headingX, maint_headingY))
 
+
 #Display functions for UI
 def displays():
     sports_button()
-    tachometer(rpm)
+    #tachometer(rpm)
+    display_blank_tach()
+    display_needle(needle_positioning())
+    display_inner_tach()
     framework()
-    display_speed()
     temp_gauge()
     display_temp()
     display_warning_indicator_small(oil_change_count)
+    display_speed()
 
 def sports_display():
-    stachometer(rpm)
+    display_blank_sports_tach()
+    display_needle(needle_positioning())
+    display_inner_tach()
     sports_button()
     sframework()
-    sdisplay_speed()
+    sdisplay_rpm()
     temp_gauge()
     sdisplay_temp()
 
@@ -780,7 +1096,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    #print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
@@ -869,13 +1185,13 @@ while app_running:
     RedrawWindow()
 
 #rpm testing
-    if rpm < 5000 and limit == False:
-        rpm += 150
-        if rpm >= 5000:
+    if rpm < 9000 and limit == False:
+        rpm += 20
+        if rpm >= 9000:
             limit = True
     elif limit == True:
-        rpm -= 75
-        if rpm <= 450:
+        rpm -= 20
+        if rpm <= 0:
             limit = False
 
 #speed testing
@@ -900,8 +1216,7 @@ while app_running:
 
 #Where mileage should increment
     #mileage = mileage + trip_distance
-    mileage = mileage + 5
-
+    mileage = mileage + 1
 
 
 
