@@ -7,6 +7,7 @@ oil_change_interval = 0
 oil_change_count = 0
 mileage = 0
 trip_distance = 0
+
 limit = False
 speed_limit = False
 temp_limit = False
@@ -20,6 +21,7 @@ five_thousand_press = False
 seven_thousand_five_press = False
 ten_thousand_press = False
 fifteen_thousand_press = False
+
 dtc_code_present = False
 dtc_code ='N/A'
 # colors_button_press = False
