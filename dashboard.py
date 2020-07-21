@@ -21,6 +21,9 @@ seven_thousand_five_press = False
 ten_thousand_press = False
 fifteen_thousand_press = False
 current_interval = 1
+clear_dtc_press = False
+dtc_error = True
+dtc_code = 'N/A'
 # colors_button_press = False
 
 #initialize the interface
@@ -703,9 +706,39 @@ def interval_display():
     interval_text()
     back_button()
 
+# Diagnostics Display
+clear_dtc_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
+clear_dtc_button_label = clear_dtc_font.render('Clear DTC', True, (255, 255, 255))
+
+def clear_dtc_button():
+    if clear_dtc_press is False:
+        clear_dtc = pygame.image.load('Sport Button not pressed (no label).png')
+    else:
+        clear_dtc = pygame.image.load('Sport Button Pressed (no label).png')
+    screen.blit(clear_dtc, (840, 425))
+    screen.blit(clear_dtc_button_label, (888, 500))
+
+
+diagnostic_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
+no_error_msg = diagnostic_font.render('No DTC Codes Detected', True, (255, 255, 255))
+no_error_symbol = pygame.image.load('car.png')
+
+error_symbol_small = pygame.image.load('engine_check_small.png')
+error_symbol = pygame.image.load('engine_check.png')
+
 def diag_display():
     display_diag_heading()
     back_button()
+    if current_page == 5:
+        screen.blit(no_error_symbol, (435, 175))
+        screen.blit(no_error_msg, (340, 300))
+    elif current_page == 6:
+        screen.blit(error_symbol_small, (465, 155))
+        clear_dtc_button()
+    else:
+        screen.blit(error_symbol, (453, 160))
+
+
 
 
 #Redraw
@@ -727,7 +760,7 @@ def RedrawWindow():
             maintenance_display()
         elif current_page == 4:
             interval_display()
-        elif current_page == 5:
+        elif current_page > 4:
             diag_display()
 
     pygame.display.update()
@@ -754,9 +787,9 @@ while app_running:
                 sports_button_press = True
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
                 back_button_press = True
-            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
                 reset_button_press = True
-            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 interval_button_press = True
             elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
                 three_thousand_press = True
@@ -768,10 +801,14 @@ while app_running:
                 ten_thousand_press = True
             elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
                 fifteen_thousand_press = True
+            elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
+                clear_dtc_press = True
+
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
             interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
             three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
+            clear_dtc_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -784,19 +821,24 @@ while app_running:
                 current_page = 3
             # Goes to vehicle diagnostics
             elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 2:
-                current_page = 5
+                # Page 6 if there is an error
+                if dtc_error is True:
+                    current_page = 6
+                else:
+                    current_page = 5
             # Back button
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
-                if current_page == 3 or current_page == 5:
+                if current_page == 3 or current_page == 5 or current_page == 6:
                     current_page = 1
                 else:
                     current_page -= 1
             # Reset button
-            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
                 mileage = 0
             # Interval button
-            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 current_page = 4
+            # Selecting oil change interval
             elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
                 current_interval = 1
             elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
@@ -807,6 +849,8 @@ while app_running:
                 current_interval = 4
             elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
                 current_interval = 5
+            elif 250 < mouse[0] < 770 and 260 < mouse[1] < 340 and current_page == 6:
+                current_page = 7
 
 #Mileage/Oil Change Interval Functions
 
