@@ -20,159 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/needle_tach/Tach.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/needle_tach/inner_tach.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/needle_tach/needle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sport_mode/Tach_sports.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/0-1000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1000-2000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2000-3000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3000-4000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4000-5000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5000-6000/Tach9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6000-7000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7000-8000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8000-9000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maintenance/interval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/interval.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/mileage.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/0-1000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/1000-2000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/2000-3000/Tach9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/3000-4000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/4000-5000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/5000-6000/Tach9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/6000-7000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/7000-8000/Tach9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sport_mode/8000-9000/Tach7.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,22 +118,22 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1429" y="278" key="#dashboard/0.0.3440.1400@0.0.3440.1400" timestamp="1594072011895" />
-    <state width="1696" height="118" key="GridCell.Tab.0.bottom" timestamp="1595306722135">
+    <state width="1696" height="118" key="GridCell.Tab.0.bottom" timestamp="1595307420849">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595306722135" />
-    <state width="1696" height="118" key="GridCell.Tab.0.center" timestamp="1595306722135">
+    <state width="1696" height="118" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1595307420849" />
+    <state width="1696" height="118" key="GridCell.Tab.0.center" timestamp="1595307420849">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595306722135" />
-    <state width="1696" height="118" key="GridCell.Tab.0.left" timestamp="1595306722135">
+    <state width="1696" height="118" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1595307420849" />
+    <state width="1696" height="118" key="GridCell.Tab.0.left" timestamp="1595307420849">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595306722135" />
-    <state width="1696" height="118" key="GridCell.Tab.0.right" timestamp="1595306722135">
+    <state width="1696" height="118" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1595307420849" />
+    <state width="1696" height="118" key="GridCell.Tab.0.right" timestamp="1595307420849">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="118" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595306722135" />
+    <state width="1696" height="118" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1595307420849" />
     <state width="948" height="491" key="GridCell.Tab.1.bottom" timestamp="1595135537429">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
