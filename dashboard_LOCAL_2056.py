@@ -1219,3 +1219,6 @@ while app_running:
 #Where mileage should increment
     #mileage = mileage + trip_distance
     mileage = mileage + 1
+
+
+
