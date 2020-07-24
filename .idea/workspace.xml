@@ -20,14 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dashboard_BACKUP_2056.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dashboard_BASE_2056.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dashboard_LOCAL_2056.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dashboard_REMOTE_2056.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine_check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine_check_small.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/maintenance ok.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/mileage.txt" afterDir="false" />
     </list>
@@ -52,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sport_mode" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/maintenance" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

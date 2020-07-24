@@ -971,7 +971,7 @@ def display_warning_indicator(oil_change_count):
 #Main Page Maintenance Indicators
 
 warning_small_img = pygame.image.load('maintenance/warning_small.png')
-everything_ok_small_img = pygame.image.load('maintenance/everything_ok.png')
+everything_ok_img = pygame.image.load('maintenance/maintenance ok.png')
 
 def display_warning_indicator_small(oil_change_count):
 
@@ -989,12 +989,7 @@ def display_warning_indicator_small(oil_change_count):
         screen.blit(oil_change_line1, (oil_txt_X, oil_txt_Y))
         screen.blit(oil_change_line2, (oil_txt_X+50, oil_txt_Y+30))
     else:
-        screen.blit(everything_ok_small_img, (warning_smallX, warning_smallY-5))
-        maintenance_ok = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
-        maintenance_ok_line1 = maintenance_ok.render(('All Maintenance'), True, (255, 255, 255))
-        maintenance_ok_line2 = maintenance_ok.render(('Up to Date'), True, (255, 255, 255))
-        screen.blit(maintenance_ok_line1, (oil_txt_X+15, oil_txt_Y-10))
-        screen.blit(maintenance_ok_line2, (oil_txt_X + 40, oil_txt_Y + 20))
+        screen.blit(everything_ok_img, (15, 200))
 
 
 #Maintenance Headings
