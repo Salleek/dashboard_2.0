@@ -8,6 +8,7 @@ oil_change_count = 0
 mileage = 0
 trip_distance = 0
 
+
 limit = False
 speed_limit = False
 temp_limit = False
@@ -23,7 +24,8 @@ ten_thousand_press = False
 fifteen_thousand_press = False
 clear_dtc_press = False
 dtc_code_present = False
-dtc_code ='N/A'
+dtc_code = 'N/A'
+current_maintenance = 1
 # colors_button_press = False
 
 #initialize the interface
@@ -996,11 +998,15 @@ def display_warning_indicator_small(oil_change_count):
 vehicle_maint_heading_img = pygame.image.load('maintenance/maintenance_heading.png')
 maint_headingX = 210
 maint_headingY = 65
+next_maintenance = pygame.image.load('next.png')
+previous_maintenance = pygame.image.load('back.png')
 
 oil_change_int_heading_img = pygame.image.load('maintenance/oil_change_interval_heading.png')
 
 def display_maint_heading():
     screen.blit(vehicle_maint_heading_img, (maint_headingX, maint_headingY))
+    screen.blit(next_maintenance, (765, 75))
+    screen.blit(previous_maintenance, (210, 75))
 
 def display_oil_int_heading():
     screen.blit(oil_change_int_heading_img, (maint_headingX, maint_headingY))
@@ -1037,21 +1043,25 @@ def sports_display():
     sdisplay_temp()
 
 def maintenance_display():
-    display_oilchange_distance(oil_change_count)
-    display_warning_indicator(oil_change_count)
     reset_button()
     interval_button()
     back_button()
     display_maint_heading()
+    # Changes maintenance information
+    if current_maintenance == 1:
+        display_oilchange_distance(oil_change_count)
+        display_warning_indicator(oil_change_count)
+    
 
 def interval_display():
-    display_oil_int_heading()
-    three_thousand()
-    five_thousand()
-    seven_thousand_five()
-    ten_thousand()
-    fifteen_thousand()
-    interval_text()
+    if current_maintenance == 1:
+        display_oil_int_heading()
+        three_thousand()
+        five_thousand()
+        seven_thousand_five()
+        ten_thousand()
+        fifteen_thousand()
+        interval_text()
     back_button()
 
 # Diagnostics Display
@@ -1121,7 +1131,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    #print(mouse)
+    print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
@@ -1162,8 +1172,21 @@ while app_running:
                 else:
                     current_page = 1
             # Goes to vehicle maintenance
-            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page < 2:
+            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page == 1:
                 current_page = 3
+            # Navigates through the different maintenances
+            # Previous maintenance
+            elif 210 < mouse[0] < 260 and 65 < mouse[1] < 135 and current_page == 3:
+                if current_maintenance == 1:
+                    current_maintenance = 3
+                else:
+                    current_maintenance -= 1
+            # Next maintenance
+            elif 765 < mouse[0] < 810 and 65 < mouse[1] < 135 and current_page == 3:
+                if current_maintenance == 3:
+                    current_maintenance = 1
+                else:
+                    current_maintenance += 1
             # Goes to vehicle diagnostics
             elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 2:
                 # Page 6 if there is an error
