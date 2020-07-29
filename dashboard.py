@@ -817,6 +817,8 @@ temp_txt_Y = 420
 #Oil Temp Gauge
 def oil_temp_gauge():
 
+    oil_icon_img = pygame.image.load('temp_gauge/oil_white.png')
+
     temp_oil = stemp_font.render(('Oil Temp ' + str(oil_temp) + ' °F'), True, (255, 255, 255))
     screen.blit(temp_oil, (temp_txt_X , 245))
 
@@ -838,7 +840,9 @@ def oil_temp_gauge():
         screen.blit(temp_indicator_img, (temp_indicatorX + 95, 220))
 
     pressure_oil = stemp_font.render(('Oil Pressure ' + str(oil_pressure) + ' PSI'), True, (255, 255, 255))
-    screen.blit(pressure_oil, (temp_txt_X - 20, 165))
+    screen.blit(pressure_oil, (temp_txt_X - 20, 185))
+
+    screen.blit(oil_icon_img, (120, 145))
 
 #Coolant Temp Gauge
 def temp_gauge():
@@ -1059,7 +1063,7 @@ def display_maintenance_distance(maintenance_string, past_due_string, maintenanc
 
     maintenance_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
     txt_X = 255
-    txt_Y = 260
+    txt_Y = 330
 
     if maintenance_count > 0:
         maintenance_change = maintenance_font.render((maintenance_string + str(maintenance_count) + ' Miles'), True, (255, 255, 255))
@@ -1071,18 +1075,25 @@ def display_maintenance_distance(maintenance_string, past_due_string, maintenanc
 
 #Warning Indicator
 
-warning_big_img = pygame.image.load('maintenance/warning_big.png')
-ok_big_img = pygame.image.load('maintenance/everything_ok_big.png')
-
-def display_warning_indicator(maintenance_count):
+def display_warning_indicator(maintenance_count, maintenance_page):
+    warning_big_img = pygame.image.load('maintenance/warning_big.png')
+    brake_img = pygame.image.load('maintenance/brake.png')
+    transmission_img = pygame.image.load('maintenance/gearbox.png')
+    oil_img = pygame.image.load('maintenance/oil_white_big.png')
 
     warning_bigX = 470
-    warning_bigY = 165
+    warning_bigY = 235
 
     if maintenance_count < 500:
         screen.blit(warning_big_img, (warning_bigX, warning_bigY))
     else:
-        screen.blit(ok_big_img, (warning_bigX, warning_bigY))
+        if maintenance_page == 1:
+            screen.blit(oil_img, (warning_bigX - 20, warning_bigY))
+        elif maintenance_page == 2:
+            screen.blit(transmission_img, (warning_bigX, warning_bigY - 15))
+        elif maintenance_page ==3:
+            screen.blit(brake_img, (warning_bigX, warning_bigY - 15))
+
 
 #Main Page Maintenance Indicators
 
@@ -1188,13 +1199,13 @@ def maintenance_display():
     # Changes maintenance information
     if current_maintenance == 1:
         display_maintenance_distance('Oil Change Due In ', 'Oil Change Past Due by ', oil_change_count, 0, -50)
-        display_warning_indicator(oil_change_count)
+        display_warning_indicator(oil_change_count, 1)
     elif current_maintenance == 2:
         display_maintenance_distance('Transmission Oil Change Due In ', 'Transmission Oil Change Past Due by ', transmission_oil_change_count, -100, -150)
-        display_warning_indicator(transmission_oil_change_count)
+        display_warning_indicator(transmission_oil_change_count, 2)
     elif current_maintenance == 3:
         display_maintenance_distance('Brake Change Due In ', 'Brake Change Past Due by ', brake_change_count, 0, -60)
-        display_warning_indicator(brake_change_count)
+        display_warning_indicator(brake_change_count, 3)
 
 def interval_display():
     if current_maintenance == 1:

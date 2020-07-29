@@ -20,15 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/logos_headings/Chilly Willie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logos_headings/Dashboard 2.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/brake.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/gearbox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maintenance/oil_white_big.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp_gauge/oil_white.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maintenance/brake_interval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/brake_interval.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/brake_mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/brake_mileage.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maintenance/interval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/interval.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/mileage.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maintenance/transmission_interval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/transmission_interval.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maintenance/transmission_mileage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maintenance/transmission_mileage.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,18 +51,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/logos_headings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/maintenance" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode\framework" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\logos_headings" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\maintenance" />
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\temp_gauge" />
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\logos_headings" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\needle_tach" />
-      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\diagnostics" />
     </key>
   </component>
   <component name="RunManager">
@@ -127,22 +126,22 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1429" y="278" key="#dashboard/0.0.3440.1400@0.0.3440.1400" timestamp="1594072011895" />
-    <state width="1696" height="115" key="GridCell.Tab.0.bottom" timestamp="1596065208153">
+    <state width="1696" height="115" key="GridCell.Tab.0.bottom" timestamp="1596066799557">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="115" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1596065208153" />
-    <state width="1696" height="115" key="GridCell.Tab.0.center" timestamp="1596065208153">
+    <state width="1696" height="115" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1596066799557" />
+    <state width="1696" height="115" key="GridCell.Tab.0.center" timestamp="1596066799557">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="115" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1596065208153" />
-    <state width="1696" height="115" key="GridCell.Tab.0.left" timestamp="1596065208152">
+    <state width="1696" height="115" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1596066799557" />
+    <state width="1696" height="115" key="GridCell.Tab.0.left" timestamp="1596066799557">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="115" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1596065208152" />
-    <state width="1696" height="115" key="GridCell.Tab.0.right" timestamp="1596065208153">
+    <state width="1696" height="115" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1596066799557" />
+    <state width="1696" height="115" key="GridCell.Tab.0.right" timestamp="1596066799557">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="115" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1596065208153" />
+    <state width="1696" height="115" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1596066799557" />
     <state width="1696" height="488" key="GridCell.Tab.1.bottom" timestamp="1596064470849">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
