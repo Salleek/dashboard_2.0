@@ -5,7 +5,11 @@ import time
 rpm = 0
 oil_change_interval = 0
 oil_change_count = 0
-mileage = 0
+transmission_oil_change_interval = 0
+brake_change_interval = 0
+oil_mileage = 0
+transmission_oil_mileage = 0
+brake_mileage = 0
 trip_distance = 0
 
 
@@ -889,11 +893,11 @@ interval_txt_X = 220
 interval_txt_Y = 200
 interval_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
 
-def interval_text():
+def interval_text(interval_string, maintenance_interval, offset):
 
-    interval_message = interval_font.render('Current Oil Change Interval: ' + str(oil_change_interval), True, (255, 255, 255))
+    interval_message = interval_font.render(interval_string + str(maintenance_interval), True, (255, 255, 255))
 
-    screen.blit(interval_message, (interval_txt_X, interval_txt_Y))
+    screen.blit(interval_message, (interval_txt_X + offset, interval_txt_Y))
 
 # Oil change interval buttons
 def three_thousand():
@@ -952,36 +956,59 @@ with open('maintenance/interval.txt', 'r+') as int_file:
     oil_change_string = int_file.readline()
     oil_change_interval = int(oil_change_string)
 
+with open('maintenance/transmission_interval.txt', 'r+') as int_file:
+    transmission_change_string = int_file.readline()
+    transmission_oil_change_interval = int(transmission_change_string)
+
+with open('maintenance/brake_interval.txt', 'r+') as int_file:
+    brake_change_string = int_file.readline()
+    brake_change_interval = int(brake_change_string)
 
 with open('maintenance/mileage.txt', 'r+') as mileage_file:
-    mileage_string = mileage_file.readline()
-    mileage = int(mileage_string)
+    oil_mileage_string = mileage_file.readline()
+    oil_mileage = int(oil_mileage_string)
 
-def oil_change_counter(mileage, interval):
-    oil_change_count = interval - mileage
-    return oil_change_count
+with open('maintenance/transmission_mileage.txt', 'r+') as mileage_file:
+    transmission_mileage_string = mileage_file.readline()
+    transmission_oil_mileage = int(transmission_mileage_string)
 
-oil_change_count = oil_change_counter(mileage, oil_change_interval)
+with open('maintenance/brake_mileage.txt', 'r+') as mileage_file:
+    brake_mileage_string = mileage_file.readline()
+    brake_mileage = int(brake_mileage_string)
 
-def display_oilchange_distance(oil_change_count):
-    oil_txt_X = 255
-    oil_txt_Y = 260
+def maintenance_counter(mileage, interval):
+    maintenance_count = interval - mileage
+    return maintenance_count
 
-    oil_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
-    oil_change = oil_change_font.render(('Oil Change Due In ' + str(oil_change_count) + ' Miles'), True, (255, 255, 255))
-    screen.blit(oil_change, (oil_txt_X, oil_txt_Y))
+oil_change_count = maintenance_counter(oil_mileage, oil_change_interval)
+transmission_oil_change_count = maintenance_counter(transmission_oil_mileage, transmission_oil_change_interval)
+brake_change_count = maintenance_counter(brake_mileage, brake_change_interval)
+
+def display_maintenance_distance(maintenance_string, past_due_string, maintenance_count, offset, offset_due):
+
+    maintenance_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
+    txt_X = 255
+    txt_Y = 260
+
+    if maintenance_count > 0:
+        maintenance_change = maintenance_font.render((maintenance_string + str(maintenance_count) + ' Miles'), True, (255, 255, 255))
+        screen.blit(maintenance_change, (txt_X + offset, txt_Y))
+    elif maintenance_count < 0:
+        maintenance_past_due = maintenance_font.render((past_due_string + str(maintenance_count * -1) + ' Miles'), True, (255, 255, 255))
+        screen.blit(maintenance_past_due, (txt_X + offset_due, txt_Y))
+
 
 #Warning Indicator
 
 warning_big_img = pygame.image.load('maintenance/warning_big.png')
 ok_big_img = pygame.image.load('maintenance/everything_ok_big.png')
 
-def display_warning_indicator(oil_change_count):
+def display_warning_indicator(maintenance_count):
 
     warning_bigX = 470
     warning_bigY = 165
 
-    if oil_change_count < 500:
+    if maintenance_count < 500:
         screen.blit(warning_big_img, (warning_bigX, warning_bigY))
     else:
         screen.blit(ok_big_img, (warning_bigX, warning_bigY))
@@ -991,21 +1018,19 @@ def display_warning_indicator(oil_change_count):
 warning_small_img = pygame.image.load('maintenance/warning_small.png')
 everything_ok_img = pygame.image.load('maintenance/maintenance ok.png')
 
-def display_warning_indicator_small(oil_change_count):
+def display_warning_indicator_small(oil_change_count, transmission_change_count, brake_change_count):
 
     warning_smallX = 120
-    warning_smallY = 240
+    warning_smallY = 230
 
-    oil_txt_X = 50
-    oil_txt_Y = 165
+    maintenance_txt_X = 45
+    maintenance_txt_Y = 175
 
-    if oil_change_count < 500:
+    if oil_change_count < 500 or transmission_change_count < 500 or brake_change_count < 500:
         screen.blit(warning_small_img, (warning_smallX, warning_smallY))
-        oil_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
-        oil_change_line1 = oil_change_font.render(('Oil Change Due In '), True, (255, 255, 255))
-        oil_change_line2 =  oil_change_font.render((str(oil_change_count) + ' Miles'), True, (255, 255, 255))
-        screen.blit(oil_change_line1, (oil_txt_X, oil_txt_Y))
-        screen.blit(oil_change_line2, (oil_txt_X+50, oil_txt_Y+30))
+        maintenance_change_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
+        maintenance_line1 = maintenance_change_font.render(('Maintenance Due'), True, (255, 255, 255))
+        screen.blit(maintenance_line1, (maintenance_txt_X, maintenance_txt_Y))
     else:
         screen.blit(everything_ok_img, (15, 200))
 
@@ -1018,14 +1043,16 @@ next_maintenance = pygame.image.load('next.png')
 previous_maintenance = pygame.image.load('back.png')
 
 oil_change_int_heading_img = pygame.image.load('maintenance/oil_change_interval_heading.png')
+transmission_oil_change_int_heading_img = pygame.image.load('maintenance/transmission_interval_heading.png')
+brake_change_int_heading_img = pygame.image.load('maintenance/brake_interval_heading.png')
 
 def display_maint_heading():
     screen.blit(vehicle_maint_heading_img, (maint_headingX, maint_headingY))
     screen.blit(next_maintenance, (765, 75))
     screen.blit(previous_maintenance, (210, 75))
 
-def display_oil_int_heading():
-    screen.blit(oil_change_int_heading_img, (maint_headingX, maint_headingY))
+def display_int_heading(maintenance_heading_img):
+    screen.blit(maintenance_heading_img, (maint_headingX, maint_headingY))
 
 
 #Diagnostic Display
@@ -1033,54 +1060,6 @@ diag_heading_img = pygame.image.load('diagnostics/vehicle_diagnostics_heading.pn
 
 def display_diag_heading():
     screen.blit(diag_heading_img, (maint_headingX, maint_headingY))
-
-
-#Display functions for UI
-def displays():
-    sports_button()
-    #tachometer(rpm)
-    display_blank_tach()
-    display_needle(needle_positioning())
-    display_inner_tach()
-    framework()
-    temp_gauge()
-    display_temp()
-    display_warning_indicator_small(oil_change_count)
-    display_speed()
-
-def sports_display():
-    display_blank_sports_tach()
-    display_needle(needle_positioning())
-    display_inner_tach()
-    sports_button()
-    sframework()
-    sdisplay_rpm()
-    temp_gauge()
-    sdisplay_temp()
-
-def maintenance_display():
-    reset_button()
-    interval_button()
-    back_button()
-    display_maint_heading()
-    # Changes maintenance information
-    if current_maintenance == 1:
-        display_oilchange_distance(oil_change_count)
-        display_warning_indicator(oil_change_count)
-
-def interval_display():
-    if current_maintenance == 1:
-        display_oil_int_heading()
-        three_thousand()
-        five_thousand()
-        seven_thousand_five()
-        ten_thousand()
-        fifteen_thousand()
-        interval_text()
-    else:
-        increment()
-        decrement()
-    back_button()
 
 # Diagnostics Display
 clear_dtc_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
@@ -1101,6 +1080,67 @@ no_error_symbol = pygame.image.load('car.png')
 
 error_symbol_small = pygame.image.load('engine_check_small.png')
 error_symbol = pygame.image.load('engine_check.png')
+
+
+#Display functions for UI
+def displays():
+    sports_button()
+    display_blank_tach()
+    display_needle(needle_positioning())
+    display_inner_tach()
+    framework()
+    temp_gauge()
+    display_temp()
+    display_warning_indicator_small(oil_change_count, transmission_oil_change_count, brake_change_count)
+    display_speed()
+
+def sports_display():
+    display_blank_sports_tach()
+    display_needle(needle_positioning())
+    display_inner_tach()
+    sports_button()
+    sframework()
+    sdisplay_rpm()
+    temp_gauge()
+    sdisplay_temp()
+
+def maintenance_display():
+    reset_button()
+    interval_button()
+    back_button()
+    display_maint_heading()
+    # Changes maintenance information
+    if current_maintenance == 1:
+        display_maintenance_distance('Oil Change Due In ', 'Oil Change Past Due by ', oil_change_count, 0, -50)
+        display_warning_indicator(oil_change_count)
+    elif current_maintenance == 2:
+        display_maintenance_distance('Transmission Oil Change Due In ', 'Transmission Oil Change Past Due by ', transmission_oil_change_count, -100, -150)
+        display_warning_indicator(transmission_oil_change_count)
+    elif current_maintenance == 3:
+        display_maintenance_distance('Brake Change Due In ', 'Brake Change Past Due by ', brake_change_count, 0, -60)
+        display_warning_indicator(brake_change_count)
+
+def interval_display():
+    if current_maintenance == 1:
+        display_int_heading(oil_change_int_heading_img)
+        three_thousand()
+        five_thousand()
+        seven_thousand_five()
+        ten_thousand()
+        fifteen_thousand()
+        interval_text('Current Oil Change Interval: ', oil_change_interval, 0)
+    elif current_maintenance == 2:
+        increment()
+        decrement()
+        interval_text('Current Transmission Oil Change Interval: ', transmission_oil_change_interval, -100)
+        display_int_heading(transmission_oil_change_int_heading_img)
+    elif current_maintenance == 3:
+        increment()
+        decrement()
+        interval_text('Current Brake Change Interval: ', brake_change_interval, -20)
+        display_int_heading(brake_change_int_heading_img)
+    #all pages
+    back_button()
 
 def diag_display():
     display_diag_heading()
@@ -1149,7 +1189,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    #print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
@@ -1182,6 +1222,7 @@ while app_running:
                 decrement_press = True
             elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
                 increment_press = True
+
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
@@ -1226,7 +1267,12 @@ while app_running:
                     current_page -= 1
             # Reset button
             elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
-                mileage = 0
+                if current_maintenance == 1:
+                    oil_mileage = 0
+                elif current_maintenance == 2:
+                    transmission_oil_mileage = 0
+                elif current_maintenance == 3:
+                    brake_mileage = 0
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 current_page = 4
@@ -1251,19 +1297,48 @@ while app_running:
                     oil_change_interval = 15000
                     with open('maintenance/interval.txt', 'w') as interval_file:
                         interval_file.write(str(oil_change_interval))
-            # elif current_maintenance > 1 and current_page == 4:
-                # if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
-                    # Decrements value
-                # elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
-                    # Increments value
+            elif current_maintenance == 2 and current_page == 4:
+                if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                    transmission_oil_change_interval = transmission_oil_change_interval - 500
+                    print(transmission_oil_change_interval)
+                    with open('maintenance/transmission_interval.txt', 'w') as interval_file:
+                        interval_file.write(str(transmission_oil_change_interval))
+                elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                    transmission_oil_change_interval = transmission_oil_change_interval + 500
+                    print(transmission_oil_change_interval)
+                    with open('maintenance/transmission_interval.txt', 'w') as interval_file:
+                        interval_file.write(str(transmission_oil_change_interval))
+            elif current_maintenance == 3 and current_page == 4:
+                if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                    brake_change_interval = brake_change_interval - 500
+                    print(brake_change_interval)
+                    with open('maintenance/brake_interval.txt', 'w') as interval_file:
+                        interval_file.write(str(brake_change_interval))
+                elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                    brake_change_interval = brake_change_interval + 500
+                    print(brake_change_interval)
+                    with open('maintenance/brake_interval.txt', 'w') as interval_file:
+                        interval_file.write(str(brake_change_interval))
 
 #Mileage/Oil Change Interval Functions
 
-    oil_change_count = oil_change_counter(mileage, oil_change_interval)
-    convert_mileage = str(mileage)
+    oil_change_count = maintenance_counter(oil_mileage, oil_change_interval)
+    transmission_oil_change_count = maintenance_counter(transmission_oil_mileage, transmission_oil_change_interval)
+    brake_change_count = maintenance_counter(brake_mileage, brake_change_interval)
+
+    convert_oil_mileage = str(oil_mileage)
+    convert_trans_oil_mileage = str(transmission_oil_mileage)
+    convert_brake_mileage = str(brake_mileage)
 
     with open('maintenance/mileage.txt', 'w') as mileage_file:
-        mileage_file.write(convert_mileage)
+        mileage_file.write(convert_oil_mileage)
+
+    with open('maintenance/transmission_mileage.txt', 'w') as mileage_file:
+        mileage_file.write(convert_trans_oil_mileage)
+
+    with open('maintenance/brake_mileage.txt', 'w') as mileage_file:
+        mileage_file.write(convert_brake_mileage)
+
 
 
 #Redraw UI
@@ -1300,5 +1375,9 @@ while app_running:
             temp_value = False
 
 #Where mileage should increment
-    #mileage = mileage + trip_distance
-    mileage = mileage + 1
+    #oil_ = oil_mileage + trip_distance
+    #transmission_oil_mileage = transmission_oil_mileage + trip_distance
+    #brake_mileage = brake_mileage + trip_distance
+    oil_mileage = oil_mileage + 1
+    transmission_oil_mileage = transmission_oil_mileage + 1
+    brake_mileage = brake_mileage + 1
