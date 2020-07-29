@@ -1204,7 +1204,7 @@ def maintenance_display():
         display_maintenance_distance('Transmission Oil Change Due In ', 'Transmission Oil Change Past Due by ', transmission_oil_change_count, -100, -150)
         display_warning_indicator(transmission_oil_change_count, 2)
     elif current_maintenance == 3:
-        display_maintenance_distance('Brake Change Due In ', 'Brake Change Past Due by ', brake_change_count, 0, -60)
+        display_maintenance_distance('Brake Change Due In ', 'Brake Change Past Due by ', brake_change_count, -30, -60)
         display_warning_indicator(brake_change_count, 3)
 
 def interval_display():
