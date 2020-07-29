@@ -19,6 +19,7 @@ throttle_position = 0
 load = 0
 oil_pressure = 0
 oil_temp = 0
+temp_value = 0
 
 
 limit = False
@@ -54,6 +55,13 @@ screen = pygame.display.set_mode((1024, 600))
 #Title of app
 pygame.display.set_caption("Dashboard 2.0")
 
+#logo and project heading
+logo_img = pygame.image.load('logos_headings/Chilly Willie.png')
+project_heading_img = pygame.image.load('logos_headings/Dashboard 2.0.png')
+
+def display_logos():
+    screen.blit(logo_img, (910, 450))
+    screen.blit(project_heading_img, (390, 25))
 #Tachometer
 tachometerX = 205
 tachometerY = 0
@@ -782,7 +790,6 @@ def display_more_info():
 #sport display information
 def display_more_info_sport():
     info_font = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
-    info_speed_font = pygame.font.Font('Fonts/pirulen rg.ttf', 30)
 
     maf_sport = info_font.render('MAF ' + str(maf_reading) +' g/s', True, (255, 255, 255))
     screen.blit(maf_sport, (755, 150))
@@ -795,37 +802,62 @@ def display_more_info_sport():
 
     speed_sport = info_font.render('Speed ' + str(speed_value) + ' MPH', True, (255, 255, 255))
     screen.blit(speed_sport, (745, 380))
-    
 
-#Temp Gauge
-temp_value = 0
-
+#temperature guages
+temp_indicator_img = pygame.image.load('temp_gauge/indicator.png')
+temp_gauge_img = pygame.image.load('temp_gauge/Temp Gauge.png')
+temp_indicatorX = 140  #135 = middle, 240 = max, 30 = min
+temp_indicatorY = 399
 temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
 
 temp_txt_X = 30
 temp_txt_Y = 420
 
-temp_indicator_img = pygame.image.load('temp_gauge/indicator.png')
-temp_indicatorX = 140  #135 = middle, 240 = max, 30 = min
-temp_indicatorY = 399
+#Oil Temp Gauge
+def oil_temp_gauge():
 
+    temp_oil = stemp_font.render(('Oil Temp ' + str(oil_temp) + ' °F'), True, (255, 255, 255))
+    screen.blit(temp_oil, (temp_txt_X , 245))
+
+    screen.blit(temp_gauge_img, (19, 220))
+
+    if oil_temp >= 180 and oil_temp <= 220:
+        screen.blit(temp_indicator_img, (temp_indicatorX, 220))
+    elif oil_temp >= 170 and oil_temp < 180:
+        screen.blit(temp_indicator_img, (temp_indicatorX - 10, 220))
+    elif oil_temp >= 100 and oil_temp < 170:
+        screen.blit(temp_indicator_img, (temp_indicatorX - 50, 220))
+    elif oil_temp >= 0 and oil_temp < 100:
+        screen.blit(temp_indicator_img, (temp_indicatorX - 105, 220))
+    elif oil_temp > 220 and oil_temp <= 250:
+        screen.blit(temp_indicator_img, (temp_indicatorX + 10, 220))
+    elif oil_temp > 250 and oil_temp <= 300:
+        screen.blit(temp_indicator_img, (temp_indicatorX + 70, 220))
+    elif oil_temp > 300:
+        screen.blit(temp_indicator_img, (temp_indicatorX + 95, 220))
+
+    pressure_oil = stemp_font.render(('Oil Pressure ' + str(oil_pressure) + ' PSI'), True, (255, 255, 255))
+    screen.blit(pressure_oil, (temp_txt_X - 20, 165))
+
+#Coolant Temp Gauge
 def temp_gauge():
 
-    if temp_value >= 180 and temp_value <= 220:
+    if temp_value >= 200 and temp_value <= 220:
         screen.blit(temp_indicator_img, (temp_indicatorX, temp_indicatorY))
-    elif temp_value >= 170 and temp_value < 180:
+    elif temp_value >= 180 and temp_value < 200:
         screen.blit(temp_indicator_img, (temp_indicatorX - 10, temp_indicatorY))
-    elif temp_value >= 100 and temp_value < 170:
+    elif temp_value >= 100 and temp_value < 180:
         screen.blit(temp_indicator_img, (temp_indicatorX - 50, temp_indicatorY))
     elif temp_value >= 0 and temp_value < 100:
         screen.blit(temp_indicator_img, (temp_indicatorX - 105, temp_indicatorY))
-    elif temp_value > 220 and temp_value <= 250:
+    elif temp_value > 195 and temp_value <= 225:
         screen.blit(temp_indicator_img, (temp_indicatorX + 10, temp_indicatorY))
-    elif temp_value > 250 and temp_value <= 300:
+    elif temp_value > 225 and temp_value <= 275:
         screen.blit(temp_indicator_img, (temp_indicatorX + 70, temp_indicatorY))
-    elif temp_value > 300:
+    elif temp_value > 275:
         screen.blit(temp_indicator_img, (temp_indicatorX + 95, temp_indicatorY))
+
 
 def display_temp():
     temp = temp_font.render(('Coolant Temp ' + str(temp_value) + ' °F'), True, (255, 255, 255))
@@ -1133,6 +1165,7 @@ def displays():
     display_warning_indicator_small(oil_change_count, transmission_oil_change_count, brake_change_count)
     display_speed()
     display_more_info()
+    display_logos()
 
 def sports_display():
     display_blank_sports_tach()
@@ -1144,6 +1177,8 @@ def sports_display():
     temp_gauge()
     sdisplay_temp()
     display_more_info_sport()
+    oil_temp_gauge()
+    display_logos()
 
 def maintenance_display():
     reset_button()
