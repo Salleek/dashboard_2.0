@@ -26,6 +26,8 @@ clear_dtc_press = False
 dtc_code_present = False
 dtc_code = 'N/A'
 current_maintenance = 1
+increment_press = False
+decrement_press = False
 # colors_button_press = False
 
 #initialize the interface
@@ -929,7 +931,21 @@ def fifteen_thousand():
         fifteen_thousand_img = pygame.image.load('15000_NP.png')
     screen.blit(fifteen_thousand_img, (715, 260))
 
-#Maintenance Display
+def increment():
+    if increment_press is True:
+        increment_img = pygame.image.load('Plus Button Pressed.png')
+    else:
+        increment_img = pygame.image.load('Plus Button Not Pressed.png')
+    screen.blit(increment_img, (600, 260))
+
+def decrement():
+    if decrement_press is True:
+        decrement_img = pygame.image.load('Subtract Button Pressed.png')
+    else:
+        decrement_img = pygame.image.load('Subtract button Not pressed.png')
+    screen.blit(decrement_img, (250, 260))
+
+# Maintenance Display
 
 #File Objects and Maintenance and Mileage Tracking
 with open('maintenance/interval.txt', 'r+') as int_file:
@@ -1051,7 +1067,6 @@ def maintenance_display():
     if current_maintenance == 1:
         display_oilchange_distance(oil_change_count)
         display_warning_indicator(oil_change_count)
-    
 
 def interval_display():
     if current_maintenance == 1:
@@ -1062,6 +1077,9 @@ def interval_display():
         ten_thousand()
         fifteen_thousand()
         interval_text()
+    else:
+        increment()
+        decrement()
     back_button()
 
 # Diagnostics Display
@@ -1147,23 +1165,29 @@ while app_running:
                 reset_button_press = True
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 interval_button_press = True
-            elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
-                three_thousand_press = True
-            elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
-                five_thousand_press = True
-            elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
-                seven_thousand_five_press = True
-            elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
-                ten_thousand_press = True
-            elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
-                fifteen_thousand_press = True
+            elif current_maintenance == 1:
+                if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
+                    three_thousand_press = True
+                elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
+                    five_thousand_press = True
+                elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
+                    seven_thousand_five_press = True
+                elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
+                    ten_thousand_press = True
+                elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
+                    fifteen_thousand_press = True
             elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
                 clear_dtc_press = True
+            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
+                decrement_press = True
+            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
+                increment_press = True
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
             interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
             three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
+            decrement_press = increment_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1206,26 +1230,32 @@ while app_running:
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 current_page = 4
-            elif 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
-                oil_change_interval = 3000
-                with open('maintenance/interval.txt', 'w') as interval_file:
-                    interval_file.write(str(oil_change_interval))
-            elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
-                oil_change_interval = 5000
-                with open('maintenance/interval.txt', 'w') as interval_file:
-                    interval_file.write(str(oil_change_interval))
-            elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
-                oil_change_interval = 7500
-                with open('maintenance/interval.txt', 'w') as interval_file:
-                    interval_file.write(str(oil_change_interval))
-            elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
-                oil_change_interval = 10000
-                with open('maintenance/interval.txt', 'w') as interval_file:
-                    interval_file.write(str(oil_change_interval))
-            elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
-                oil_change_interval = 15000
-                with open('maintenance/interval.txt', 'w') as interval_file:
-                    interval_file.write(str(oil_change_interval))
+            if current_maintenance == 1 and current_page == 4:
+                if 160 < mouse[0] < 250 and 305 < mouse[1] < 395:
+                    oil_change_interval = 3000
+                    with open('maintenance/interval.txt', 'w') as interval_file:
+                        interval_file.write(str(oil_change_interval))
+                elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395:
+                    oil_change_interval = 5000
+                    with open('maintenance/interval.txt', 'w') as interval_file:
+                        interval_file.write(str(oil_change_interval))
+                elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395:
+                    oil_change_interval = 7500
+                    with open('maintenance/interval.txt', 'w') as interval_file:
+                        interval_file.write(str(oil_change_interval))
+                elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395:
+                    oil_change_interval = 10000
+                    with open('maintenance/interval.txt', 'w') as interval_file:
+                        interval_file.write(str(oil_change_interval))
+                elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
+                    oil_change_interval = 15000
+                    with open('maintenance/interval.txt', 'w') as interval_file:
+                        interval_file.write(str(oil_change_interval))
+            # elif current_maintenance > 1 and current_page == 4:
+                # if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                    # Decrements value
+                # elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                    # Increments value
 
 #Mileage/Oil Change Interval Functions
 
