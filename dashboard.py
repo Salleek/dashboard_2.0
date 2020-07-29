@@ -12,6 +12,14 @@ transmission_oil_mileage = 0
 brake_mileage = 0
 trip_distance = 0
 
+avg_mpg = 0
+inst_mpg = 0
+maf_reading = 0
+throttle_position = 0
+load = 0
+oil_pressure = 0
+oil_temp = 0
+
 
 limit = False
 speed_limit = False
@@ -758,6 +766,37 @@ def sdisplay_rpm():
 
     screen.blit(rpm_text, (mphtextX-10, mphtextY-10))
 
+#main display information
+def display_more_info():
+    info_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
+
+    rpm_norm = info_font.render('Tach ' + str(rpm) + ' RPM', True, (255, 255, 255))
+    screen.blit(rpm_norm, (775, 330))
+
+    mpg_inst_norm = info_font.render('MPG ' + str(inst_mpg), True, (255, 255, 255))
+    screen.blit(mpg_inst_norm, (775, 370))
+
+    mpg_avg_norm = info_font.render('MPG (Avg) ' + str(avg_mpg), True, (255, 255, 255))
+    screen.blit(mpg_avg_norm, (775, 410))
+
+#sport display information
+def display_more_info_sport():
+    info_font = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
+    info_speed_font = pygame.font.Font('Fonts/pirulen rg.ttf', 30)
+
+    maf_sport = info_font.render('MAF ' + str(maf_reading) +' g/s', True, (255, 255, 255))
+    screen.blit(maf_sport, (755, 150))
+
+    throttle_sport = info_font.render('Throttle ' + str(throttle_position) + '%', True, (255, 255, 255))
+    screen.blit(throttle_sport, (755, 190))
+
+    load_sport = info_font.render('Load ' + str(load) + '%', True, (255, 255, 255))
+    screen.blit(load_sport, (755, 230))
+
+    speed_sport = info_font.render('Speed ' + str(speed_value) + ' MPH', True, (255, 255, 255))
+    screen.blit(speed_sport, (745, 380))
+    
+
 #Temp Gauge
 temp_value = 0
 
@@ -1093,6 +1132,7 @@ def displays():
     display_temp()
     display_warning_indicator_small(oil_change_count, transmission_oil_change_count, brake_change_count)
     display_speed()
+    display_more_info()
 
 def sports_display():
     display_blank_sports_tach()
@@ -1103,6 +1143,7 @@ def sports_display():
     sdisplay_rpm()
     temp_gauge()
     sdisplay_temp()
+    display_more_info_sport()
 
 def maintenance_display():
     reset_button()
@@ -1189,7 +1230,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    #print(mouse)
+    print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             app_running = False
