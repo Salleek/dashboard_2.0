@@ -1284,32 +1284,37 @@ while app_running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Checks if the mouse click was where the button is
             # mouse[0] is the x coordinate, mouse[1] is the y
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
-                sports_button_press = True
-            elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
-                back_button_press = True
-            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
-                reset_button_press = True
-            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
-                interval_button_press = True
-            elif current_maintenance == 1:
-                if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
-                    three_thousand_press = True
-                elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
-                    five_thousand_press = True
-                elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
-                    seven_thousand_five_press = True
-                elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
-                    ten_thousand_press = True
-                elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
-                    fifteen_thousand_press = True
-            elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
-                clear_dtc_press = True
-            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
-                decrement_press = True
-            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
-                increment_press = True
-
+            if current_page < 3:
+                if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                    sports_button_press = True
+            elif current_page >= 3:
+                if 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
+                    back_button_press = True
+            elif current_page == 3:
+                if 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                    reset_button_press = True
+                elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                    interval_button_press = True
+            elif current_page == 4:
+                if current_maintenance == 1:
+                    if 160 < mouse[0] < 250 and 305 < mouse[1] < 395:
+                        three_thousand_press = True
+                    elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395:
+                        five_thousand_press = True
+                    elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395:
+                        seven_thousand_five_press = True
+                    elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395:
+                        ten_thousand_press = True
+                    elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
+                        fifteen_thousand_press = True
+                else:
+                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                        decrement_press = True
+                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                        increment_press = True
+            elif current_page == 6:
+                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+                    clear_dtc_press = True
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
@@ -1318,94 +1323,100 @@ while app_running:
             decrement_press = increment_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
-            if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
-                if current_page != 2:
-                    current_page = 2
+            if current_page < 3:
+                if current_page == 1:
+                    # Goes to vehicle maintenance
+                    if 10 < mouse[0] < 270 and 130 < mouse[1] < 300:
+                        current_page = 3
+                    # Sports mode button
+                    elif 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                        current_page = 2
+                    # Goes to vehicle diagnostics
+                    elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300:
+                    # Page 6 if there is an error
+                        if dtc_code_present is True:
+                            current_page = 6
+                        else:
+                            current_page = 5
                 else:
-                    current_page = 1
-            # Goes to vehicle maintenance
-            elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page == 1:
-                current_page = 3
-            # Navigates through the different maintenances
-            # Previous maintenance
-            elif 210 < mouse[0] < 260 and 65 < mouse[1] < 135 and current_page == 3:
-                if current_maintenance == 1:
-                    current_maintenance = 3
-                else:
-                    current_maintenance -= 1
-            # Next maintenance
-            elif 765 < mouse[0] < 810 and 65 < mouse[1] < 135 and current_page == 3:
-                if current_maintenance == 3:
-                    current_maintenance = 1
-                else:
-                    current_maintenance += 1
-            # Goes to vehicle diagnostics
-            elif 754 < mouse[0] < 1016 and 130 < mouse[1] < 300 and current_page < 2:
-                # Page 6 if there is an error
-                if dtc_code_present is True:
-                    current_page = 6
-                else:
-                    current_page = 5
+                    if 90 < mouse[0] < 180 and 495 < mouse[1] < 585:
+                        current_page = 1
             # Back button
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
                 if current_page == 3 or current_page == 5 or current_page == 6:
                     current_page = 1
                 else:
                     current_page -= 1
-            # Reset button
-            elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
+            # Navigates through the different maintenances
+            elif current_page == 3:
+                # Previous maintenance
+                if 210 < mouse[0] < 260 and 65 < mouse[1] < 135:
+                    if current_maintenance == 1:
+                        current_maintenance = 3
+                    else:
+                        current_maintenance -= 1
+                # Next maintenance
+                elif 765 < mouse[0] < 810 and 65 < mouse[1] < 135:
+                    if current_maintenance == 3:
+                        current_maintenance = 1
+                    else:
+                        current_maintenance += 1
+                # Reset button
+                elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561:
+                    if current_maintenance == 1:
+                        oil_mileage = 0
+                    elif current_maintenance == 2:
+                        transmission_oil_mileage = 0
+                    elif current_maintenance == 3:
+                        brake_mileage = 0
+                # Interval button
+                elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561:
+                    current_page = 4
+
+            elif current_page == 4:
                 if current_maintenance == 1:
-                    oil_mileage = 0
+                    if 160 < mouse[0] < 250 and 305 < mouse[1] < 395:
+                        oil_change_interval = 3000
+                        with open('maintenance/interval.txt', 'w') as interval_file:
+                            interval_file.write(str(oil_change_interval))
+                    elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395:
+                        oil_change_interval = 5000
+                        with open('maintenance/interval.txt', 'w') as interval_file:
+                            interval_file.write(str(oil_change_interval))
+                    elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395:
+                        oil_change_interval = 7500
+                        with open('maintenance/interval.txt', 'w') as interval_file:
+                            interval_file.write(str(oil_change_interval))
+                    elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395:
+                        oil_change_interval = 10000
+                        with open('maintenance/interval.txt', 'w') as interval_file:
+                            interval_file.write(str(oil_change_interval))
+                    elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
+                        oil_change_interval = 15000
+                        with open('maintenance/interval.txt', 'w') as interval_file:
+                            interval_file.write(str(oil_change_interval))
                 elif current_maintenance == 2:
-                    transmission_oil_mileage = 0
+                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                        transmission_oil_change_interval = transmission_oil_change_interval - 500
+                        print(transmission_oil_change_interval)
+                        with open('maintenance/transmission_interval.txt', 'w') as interval_file:
+                            interval_file.write(str(transmission_oil_change_interval))
+                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                        transmission_oil_change_interval = transmission_oil_change_interval + 500
+                        print(transmission_oil_change_interval)
+                        with open('maintenance/transmission_interval.txt', 'w') as interval_file:
+                            interval_file.write(str(transmission_oil_change_interval))
                 elif current_maintenance == 3:
-                    brake_mileage = 0
-            # Interval button
-            elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
-                current_page = 4
-            if current_maintenance == 1 and current_page == 4:
-                if 160 < mouse[0] < 250 and 305 < mouse[1] < 395:
-                    oil_change_interval = 3000
-                    with open('maintenance/interval.txt', 'w') as interval_file:
-                        interval_file.write(str(oil_change_interval))
-                elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395:
-                    oil_change_interval = 5000
-                    with open('maintenance/interval.txt', 'w') as interval_file:
-                        interval_file.write(str(oil_change_interval))
-                elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395:
-                    oil_change_interval = 7500
-                    with open('maintenance/interval.txt', 'w') as interval_file:
-                        interval_file.write(str(oil_change_interval))
-                elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395:
-                    oil_change_interval = 10000
-                    with open('maintenance/interval.txt', 'w') as interval_file:
-                        interval_file.write(str(oil_change_interval))
-                elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
-                    oil_change_interval = 15000
-                    with open('maintenance/interval.txt', 'w') as interval_file:
-                        interval_file.write(str(oil_change_interval))
-            elif current_maintenance == 2 and current_page == 4:
-                if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
-                    transmission_oil_change_interval = transmission_oil_change_interval - 500
-                    print(transmission_oil_change_interval)
-                    with open('maintenance/transmission_interval.txt', 'w') as interval_file:
-                        interval_file.write(str(transmission_oil_change_interval))
-                elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
-                    transmission_oil_change_interval = transmission_oil_change_interval + 500
-                    print(transmission_oil_change_interval)
-                    with open('maintenance/transmission_interval.txt', 'w') as interval_file:
-                        interval_file.write(str(transmission_oil_change_interval))
-            elif current_maintenance == 3 and current_page == 4:
-                if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
-                    brake_change_interval = brake_change_interval - 500
-                    print(brake_change_interval)
-                    with open('maintenance/brake_interval.txt', 'w') as interval_file:
-                        interval_file.write(str(brake_change_interval))
-                elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
-                    brake_change_interval = brake_change_interval + 500
-                    print(brake_change_interval)
-                    with open('maintenance/brake_interval.txt', 'w') as interval_file:
-                        interval_file.write(str(brake_change_interval))
+                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                        brake_change_interval = brake_change_interval - 500
+                        print(brake_change_interval)
+                        with open('maintenance/brake_interval.txt', 'w') as interval_file:
+                            interval_file.write(str(brake_change_interval))
+                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                        brake_change_interval = brake_change_interval + 500
+                        print(brake_change_interval)
+                        with open('maintenance/brake_interval.txt', 'w') as interval_file:
+                            interval_file.write(str(brake_change_interval))
 
 #Mileage/Oil Change Interval Functions
 
