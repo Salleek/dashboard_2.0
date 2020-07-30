@@ -1326,7 +1326,7 @@ connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
 connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
 connection.watch(obd.commands.THROTTLE_POS, callback=get_throttle_position)
-connection.watch(obd.commands.MAF, callback=get_maf_reading)
+connection.watch(obd.commands.MAF, callback=get_maf)
 connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
 connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
 connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
@@ -1342,7 +1342,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    #print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             connection.stop()
@@ -1501,18 +1501,12 @@ while app_running:
     RedrawWindow()
 
 #rpm testing
-    if rpm < rpm_target and limit == False:
-        rpm += 50
-        if rpm >= rpm_target:
-            limit = True
-    elif limit == True and rpm_target < rpm:
-        rpm -= 50
-        if rpm >= rpm_target:
-            limit = False
-    elif limit == True and rpm_target > rpm:
-        rpm += 50
-        if rpm >= rpm_target:
-            limit = False
+    if rpm < rpm_target:
+        rpm += 25
+    elif rpm < rpm_target:
+        rpm -= 25
+    elif rpm == rpm_target:
+        rpm == rpm_target
 ##
 ###speed testing
 ##    if speed_value < 175 and speed_limit == False:
