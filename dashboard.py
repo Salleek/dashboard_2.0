@@ -13,6 +13,7 @@ oil_mileage = 0
 transmission_oil_mileage = 0
 brake_mileage = 0
 trip_distance = 0
+prev_trip_distance = 0
 
 avg_mpg = 0
 inst_mpg = 0
@@ -1320,6 +1321,11 @@ def get_oil_temp(oiltempRaw):
     if not oiltempRaw.is_null():
         global oil_temp
         oil_temp = int((oiltempRaw.value.magnitude * 1.8) + 32)
+
+def get_trip_distance(tripdistanceRaw):
+    if not tripdistanceRaw.is_null():
+        global trip_distance
+        trip_distance = int(tripdistanceRaw.value.magnitude * 0.621371)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -1330,8 +1336,10 @@ connection.watch(obd.commands.MAF, callback=get_maf)
 connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
 connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
 connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
+connection.watch(obd.commands.DISTANCE_W_MIL, callback=get_trip_distance)
 
 connection.start()
+
 
 #Game Loop
 app_running = True
@@ -1559,9 +1567,11 @@ while app_running:
 ##            temp_value = False
 
 #Where mileage should increment
-    #oil_ = oil_mileage + trip_distance
-    #transmission_oil_mileage = transmission_oil_mileage + trip_distance
-    #brake_mileage = brake_mileage + trip_distance
-    oil_mileage = oil_mileage + 1
-    transmission_oil_mileage = transmission_oil_mileage + 1
-    brake_mileage = brake_mileage + 1
+    if trip_distance > prev_trip_distance + 1
+        oil_mileage = oil_mileage + 1
+        transmission_oil_mileage = transmission_oil_mileage + 1
+        brake_mileage = brake_mileage + 1
+        prev_trip_distance = trip_distance
+##    oil_mileage = oil_mileage + 1
+##    transmission_oil_mileage = transmission_oil_mileage + 1
+##    brake_mileage = brake_mileage + 1
