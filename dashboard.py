@@ -1283,8 +1283,8 @@ def RedrawWindow():
 #OBD Callback Definitions
 def get_rpm(rpmRaw):
     if not rpmRaw.is_null():
-        global rpm
-        rpm = int(rpmRaw.value.magnitude)
+        global rpm_target
+        rpm_target = int(rpmRaw.value.magnitude)
 
 def get_speed(speedRaw):
     if not speedRaw.is_null():
@@ -1500,15 +1500,15 @@ while app_running:
 #Redraw UI
     RedrawWindow()
 
-###rpm testing
-##    if rpm < 8500 and limit == False:
-##        rpm += 150
-##        if rpm >= 8500:
-##            limit = True
-##    elif limit == True:
-##        rpm -= 75
-##        if rpm <= 450:
-##            limit = False
+#rpm testing
+    if rpm < rpm_target and limit == False:
+        rpm += 20
+        if rpm >= rpm_target:
+            limit = True
+    elif limit == True and rpm_target < rpm:
+        rpm -= 20
+        if rpm >= rpm_target:
+            limit = False
 ##
 ###speed testing
 ##    if speed_value < 175 and speed_limit == False:
