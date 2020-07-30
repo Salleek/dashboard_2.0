@@ -1502,11 +1502,15 @@ while app_running:
 
 #rpm testing
     if rpm < rpm_target and limit == False:
-        rpm += 20
+        rpm += 50
         if rpm >= rpm_target:
             limit = True
     elif limit == True and rpm_target < rpm:
-        rpm -= 20
+        rpm -= 50
+        if rpm >= rpm_target:
+            limit = False
+    elif limit == True and rpm_target > rpm:
+        rpm += 50
         if rpm >= rpm_target:
             limit = False
 ##
