@@ -63,13 +63,11 @@ screen = pygame.display.set_mode((display_width,display_height))
 #Title of app
 pygame.display.set_caption("Dashboard 2.0")
 
-<<<<<<< HEAD
 #OBD Initilization
 #connection = obd.Async(fast=False, check_voltage=True)
 connection = obd.Async(fast=False)
 #connection = obd.OBD()
 
-=======
 #logo and project heading
 logo_img = pygame.image.load('logos_headings/Chilly Willie.png')
 project_heading_img = pygame.image.load('logos_headings/Dashboard 2.0.png')
@@ -77,7 +75,7 @@ project_heading_img = pygame.image.load('logos_headings/Dashboard 2.0.png')
 def display_logos():
     screen.blit(logo_img, (910, 450))
     screen.blit(project_heading_img, (390, 25))
->>>>>>> 0aac987b4047ab2a3ca564ffef5e5ca2febc10ff
+    
 #Tachometer
 tachometerX = 205
 tachometerY = 0
@@ -1297,11 +1295,42 @@ def get_temp(tempRaw):
     if not tempRaw.is_null():
         global temp_value
         temp_value = int((tempRaw.value.magnitude * 1.8) + 32)
+
+def get_throttle_position(throttlepositionRaw):
+    if not throttlepositionRaw.is_null():
+        global throttle_position
+        throttle_position = int(throttlepositionRaw.value.magnitude)
+
+def get_maf(mafRaw):
+    if not mafRaw.is_null():
+        global maf_reading
+        maf_reading = int(mafRaw.value.magnitude)
+
+def get_load(loadRaw):
+    if not loadRaw.is_null():
+        global load
+        load = int(loadRaw.value.magnitude)
+
+def get_oil_pressure(oilpressureRaw):
+    if not oilpressureRaw.is_null():
+        global oil_pressure
+        oil_pressure = int(oilpressureRaw.value.magnitude * 0.14503)
+
+def get_oil_temp(oiltempRaw):
+    if not oiltempRaw.is_null():
+        global oil_temp
+        oil_temp = int((oiltempRaw.value.magnitude * 1.8) + 32)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
 connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
+connection.watch(obd.commands.THROTTLE_POS, callback=get_throttle_position)
+connection.watch(obd.commands.MAF, callback=get_maf_reading)
+connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
+connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
+connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
+
 connection.start()
 
 #Game Loop
@@ -1319,9 +1348,7 @@ while app_running:
             connection.stop()
             connection.close()
             app_running = False
-<<<<<<< HEAD
-                
-=======
+
         # Checks for when we press the mouse button down
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Checks if the mouse click was where the button is
@@ -1450,7 +1477,6 @@ while app_running:
                         interval_file.write(str(brake_change_interval))
 
 #Mileage/Oil Change Interval Functions
->>>>>>> 0aac987b4047ab2a3ca564ffef5e5ca2febc10ff
 
     oil_change_count = maintenance_counter(oil_mileage, oil_change_interval)
     transmission_oil_change_count = maintenance_counter(transmission_oil_mileage, transmission_oil_change_interval)
@@ -1474,7 +1500,6 @@ while app_running:
 #Redraw UI
     RedrawWindow()
 
-<<<<<<< HEAD
 ###rpm testing
 ##    if rpm < 8500 and limit == False:
 ##        rpm += 150
@@ -1504,7 +1529,7 @@ while app_running:
 ##        temp_value -= 1
 ##        if temp_value <= 0:
 ##            temp_value = False
-=======
+
 ###rpm testing
 ##    if rpm < 9000 and limit == False:
 ##        rpm += 20
@@ -1534,7 +1559,6 @@ while app_running:
 ##        temp_value -= 1
 ##        if temp_value <= 0:
 ##            temp_value = False
-##>>>>>>> 0aac987b4047ab2a3ca564ffef5e5ca2febc10ff
 
 #Where mileage should increment
     #oil_ = oil_mileage + trip_distance
