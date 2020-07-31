@@ -1401,6 +1401,7 @@ while app_running:
             interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
             three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
             decrement_press = increment_press = False
+            clear_dtc_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1491,6 +1492,9 @@ while app_running:
                     print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
+            elif current_page == 6:
+                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+                    obd.commands.CLEAR_DTC
 
 #Mileage/Oil Change Interval Functions
 
@@ -1518,20 +1522,23 @@ while app_running:
 
 #rpm needle smoothening
     if rpm < rpm_target_temp:
-        rpm += 50
+        rpm += 100
     elif rpm > rpm_target_temp:
-        rpm -= 20
+        rpm -= 25
     elif rpm == rpm_target_temp:
         rpm == rpm_target
 
     endTime = time.time()
 
-    if (endTime - startTime > .1):
+    if (endTime - startTime > .05):
         rpm_target_temp = rpm_target
         startTime = time.time()
 
 #instant mpg
-    inst_mpg = ((710.7 + speed_value)/maf_reading)
+    if maf_reading > 8:
+        inst_mpg = ((710.7 + speed_value)/maf_reading)
+    else:
+        inst_mpg = 0;
 
 #average mpg
     
