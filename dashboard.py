@@ -1330,9 +1330,9 @@ def get_trip_distance(tripdistanceRaw):
         trip_distance = int(tripdistanceRaw.value.magnitude * 0.621371)
 
 def get_dtc_codes(dtcRaw):
-        global dtc_code
-        dtc_code = dtcRaw.value
-        print(dtcRaw.value)
+    global dtc_code
+    dtc_code = dtcRaw.value
+    print(dtcRaw.value)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -1529,6 +1529,12 @@ while app_running:
     if (endTime - startTime > .1):
         rpm_target_temp = rpm_target
         startTime = time.time()
+
+#instant mpg
+    inst_mpg = ((710.7 + speed_value)/maf_reading)
+
+#average mpg
+    
 ##
 ###speed testing
 ##    if speed_value < 175 and speed_limit == False:
