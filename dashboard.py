@@ -775,7 +775,7 @@ def display_speed():
     screen.blit(mph, (mphtextX, mphtextY))
 
 def sdisplay_rpm():
-    srpm = rpm_font.render(str(rpm), True, (255, 255, 255))
+    srpm = rpm_font.render(str(rpm_target), True, (255, 255, 255))
     rpm_text = srpmfont.render("RPM", True, (255, 255, 255))
 
     if rpm <= 9:
@@ -795,7 +795,7 @@ def sdisplay_rpm():
 def display_more_info():
     info_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
 
-    rpm_norm = info_font.render('Tach ' + str(rpm) + ' RPM', True, (255, 255, 255))
+    rpm_norm = info_font.render('Tach ' + str(rpm_target) + ' RPM', True, (255, 255, 255))
     screen.blit(rpm_norm, (775, 330))
 
     mpg_inst_norm = info_font.render('MPG ' + str(inst_mpg), True, (255, 255, 255))
@@ -1328,6 +1328,11 @@ def get_trip_distance(tripdistanceRaw):
     if not tripdistanceRaw.is_null():
         global trip_distance
         trip_distance = int(tripdistanceRaw.value.magnitude * 0.621371)
+
+def get_dtc_codes(dtcRaw):
+        global dtc_code
+        dtc_code = dtcRaw.value
+        print(dtcRaw.value)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -1339,6 +1344,7 @@ connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
 connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
 connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
 connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
+connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
 
 connection.start()
 
@@ -1510,7 +1516,7 @@ while app_running:
 #Redraw UI
     RedrawWindow()
 
-#rpm testing
+#rpm needle smoothening
     if rpm < rpm_target_temp:
         rpm += 50
     elif rpm > rpm_target_temp:
@@ -1520,7 +1526,7 @@ while app_running:
 
     endTime = time.time()
 
-    if (endTime - startTime > 1):
+    if (endTime - startTime > .1):
         rpm_target_temp = rpm_target
         startTime = time.time()
 ##
