@@ -1,8 +1,12 @@
 import pygame
 import time
+import obd
+#obd.logger.setLevel(obd.logging.DEBUG)
+startTime = time.time()
 
 #globals
 rpm = 0
+rpm_target_temp = 0
 oil_change_interval = 0
 oil_change_count = 0
 transmission_oil_change_interval = 0
@@ -11,14 +15,15 @@ oil_mileage = 0
 transmission_oil_mileage = 0
 brake_mileage = 0
 trip_distance = 0
+prev_trip_distance = 0
 
 avg_mpg = 0
 inst_mpg = 0
 maf_reading = 0
 throttle_position = 0
 load = 0
-oil_pressure = 0
-oil_temp = 0
+fuel_pressure = 0
+intake_temp = 0
 temp_value = 0
 
 
@@ -50,10 +55,21 @@ pygame.init()
 clock = pygame.time.Clock()
 
 #create screen
-screen = pygame.display.set_mode((1024, 600))
+infoObject = pygame.display.Info()
+display_width = infoObject.current_w
+display_height = infoObject.current_h
+
+screen = pygame.display.set_mode((display_width,display_height))
+#screen = pygame.display.set_mode((1024, 600))
+#screen = pygame.display.set_mode((800, 480))
 
 #Title of app
 pygame.display.set_caption("Dashboard 2.0")
+
+#OBD Initilization
+#connection = obd.Async(fast=False, check_voltage=True)
+connection = obd.Async(fast=False)
+#connection = obd.OBD()
 
 #logo and project heading
 logo_img = pygame.image.load('logos_headings/Chilly Willie.png')
@@ -62,6 +78,7 @@ project_heading_img = pygame.image.load('logos_headings/Dashboard 2.0.png')
 def display_logos():
     screen.blit(logo_img, (910, 450))
     screen.blit(project_heading_img, (390, 25))
+    
 #Tachometer
 tachometerX = 205
 tachometerY = 0
@@ -758,7 +775,7 @@ def display_speed():
     screen.blit(mph, (mphtextX, mphtextY))
 
 def sdisplay_rpm():
-    srpm = rpm_font.render(str(rpm), True, (255, 255, 255))
+    srpm = rpm_font.render(str(rpm_target), True, (255, 255, 255))
     rpm_text = srpmfont.render("RPM", True, (255, 255, 255))
 
     if rpm <= 9:
@@ -778,7 +795,7 @@ def sdisplay_rpm():
 def display_more_info():
     info_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
 
-    rpm_norm = info_font.render('Tach ' + str(rpm) + ' RPM', True, (255, 255, 255))
+    rpm_norm = info_font.render('Tach ' + str(rpm_target) + ' RPM', True, (255, 255, 255))
     screen.blit(rpm_norm, (775, 330))
 
     mpg_inst_norm = info_font.render('MPG ' + str(inst_mpg), True, (255, 255, 255))
@@ -814,33 +831,33 @@ stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
 temp_txt_X = 30
 temp_txt_Y = 420
 
-#Oil Temp Gauge
-def oil_temp_gauge():
+#Intake Temp Gauge
+def intake_temp_gauge():
 
-    oil_icon_img = pygame.image.load('temp_gauge/oil_white.png')
+    intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
 
-    temp_oil = stemp_font.render(('Oil Temp ' + str(oil_temp) + ' °F'), True, (255, 255, 255))
-    screen.blit(temp_oil, (temp_txt_X , 245))
+    temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
+    screen.blit(temp_intake, (temp_txt_X , 245))
 
     screen.blit(temp_gauge_img, (19, 220))
 
-    if oil_temp >= 180 and oil_temp <= 220:
+    if intake_temp >= 180 and intake_temp <= 220:
         screen.blit(temp_indicator_img, (temp_indicatorX, 220))
-    elif oil_temp >= 170 and oil_temp < 180:
+    elif intake_temp >= 170 and intake_temp < 180:
         screen.blit(temp_indicator_img, (temp_indicatorX - 10, 220))
-    elif oil_temp >= 100 and oil_temp < 170:
+    elif intake_temp >= 100 and intake_temp < 170:
         screen.blit(temp_indicator_img, (temp_indicatorX - 50, 220))
-    elif oil_temp >= 0 and oil_temp < 100:
+    elif intake_temp >= 0 and intake_temp < 100:
         screen.blit(temp_indicator_img, (temp_indicatorX - 105, 220))
-    elif oil_temp > 220 and oil_temp <= 250:
+    elif intake_temp > 220 and intake_temp <= 250:
         screen.blit(temp_indicator_img, (temp_indicatorX + 10, 220))
-    elif oil_temp > 250 and oil_temp <= 300:
+    elif intake_temp > 250 and intake_temp <= 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 70, 220))
-    elif oil_temp > 300:
+    elif intake_temp > 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 95, 220))
 
-    pressure_oil = stemp_font.render(('Oil Pressure ' + str(oil_pressure) + ' PSI'), True, (255, 255, 255))
-    screen.blit(pressure_oil, (temp_txt_X - 20, 185))
+    pressure_fuel = stemp_font.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
+    screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
     screen.blit(oil_icon_img, (120, 145))
 
@@ -1188,7 +1205,7 @@ def sports_display():
     temp_gauge()
     sdisplay_temp()
     display_more_info_sport()
-    oil_temp_gauge()
+    intake_temp_gauge()
     display_logos()
 
 def maintenance_display():
@@ -1265,21 +1282,93 @@ def RedrawWindow():
             diag_display()
 
     pygame.display.update()
+    
+#OBD Callback Definitions
+def get_rpm(rpmRaw):
+    if not rpmRaw.is_null():
+        global rpm_target
+        rpm_target = int(rpmRaw.value.magnitude)
+
+def get_speed(speedRaw):
+    if not speedRaw.is_null():
+        global speed_value
+        speed_value = int(speedRaw.value.magnitude * 0.621371) #to MPH instead of KMH
+
+def get_temp(tempRaw):
+    if not tempRaw.is_null():
+        global temp_value
+        temp_value = int((tempRaw.value.magnitude * 1.8) + 32)
+
+def get_throttle_position(throttlepositionRaw):
+    if not throttlepositionRaw.is_null():
+        global throttle_position
+        throttle_position = int(throttlepositionRaw.value.magnitude)
+
+def get_maf(mafRaw):
+    if not mafRaw.is_null():
+        global maf_reading
+        maf_reading = int(mafRaw.value.magnitude)
+
+def get_load(loadRaw):
+    if not loadRaw.is_null():
+        global load
+        load = int(loadRaw.value.magnitude)
+
+def get_fuel_pressure(fuelpressureRaw):
+    if not fuelpressureRaw.is_null():
+        global fuel_pressure
+        fuel_pressure = int(fuelpressureRaw.value.magnitude * 0.14503)
+
+def get_intake_temp(intaketempRaw):
+    if not intaketempRaw.is_null():
+        global intake_temp
+        intake_temp = int((intaketempRaw.value.magnitude * 1.8) + 32)
+
+def get_trip_distance(tripdistanceRaw):
+    if not tripdistanceRaw.is_null():
+        global trip_distance
+        trip_distance = int(tripdistanceRaw.value.magnitude * 0.621371)
+
+def get_dtc_codes(dtcRaw):
+    global dtc_code
+    dtc_code = dtcRaw.value
+    if dtcRaw.value:
+        dtc_code_present = True
+    else:
+        dtc_code_present = False
+    print(dtcRaw.value)
+        
+#OBD Connection Callbacks
+connection.watch(obd.commands.RPM, callback=get_rpm)
+connection.watch(obd.commands.SPEED, callback=get_speed)
+connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
+connection.watch(obd.commands.THROTTLE_POS, callback=get_throttle_position)
+connection.watch(obd.commands.MAF, callback=get_maf)
+connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
+connection.watch(obd.commands.FUEL_PRESSURE, callback=get_fuel_pressure)
+connection.watch(obd.commands.INTAKE_TEMP, callback=get_intake_temp)
+connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
+connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
+
+connection.start()
+
 
 #Game Loop
 app_running = True
 while app_running:
-
     clock.tick(60)
 
     #screen fill
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    #print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            connection.stop()
+            connection.close()
             app_running = False
+
         # Checks for when we press the mouse button down
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Checks if the mouse click was where the button is
@@ -1316,6 +1405,7 @@ while app_running:
             interval_button_press = reset_button_press = diagnostic_press = maintenance_press = back_button_press = sports_button_press = False
             three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
             decrement_press = increment_press = False
+            clear_dtc_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1406,6 +1496,9 @@ while app_running:
                     print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
+            elif current_page == 6:
+                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+                    obd.commands.CLEAR_DTC
 
 #Mileage/Oil Change Interval Functions
 
@@ -1431,40 +1524,90 @@ while app_running:
 #Redraw UI
     RedrawWindow()
 
-#rpm testing
-    if rpm < 9000 and limit == False:
-        rpm += 20
-        if rpm >= 9000:
-            limit = True
-    elif limit == True:
-        rpm -= 20
-        if rpm <= 0:
-            limit = False
+#rpm needle smoothening
+    if rpm < rpm_target_temp:
+        rpm += 100
+    elif rpm > rpm_target_temp:
+        rpm -= 25
+    elif rpm == rpm_target_temp:
+        rpm == rpm_target
 
-#speed testing
-    if speed_value < 175 and speed_limit == False:
-        speed_value += 1
-        if speed_value >= 175:
-            speed_limit = True
-    elif speed_limit == True:
-        speed_value -= 1
-        if speed_value <= 0:
-            speed_limit = False
+    endTime = time.time()
 
-#temp gauge testing
-    if temp_value < 310 and temp_limit == False:
-        temp_value += 1
-        if temp_value >= 310:
-            temp_value = True
-    elif temp_value == True:
-        temp_value -= 1
-        if temp_value <= 0:
-            temp_value = False
+    if (endTime - startTime > .05):
+        rpm_target_temp = rpm_target
+        startTime = time.time()
+
+#instant mpg
+    if speed_value < 1:
+        inst_mpg = 0
+    elif speed_value >= 1 and maf_reading > 0.5:
+        if ((710.7 + speed_value)/maf_reading) > 100:
+            inst_mpg = 99
+        else:
+            inst_mpg = round((710.7 + speed_value)/maf_reading)
+    else:
+        inst_mpg = 0;
+
+#average mpg
+    
+##
+###speed testing
+##    if speed_value < 175 and speed_limit == False:
+##        speed_value += 1
+##        if speed_value >= 175:
+##            speed_limit = True
+##    elif speed_limit == True:
+##        speed_value -= 1
+##        if speed_value <= 0:
+##            speed_limit = False
+##
+###temp gauge testing
+##    if temp_value < 310 and temp_limit == False:
+##        temp_value += 1
+##        if temp_value >= 310:
+##            temp_value = True
+##    elif temp_value == True:
+##        temp_value -= 1
+##        if temp_value <= 0:
+##            temp_value = False
+
+###rpm testing
+##    if rpm < 9000 and limit == False:
+##        rpm += 20
+##        if rpm >= 9000:
+##            limit = True
+##    elif limit == True:
+##        rpm -= 20
+##        if rpm <= 0:
+##            limit = False
+##
+###speed testing
+##    if speed_value < 175 and speed_limit == False:
+##        speed_value += 1
+##        if speed_value >= 175:
+##            speed_limit = True
+##    elif speed_limit == True:
+##        speed_value -= 1
+##        if speed_value <= 0:
+##            speed_limit = False
+##
+###temp gauge testing
+##    if temp_value < 310 and temp_limit == False:
+##        temp_value += 1
+##        if temp_value >= 310:
+##            temp_value = True
+##    elif temp_value == True:
+##        temp_value -= 1
+##        if temp_value <= 0:
+##            temp_value = False
 
 #Where mileage should increment
-    #oil_ = oil_mileage + trip_distance
-    #transmission_oil_mileage = transmission_oil_mileage + trip_distance
-    #brake_mileage = brake_mileage + trip_distance
-    oil_mileage = oil_mileage + 1
-    transmission_oil_mileage = transmission_oil_mileage + 1
-    brake_mileage = brake_mileage + 1
+    if trip_distance > prev_trip_distance + 1:
+        oil_mileage = oil_mileage + 1
+        transmission_oil_mileage = transmission_oil_mileage + 1
+        brake_mileage = brake_mileage + 1
+        prev_trip_distance = trip_distance
+##    oil_mileage = oil_mileage + 1
+##    transmission_oil_mileage = transmission_oil_mileage + 1
+##    brake_mileage = brake_mileage + 1
