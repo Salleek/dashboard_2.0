@@ -2,9 +2,11 @@ import pygame
 import time
 import obd
 #obd.logger.setLevel(obd.logging.DEBUG)
+startTime = time.time()
 
 #globals
 rpm = 0
+rpm_target_temp = 0
 oil_change_interval = 0
 oil_change_count = 0
 transmission_oil_change_interval = 0
@@ -1336,7 +1338,7 @@ connection.watch(obd.commands.MAF, callback=get_maf)
 connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
 connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
 connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
-connection.watch(obd.commands.DISTANCE_W_MIL, callback=get_trip_distance)
+connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
 
 connection.start()
 
@@ -1509,12 +1511,18 @@ while app_running:
     RedrawWindow()
 
 #rpm testing
-    if rpm < rpm_target:
-        rpm += 25
-    elif rpm < rpm_target:
-        rpm -= 25
-    elif rpm == rpm_target:
+    if rpm < rpm_target_temp:
+        rpm += 50
+    elif rpm > rpm_target_temp:
+        rpm -= 20
+    elif rpm == rpm_target_temp:
         rpm == rpm_target
+
+    endTime = time.time()
+
+    if (endTime - startTime > 1):
+        rpm_target_temp = rpm_target
+        startTime = time.time()
 ##
 ###speed testing
 ##    if speed_value < 175 and speed_limit == False:
@@ -1567,7 +1575,7 @@ while app_running:
 ##            temp_value = False
 
 #Where mileage should increment
-    if trip_distance > prev_trip_distance + 1
+    if trip_distance > prev_trip_distance + 1:
         oil_mileage = oil_mileage + 1
         transmission_oil_mileage = transmission_oil_mileage + 1
         brake_mileage = brake_mileage + 1
