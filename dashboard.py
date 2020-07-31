@@ -1260,7 +1260,7 @@ def diag_display():
     elif current_page == 6:
         screen.blit(error_symbol_small, (465, 155))
         # for i in dtc_code:
-        error_label = error_font.render(dtc_code + '\n', True, (255, 255, 255))
+        error_label = error_font.render(dtc_code, True, (255, 255, 255))
         screen.blit(error_label, (465, 200))
         clear_dtc_button()
     # else:
@@ -1339,10 +1339,10 @@ def get_trip_distance(tripdistanceRaw):
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
-    if dtcRaw.value:
-        dtc_code_present = True
-    else:
+    if not dtc_code:
         dtc_code_present = False
+    else:
+        dtc_code_present = True
     print(dtcRaw.value)
         
 #OBD Connection Callbacks
@@ -1503,9 +1503,9 @@ while app_running:
                     print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
-            elif current_page == 6:
-                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
-                    obd.commands.CLEAR_DTC
+            # elif current_page == 6:
+            #     if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+            #         obd.commands.CLEAR_DTC
 
 #Mileage/Oil Change Interval Functions
 
