@@ -22,8 +22,8 @@ inst_mpg = 0
 maf_reading = 0
 throttle_position = 0
 load = 0
-oil_pressure = 0
-oil_temp = 0
+fuel_pressure = 0
+intake_temp = 0
 temp_value = 0
 
 
@@ -831,33 +831,33 @@ stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
 temp_txt_X = 30
 temp_txt_Y = 420
 
-#Oil Temp Gauge
-def oil_temp_gauge():
+#Intake Temp Gauge
+def intake_temp_gauge():
 
-    oil_icon_img = pygame.image.load('temp_gauge/oil_white.png')
+    intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
 
-    temp_oil = stemp_font.render(('Oil Temp ' + str(oil_temp) + ' °F'), True, (255, 255, 255))
-    screen.blit(temp_oil, (temp_txt_X , 245))
+    temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
+    screen.blit(temp_intake, (temp_txt_X , 245))
 
     screen.blit(temp_gauge_img, (19, 220))
 
-    if oil_temp >= 180 and oil_temp <= 220:
+    if intake_temp >= 180 and intake_temp <= 220:
         screen.blit(temp_indicator_img, (temp_indicatorX, 220))
-    elif oil_temp >= 170 and oil_temp < 180:
+    elif intake_temp >= 170 and intake_temp < 180:
         screen.blit(temp_indicator_img, (temp_indicatorX - 10, 220))
-    elif oil_temp >= 100 and oil_temp < 170:
+    elif intake_temp >= 100 and intake_temp < 170:
         screen.blit(temp_indicator_img, (temp_indicatorX - 50, 220))
-    elif oil_temp >= 0 and oil_temp < 100:
+    elif intake_temp >= 0 and intake_temp < 100:
         screen.blit(temp_indicator_img, (temp_indicatorX - 105, 220))
-    elif oil_temp > 220 and oil_temp <= 250:
+    elif intake_temp > 220 and intake_temp <= 250:
         screen.blit(temp_indicator_img, (temp_indicatorX + 10, 220))
-    elif oil_temp > 250 and oil_temp <= 300:
+    elif intake_temp > 250 and intake_temp <= 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 70, 220))
-    elif oil_temp > 300:
+    elif intake_temp > 300:
         screen.blit(temp_indicator_img, (temp_indicatorX + 95, 220))
 
-    pressure_oil = stemp_font.render(('Oil Pressure ' + str(oil_pressure) + ' PSI'), True, (255, 255, 255))
-    screen.blit(pressure_oil, (temp_txt_X - 20, 185))
+    pressure_fuel = stemp_font.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
+    screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
     screen.blit(oil_icon_img, (120, 145))
 
@@ -1205,7 +1205,7 @@ def sports_display():
     temp_gauge()
     sdisplay_temp()
     display_more_info_sport()
-    oil_temp_gauge()
+    intake_temp_gauge()
     display_logos()
 
 def maintenance_display():
@@ -1314,15 +1314,15 @@ def get_load(loadRaw):
         global load
         load = int(loadRaw.value.magnitude)
 
-def get_oil_pressure(oilpressureRaw):
-    if not oilpressureRaw.is_null():
-        global oil_pressure
-        oil_pressure = int(oilpressureRaw.value.magnitude * 0.14503)
+def get_fuel_pressure(fuelpressureRaw):
+    if not fuelpressureRaw.is_null():
+        global fuel_pressure
+        fuel_pressure = int(fuelpressureRaw.value.magnitude * 0.14503)
 
-def get_oil_temp(oiltempRaw):
-    if not oiltempRaw.is_null():
-        global oil_temp
-        oil_temp = int((oiltempRaw.value.magnitude * 1.8) + 32)
+def get_intake_temp(intaketempRaw):
+    if not intaketempRaw.is_null():
+        global intake_temp
+        intake_temp = int((intaketempRaw.value.magnitude * 1.8) + 32)
 
 def get_trip_distance(tripdistanceRaw):
     if not tripdistanceRaw.is_null():
@@ -1332,6 +1332,10 @@ def get_trip_distance(tripdistanceRaw):
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
+    if dtcRaw.value:
+        dtc_code_present = True
+    else:
+        dtc_code_present = False
     print(dtcRaw.value)
         
 #OBD Connection Callbacks
@@ -1341,8 +1345,8 @@ connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
 connection.watch(obd.commands.THROTTLE_POS, callback=get_throttle_position)
 connection.watch(obd.commands.MAF, callback=get_maf)
 connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
-connection.watch(obd.commands.FUEL_PRESSURE, callback=get_oil_pressure)
-connection.watch(obd.commands.OIL_TEMP, callback=get_oil_temp)
+connection.watch(obd.commands.FUEL_PRESSURE, callback=get_fuel_pressure)
+connection.watch(obd.commands.intake_temp, callback=get_intake_temp)
 connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
 connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
 
@@ -1359,6 +1363,7 @@ while app_running:
 
     mouse = pygame.mouse.get_pos()
     #print(mouse)
+    if
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             connection.stop()
@@ -1535,8 +1540,13 @@ while app_running:
         startTime = time.time()
 
 #instant mpg
-    if maf_reading > 8:
-        inst_mpg = ((710.7 + speed_value)/maf_reading)
+    if speed_value < 1:
+        inst_mpg = 0
+    elif speed value >= 1 and maf_reading > 0.5:
+        if ((710.7 + speed_value)/maf_reading) > 100:
+            inst_mpg = 99
+        else:
+            inst_mpg = round((710.7 + speed_value)/maf_reading)
     else:
         inst_mpg = 0;
 
