@@ -1248,7 +1248,7 @@ def interval_display():
     #all pages
     back_button()
 
-error_font = pygame.font.Font('Fonts/LeelUlsl.ttf', 20)
+error_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
 
 def diag_display():
     display_diag_heading()
@@ -1259,9 +1259,9 @@ def diag_display():
 
     elif current_page == 6:
         screen.blit(error_symbol_small, (465, 155))
-        for i in dtc_code:
-            error_label = error_font.render(dtc_code[i] + '\n', True, (255, 255, 255))
-            screen.blit(error_label, (465, 200))
+        # for i in dtc_code:
+        error_label = error_font.render(dtc_code + '\n', True, (255, 255, 255))
+        screen.blit(error_label, (465, 200))
         clear_dtc_button()
     # else:
     #     screen.blit(error_symbol, (453, 160))
