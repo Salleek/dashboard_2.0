@@ -1,6 +1,10 @@
+import obd
 import pygame
 import time
 import obd
+#obd.logger.setLevel(obd.logging.DEBUG)
+startTime = time.time()
+
 #obd.logger.setLevel(obd.logging.DEBUG)
 startTime = time.time()
 
@@ -778,13 +782,13 @@ def sdisplay_rpm():
     srpm = rpm_font.render(str(rpm_target), True, (255, 255, 255))
     rpm_text = srpmfont.render("RPM", True, (255, 255, 255))
 
-    if rpm <= 9:
+    if rpm_target <= 9:
         screen.blit(srpm, (speedtextX0, speedtextY0+15))
-    elif rpm >= 10 and rpm <= 99:
+    elif rpm_target >= 10 and rpm_target <= 99:
         screen.blit(srpm, (speedtextX10-5, speedtextY10+15))
-    elif rpm >= 100 and rpm <= 999:
-        screen.blit(srpm, (speedtextX10 - 15, speedtextY10 + 15))
-    elif rpm >= 1000 and rpm <= 1999:
+    elif rpm_target >= 100 and rpm_target <= 999:
+        screen.blit(srpm, (speedtextX10 - 20, speedtextY10 + 15))
+    elif rpm_target >= 1000 and rpm_target <= 1999:
         screen.blit(srpm, (speedtextX10 - 22, speedtextY10 + 15))
     elif rpm >= 2000:
         screen.blit(srpm, (speedtextX100-25, speedtextY100+15))
@@ -833,9 +837,7 @@ temp_txt_Y = 420
 
 #Intake Temp Gauge
 def intake_temp_gauge():
-
     intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
-
     temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
     screen.blit(temp_intake, (temp_txt_X , 245))
 
@@ -859,7 +861,7 @@ def intake_temp_gauge():
     pressure_fuel = stemp_font.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
     screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
-    screen.blit(oil_icon_img, (120, 145))
+    screen.blit(intake_icon_img, (120, 145))
 
 #Coolant Temp Gauge
 def temp_gauge():
