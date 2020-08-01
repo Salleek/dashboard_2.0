@@ -1,7 +1,6 @@
 import obd
 import pygame
 import time
-import obd
 #obd.logger.setLevel(obd.logging.DEBUG)
 startTime = time.time()
 
@@ -1344,14 +1343,12 @@ def get_trip_distance(tripdistanceRaw):
 
 def get_dtc_codes(dtcRaw):
     global dtc_code
-    global dtc_code_present
     dtc_code = dtcRaw.value
-    if not dtcRaw.value.is_null():
-        dtc_code_present = True
-    else:
-        dtc_code_present = False
-    print(dtc_code)
-        
+    return dtc_code
+
+
+dtc_code_present = False
+
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
@@ -1625,3 +1622,10 @@ while app_running:
 ##    oil_mileage = oil_mileage + 1
 ##    transmission_oil_mileage = transmission_oil_mileage + 1
 ##    brake_mileage = brake_mileage + 1
+
+
+    if not dtc_code.is_null():
+        dtc_code_present = True
+    else:
+        dtc_code_present = False
+
