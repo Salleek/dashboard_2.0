@@ -1259,12 +1259,13 @@ def diag_display():
 
     elif current_page == 6:
         screen.blit(error_symbol_small, (465, 155))
-        # for i in dtc_code:
-        error_label = error_font.render(dtc_code, True, (255, 255, 255))
+        # error_list = []
+        # for i in range(len(dtc_code)):
+        #     error_num, error_description = dtc_code[i]
+        #     error_list.append(error_num)
+        error_label = error_font.render('Test', True, (255, 255, 255))
         screen.blit(error_label, (465, 200))
         clear_dtc_button()
-    # else:
-    #     screen.blit(error_symbol, (453, 160))
 
 #Redraw
 def RedrawWindow():
@@ -1338,12 +1339,13 @@ def get_trip_distance(tripdistanceRaw):
 
 def get_dtc_codes(dtcRaw):
     global dtc_code
+    global dtc_code_present
     dtc_code = dtcRaw.value
-    if not dtc_code:
-        dtc_code_present = False
-    else:
+    if not dtcRaw.value.is_null():
         dtc_code_present = True
-    print(dtcRaw.value)
+    else:
+        dtc_code_present = False
+    print(dtc_code)
         
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
