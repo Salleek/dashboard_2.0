@@ -822,9 +822,9 @@ clear_dtc_button_label = clear_dtc_font.render('Clear DTC', True, (255, 255, 255
 
 def clear_dtc_button():
     if clear_dtc_press is False:
-        clear_dtc = pygame.image.load('Sport Button not pressed (no label).png')
+        clear_dtc = pygame.image.load('Sport button not pressed (no label).png')
     else:
-        clear_dtc = pygame.image.load('Sport button pressed (no label).png')
+        clear_dtc = pygame.image.load('Sport Button pressed (no label).png')
     screen.blit(clear_dtc, (840, 425))
     screen.blit(clear_dtc_button_label, (888, 500))
 
