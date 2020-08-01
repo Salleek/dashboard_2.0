@@ -193,45 +193,45 @@ def tachometer():
 
     # 6000-7000
     if rpm_target > 6000 and rpm_target <= 6167:
-        screen.blit(tachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[0], (tachometerX, tachometerY))
     elif rpm_target > 6167 and rpm_target <= 6334:
-        screen.blit(tachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[1], (tachometerX, tachometerY))
     elif rpm_target > 6334 and rpm_target <= 6501:
-        screen.blit(tachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[2], (tachometerX, tachometerY))
     elif rpm_target > 6501 and rpm_target <= 6800:
-        screen.blit(tachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[3], (tachometerX, tachometerY))
     elif rpm_target > 6800 and rpm_target <= 6950:
-        screen.blit(tachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[4], (tachometerX, tachometerY))
     elif rpm_target > 6950 and rpm_target <= 7000:
-        screen.blit(tachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(tachometer_6[5], (tachometerX, tachometerY))
 
     # 7000-8000
     if rpm_target > 7000 and rpm_target <= 7167:
-        screen.blit(tachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[0], (tachometerX, tachometerY))
     elif rpm_target > 7167 and rpm_target <= 7334:
-        screen.blit(tachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[1], (tachometerX, tachometerY))
     elif rpm_target > 7334 and rpm_target <= 7501:
-        screen.blit(tachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[2], (tachometerX, tachometerY))
     elif rpm_target > 7501 and rpm_target <= 7800:
-        screen.blit(tachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[3], (tachometerX, tachometerY))
     elif rpm_target > 7800 and rpm_target <= 7950:
-        screen.blit(tachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[4], (tachometerX, tachometerY))
     elif rpm_target > 7950 and rpm_target <= 8000:
-        screen.blit(tachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(tachometer_7[5], (tachometerX, tachometerY))
 
     # 8000-9000
     if rpm_target > 8000 and rpm_target <= 8167:
-        screen.blit(tachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[0], (tachometerX, tachometerY))
     elif rpm_target > 8167 and rpm_target <= 8334:
-        screen.blit(tachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[1], (tachometerX, tachometerY))
     elif rpm_target > 8334 and rpm_target <= 8501:
-        screen.blit(tachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[2], (tachometerX, tachometerY))
     elif rpm_target > 8501 and rpm_target <= 8800:
-        screen.blit(tachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[3], (tachometerX, tachometerY))
     elif rpm_target > 8800 and rpm_target <= 8950:
-        screen.blit(tachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[4], (tachometerX, tachometerY))
     elif rpm_target > 8950 and rpm_target <= 9000:
-        screen.blit(tachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(tachometer_8[5], (tachometerX, tachometerY))
 
 
 def stachometer():
@@ -323,45 +323,45 @@ def stachometer():
 
     # 6000-7000
     if rpm_target > 6000 and rpm_target <= 6167:
-        screen.blit(stachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[0], (tachometerX, tachometerY))
     elif rpm_target > 6167 and rpm_target <= 6334:
-        screen.blit(stachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[1], (tachometerX, tachometerY))
     elif rpm_target > 6334 and rpm_target <= 6501:
-        screen.blit(stachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[2], (tachometerX, tachometerY))
     elif rpm_target > 6501 and rpm_target <= 6800:
-        screen.blit(stachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[3], (tachometerX, tachometerY))
     elif rpm_target > 6800 and rpm_target <= 6950:
-        screen.blit(stachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[4], (tachometerX, tachometerY))
     elif rpm_target > 6950 and rpm_target <= 7000:
-        screen.blit(stachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(stachometer_6[5], (tachometerX, tachometerY))
 
     # 7000-8000
     if rpm_target > 7000 and rpm_target <= 7167:
-        screen.blit(stachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[0], (tachometerX, tachometerY))
     elif rpm_target > 7167 and rpm_target <= 7334:
-        screen.blit(stachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[1], (tachometerX, tachometerY))
     elif rpm_target > 7334 and rpm_target <= 7501:
-        screen.blit(stachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[2], (tachometerX, tachometerY))
     elif rpm_target > 7501 and rpm_target <= 7800:
-        screen.blit(stachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[3], (tachometerX, tachometerY))
     elif rpm_target > 7800 and rpm_target <= 7950:
-        screen.blit(stachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[4], (tachometerX, tachometerY))
     elif rpm_target > 7950 and rpm_target <= 8000:
-        screen.blit(stachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(stachometer_7[5], (tachometerX, tachometerY))
 
     # 8000-9000
     if rpm_target > 8000 and rpm_target <= 8167:
-        screen.blit(stachometer_5[0], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[0], (tachometerX, tachometerY))
     elif rpm_target > 8167 and rpm_target <= 8334:
-        screen.blit(stachometer_5[1], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[1], (tachometerX, tachometerY))
     elif rpm_target > 8334 and rpm_target <= 8501:
-        screen.blit(stachometer_5[2], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[2], (tachometerX, tachometerY))
     elif rpm_target > 8501 and rpm_target <= 8800:
-        screen.blit(stachometer_5[3], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[3], (tachometerX, tachometerY))
     elif rpm_target > 8800 and rpm_target <= 8950:
-        screen.blit(stachometer_5[4], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[4], (tachometerX, tachometerY))
     elif rpm_target > 8950 and rpm_target <= 9000:
-        screen.blit(stachometer_5[5], (tachometerX, tachometerY))
+        screen.blit(stachometer_8[5], (tachometerX, tachometerY))
 
 # Speed
 speed_value = 0
