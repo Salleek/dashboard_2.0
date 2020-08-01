@@ -1,10 +1,11 @@
 import obd
 import pygame
 import time
-#obd.logger.setLevel(obd.logging.DEBUG)
+
+# obd.logger.setLevel(obd.logging.DEBUG)
 startTime = time.time()
 
-#globals
+# globals
 oil_change_interval = 0
 oil_change_count = 0
 transmission_oil_change_interval = 0
@@ -23,7 +24,6 @@ load = 0
 fuel_pressure = 0
 intake_temp = 0
 temp_value = 0
-
 
 limit = False
 speed_limit = False
@@ -46,63 +46,104 @@ increment_press = False
 decrement_press = False
 # colors_button_press = False
 
-#initialize the interface
+# initialize the interface
 pygame.init()
 
-#clock
+# clock
 clock = pygame.time.Clock()
 
-#create screen
+# create screen
 infoObject = pygame.display.Info()
 display_width = infoObject.current_w
 display_height = infoObject.current_h
 
-screen = pygame.display.set_mode((display_width,display_height))
-#screen = pygame.display.set_mode((1024, 600))
-#screen = pygame.display.set_mode((800, 480))
+screen = pygame.display.set_mode((display_width, display_height))
+# screen = pygame.display.set_mode((1024, 600))
+# screen = pygame.display.set_mode((800, 480))
 
-#Title of app
+# Title of app
 pygame.display.set_caption("Dashboard 2.0")
 
-#OBD Initilization
-#connection = obd.Async(fast=False, check_voltage=True)
+# OBD Initilization
+# connection = obd.Async(fast=False, check_voltage=True)
 connection = obd.Async(fast=False)
-#connection = obd.OBD()
+# connection = obd.OBD()
 
-#logo and project heading
+# logo and project heading
 logo_img = pygame.image.load('logos_headings/Chilly Willie.png')
 project_heading_img = pygame.image.load('logos_headings/Dashboard 2.0.png')
+
 
 def display_logos():
     screen.blit(logo_img, (910, 450))
     screen.blit(project_heading_img, (390, 25))
-    
-#Tachometer
+
+
+# Tachometer
 tachometerX = 205
 tachometerY = 0
 
-tachometer_0 = [pygame.image.load('tach/norm/0/tach1.png'), pygame.image.load('tach/norm/0/tach2.png'), pygame.image.load('tach/norm/0/tach3.png'), pygame.image.load('tach/norm/0/tach4.png'), pygame.image.load('tach/norm/0/tach5.png'),pygame.image.load('tach/norm/0/tach6.png'), pygame.image.load('tach/norm/0/tach7.png')]
-tachometer_1 = [pygame.image.load('tach/norm/1000/tach1.png'), pygame.image.load('tach/norm/1000/tach2.png'), pygame.image.load('tach/norm/1000/tach3.png'), pygame.image.load('tach/norm/1000/tach4.png'), pygame.image.load('tach/norm/1000/tach5.png'),pygame.image.load('tach/norm/1000/tach6.png')]
-tachometer_2 = [pygame.image.load('tach/norm/2000/tach1.png'), pygame.image.load('tach/norm/2000/tach2.png'), pygame.image.load('tach/norm/2000/tach3.png'), pygame.image.load('tach/norm/2000/tach4.png'), pygame.image.load('tach/norm/2000/tach5.png'),pygame.image.load('tach/norm/2000/tach6.png')]
-tachometer_3 = [pygame.image.load('tach/norm/3000/tach1.png'), pygame.image.load('tach/norm/3000/tach2.png'), pygame.image.load('tach/norm/3000/tach3.png'), pygame.image.load('tach/norm/3000/tach4.png'), pygame.image.load('tach/norm/3000/tach5.png'),pygame.image.load('tach/norm/3000/tach6.png')]
-tachometer_4 = [pygame.image.load('tach/norm/4000/tach1.png'), pygame.image.load('tach/norm/4000/tach2.png'), pygame.image.load('tach/norm/4000/tach3.png'), pygame.image.load('tach/norm/4000/tach4.png'), pygame.image.load('tach/norm/4000/tach5.png'),pygame.image.load('tach/norm/4000/tach6.png')]
-tachometer_5 = [pygame.image.load('tach/norm/5000/tach1.png'), pygame.image.load('tach/norm/5000/tach2.png'), pygame.image.load('tach/norm/5000/tach3.png'), pygame.image.load('tach/norm/5000/tach4.png'), pygame.image.load('tach/norm/5000/tach5.png'),pygame.image.load('tach/norm/5000/tach6.png')]
-tachometer_6 = [pygame.image.load('tach/norm/6000/tach1.png'), pygame.image.load('tach/norm/6000/tach2.png'), pygame.image.load('tach/norm/6000/tach3.png'), pygame.image.load('tach/norm/6000/tach4.png'), pygame.image.load('tach/norm/6000/tach5.png'),pygame.image.load('tach/norm/6000/tach6.png')]
-tachometer_7 = [pygame.image.load('tach/norm/7000/tach1.png'), pygame.image.load('tach/norm/7000/tach2.png'), pygame.image.load('tach/norm/7000/tach3.png'), pygame.image.load('tach/norm/7000/tach4.png'), pygame.image.load('tach/norm/7000/tach5.png'),pygame.image.load('tach/norm/7000/tach6.png')]
-tachometer_8 = [pygame.image.load('tach/norm/8000/tach1.png'), pygame.image.load('tach/norm/8000/tach2.png'), pygame.image.load('tach/norm/8000/tach3.png'), pygame.image.load('tach/norm/8000/tach4.png'), pygame.image.load('tach/norm/8000/tach5.png'),pygame.image.load('tach/norm/8000/tach6.png')]
+tachometer_0 = [pygame.image.load('tach/norm/0/tach1.png'), pygame.image.load('tach/norm/0/tach2.png'),
+                pygame.image.load('tach/norm/0/tach3.png'), pygame.image.load('tach/norm/0/tach4.png'),
+                pygame.image.load('tach/norm/0/tach5.png'), pygame.image.load('tach/norm/0/tach6.png'),
+                pygame.image.load('tach/norm/0/tach7.png')]
+tachometer_1 = [pygame.image.load('tach/norm/1000/tach1.png'), pygame.image.load('tach/norm/1000/tach2.png'),
+                pygame.image.load('tach/norm/1000/tach3.png'), pygame.image.load('tach/norm/1000/tach4.png'),
+                pygame.image.load('tach/norm/1000/tach5.png'), pygame.image.load('tach/norm/1000/tach6.png')]
+tachometer_2 = [pygame.image.load('tach/norm/2000/tach1.png'), pygame.image.load('tach/norm/2000/tach2.png'),
+                pygame.image.load('tach/norm/2000/tach3.png'), pygame.image.load('tach/norm/2000/tach4.png'),
+                pygame.image.load('tach/norm/2000/tach5.png'), pygame.image.load('tach/norm/2000/tach6.png')]
+tachometer_3 = [pygame.image.load('tach/norm/3000/tach1.png'), pygame.image.load('tach/norm/3000/tach2.png'),
+                pygame.image.load('tach/norm/3000/tach3.png'), pygame.image.load('tach/norm/3000/tach4.png'),
+                pygame.image.load('tach/norm/3000/tach5.png'), pygame.image.load('tach/norm/3000/tach6.png')]
+tachometer_4 = [pygame.image.load('tach/norm/4000/tach1.png'), pygame.image.load('tach/norm/4000/tach2.png'),
+                pygame.image.load('tach/norm/4000/tach3.png'), pygame.image.load('tach/norm/4000/tach4.png'),
+                pygame.image.load('tach/norm/4000/tach5.png'), pygame.image.load('tach/norm/4000/tach6.png')]
+tachometer_5 = [pygame.image.load('tach/norm/5000/tach1.png'), pygame.image.load('tach/norm/5000/tach2.png'),
+                pygame.image.load('tach/norm/5000/tach3.png'), pygame.image.load('tach/norm/5000/tach4.png'),
+                pygame.image.load('tach/norm/5000/tach5.png'), pygame.image.load('tach/norm/5000/tach6.png')]
+tachometer_6 = [pygame.image.load('tach/norm/6000/tach1.png'), pygame.image.load('tach/norm/6000/tach2.png'),
+                pygame.image.load('tach/norm/6000/tach3.png'), pygame.image.load('tach/norm/6000/tach4.png'),
+                pygame.image.load('tach/norm/6000/tach5.png'), pygame.image.load('tach/norm/6000/tach6.png')]
+tachometer_7 = [pygame.image.load('tach/norm/7000/tach1.png'), pygame.image.load('tach/norm/7000/tach2.png'),
+                pygame.image.load('tach/norm/7000/tach3.png'), pygame.image.load('tach/norm/7000/tach4.png'),
+                pygame.image.load('tach/norm/7000/tach5.png'), pygame.image.load('tach/norm/7000/tach6.png')]
+tachometer_8 = [pygame.image.load('tach/norm/8000/tach1.png'), pygame.image.load('tach/norm/8000/tach2.png'),
+                pygame.image.load('tach/norm/8000/tach3.png'), pygame.image.load('tach/norm/8000/tach4.png'),
+                pygame.image.load('tach/norm/8000/tach5.png'), pygame.image.load('tach/norm/8000/tach6.png')]
 
-stachometer_0 = [pygame.image.load('tach/sport/0/tach1.png'), pygame.image.load('tach/sport/0/tach2.png'), pygame.image.load('tach/sport/0/tach3.png'), pygame.image.load('tach/sport/0/tach4.png'), pygame.image.load('tach/sport/0/tach5.png'),pygame.image.load('tach/sport/0/tach6.png'), pygame.image.load('tach/sport/0/tach7.png')]
-stachometer_1 = [pygame.image.load('tach/sport/1000/tach1.png'), pygame.image.load('tach/sport/1000/tach2.png'), pygame.image.load('tach/sport/1000/tach3.png'), pygame.image.load('tach/sport/1000/tach4.png'), pygame.image.load('tach/sport/1000/tach5.png'),pygame.image.load('tach/sport/1000/tach6.png')]
-stachometer_2 = [pygame.image.load('tach/sport/2000/tach1.png'), pygame.image.load('tach/sport/2000/tach2.png'), pygame.image.load('tach/sport/2000/tach3.png'), pygame.image.load('tach/sport/2000/tach4.png'), pygame.image.load('tach/sport/2000/tach5.png'),pygame.image.load('tach/sport/2000/tach6.png')]
-stachometer_3 = [pygame.image.load('tach/sport/3000/tach1.png'), pygame.image.load('tach/sport/3000/tach2.png'), pygame.image.load('tach/sport/3000/tach3.png'), pygame.image.load('tach/sport/3000/tach4.png'), pygame.image.load('tach/sport/3000/tach5.png'),pygame.image.load('tach/sport/3000/tach6.png')]
-stachometer_4 = [pygame.image.load('tach/sport/4000/tach1.png'), pygame.image.load('tach/sport/4000/tach2.png'), pygame.image.load('tach/sport/4000/tach3.png'), pygame.image.load('tach/sport/4000/tach4.png'), pygame.image.load('tach/sport/4000/tach5.png'),pygame.image.load('tach/sport/4000/tach6.png')]
-stachometer_5 = [pygame.image.load('tach/sport/5000/tach1.png'), pygame.image.load('tach/sport/5000/tach2.png'), pygame.image.load('tach/sport/5000/tach3.png'), pygame.image.load('tach/sport/5000/tach4.png'), pygame.image.load('tach/sport/5000/tach5.png'),pygame.image.load('tach/sport/5000/tach6.png')]
-stachometer_6 = [pygame.image.load('tach/sport/6000/tach1.png'), pygame.image.load('tach/sport/6000/tach2.png'), pygame.image.load('tach/sport/6000/tach3.png'), pygame.image.load('tach/sport/6000/tach4.png'), pygame.image.load('tach/sport/6000/tach5.png'),pygame.image.load('tach/sport/6000/tach6.png')]
-stachometer_7 = [pygame.image.load('tach/sport/7000/tach1.png'), pygame.image.load('tach/sport/7000/tach2.png'), pygame.image.load('tach/sport/7000/tach3.png'), pygame.image.load('tach/sport/7000/tach4.png'), pygame.image.load('tach/sport/7000/tach5.png'),pygame.image.load('tach/sport/7000/tach6.png')]
-stachometer_8 = [pygame.image.load('tach/sport/8000/tach1.png'), pygame.image.load('tach/sport/8000/tach2.png'), pygame.image.load('tach/sport/8000/tach3.png'), pygame.image.load('tach/sport/8000/tach4.png'), pygame.image.load('tach/sport/8000/tach5.png'),pygame.image.load('tach/sport/8000/tach6.png')]
+stachometer_0 = [pygame.image.load('tach/sport/0/tach1.png'), pygame.image.load('tach/sport/0/tach2.png'),
+                 pygame.image.load('tach/sport/0/tach3.png'), pygame.image.load('tach/sport/0/tach4.png'),
+                 pygame.image.load('tach/sport/0/tach5.png'), pygame.image.load('tach/sport/0/tach6.png'),
+                 pygame.image.load('tach/sport/0/tach7.png')]
+stachometer_1 = [pygame.image.load('tach/sport/1000/tach1.png'), pygame.image.load('tach/sport/1000/tach2.png'),
+                 pygame.image.load('tach/sport/1000/tach3.png'), pygame.image.load('tach/sport/1000/tach4.png'),
+                 pygame.image.load('tach/sport/1000/tach5.png'), pygame.image.load('tach/sport/1000/tach6.png')]
+stachometer_2 = [pygame.image.load('tach/sport/2000/tach1.png'), pygame.image.load('tach/sport/2000/tach2.png'),
+                 pygame.image.load('tach/sport/2000/tach3.png'), pygame.image.load('tach/sport/2000/tach4.png'),
+                 pygame.image.load('tach/sport/2000/tach5.png'), pygame.image.load('tach/sport/2000/tach6.png')]
+stachometer_3 = [pygame.image.load('tach/sport/3000/tach1.png'), pygame.image.load('tach/sport/3000/tach2.png'),
+                 pygame.image.load('tach/sport/3000/tach3.png'), pygame.image.load('tach/sport/3000/tach4.png'),
+                 pygame.image.load('tach/sport/3000/tach5.png'), pygame.image.load('tach/sport/3000/tach6.png')]
+stachometer_4 = [pygame.image.load('tach/sport/4000/tach1.png'), pygame.image.load('tach/sport/4000/tach2.png'),
+                 pygame.image.load('tach/sport/4000/tach3.png'), pygame.image.load('tach/sport/4000/tach4.png'),
+                 pygame.image.load('tach/sport/4000/tach5.png'), pygame.image.load('tach/sport/4000/tach6.png')]
+stachometer_5 = [pygame.image.load('tach/sport/5000/tach1.png'), pygame.image.load('tach/sport/5000/tach2.png'),
+                 pygame.image.load('tach/sport/5000/tach3.png'), pygame.image.load('tach/sport/5000/tach4.png'),
+                 pygame.image.load('tach/sport/5000/tach5.png'), pygame.image.load('tach/sport/5000/tach6.png')]
+stachometer_6 = [pygame.image.load('tach/sport/6000/tach1.png'), pygame.image.load('tach/sport/6000/tach2.png'),
+                 pygame.image.load('tach/sport/6000/tach3.png'), pygame.image.load('tach/sport/6000/tach4.png'),
+                 pygame.image.load('tach/sport/6000/tach5.png'), pygame.image.load('tach/sport/6000/tach6.png')]
+stachometer_7 = [pygame.image.load('tach/sport/7000/tach1.png'), pygame.image.load('tach/sport/7000/tach2.png'),
+                 pygame.image.load('tach/sport/7000/tach3.png'), pygame.image.load('tach/sport/7000/tach4.png'),
+                 pygame.image.load('tach/sport/7000/tach5.png'), pygame.image.load('tach/sport/7000/tach6.png')]
+stachometer_8 = [pygame.image.load('tach/sport/8000/tach1.png'), pygame.image.load('tach/sport/8000/tach2.png'),
+                 pygame.image.load('tach/sport/8000/tach3.png'), pygame.image.load('tach/sport/8000/tach4.png'),
+                 pygame.image.load('tach/sport/8000/tach5.png'), pygame.image.load('tach/sport/8000/tach6.png')]
+
 
 def tachometer():
-    #0-1000
+    # 0-1000
     if rpm_target == 0:
         screen.blit(tachometer_0[1], (tachometerX, tachometerY))
     elif rpm_target > 0 and rpm_target <= 167:
@@ -118,7 +159,7 @@ def tachometer():
     elif rpm_target > 900 and rpm_target <= 1000:
         screen.blit(tachometer_0[7], (tachometerX, tachometerY))
 
-    #1000-2000
+    # 1000-2000
     if rpm_target > 1000 and rpm_target <= 1167:
         screen.blit(tachometer_1[1], (tachometerX, tachometerY))
     elif rpm_target > 1167 and rpm_target <= 1334:
@@ -160,7 +201,7 @@ def tachometer():
     elif rpm_target > 3900 and rpm_target <= 4000:
         screen.blit(tachometer_3[6], (tachometerX, tachometerY))
 
-    #4000-5000
+    # 4000-5000
     if rpm_target > 4000 and rpm_target <= 4167:
         screen.blit(tachometer_4[1], (tachometerX, tachometerY))
     elif rpm_target > 4167 and rpm_target <= 4334:
@@ -174,7 +215,7 @@ def tachometer():
     elif rpm_target > 4900 and rpm_target <= 5000:
         screen.blit(tachometer_4[6], (tachometerX, tachometerY))
 
-    #5000-6000
+    # 5000-6000
     if rpm_target > 5000 and rpm_target <= 5167:
         screen.blit(tachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 5167 and rpm_target <= 5334:
@@ -188,7 +229,7 @@ def tachometer():
     elif rpm_target > 5900 and rpm_target <= 6000:
         screen.blit(tachometer_5[6], (tachometerX, tachometerY))
 
-    #6000-7000
+    # 6000-7000
     if rpm_target > 6000 and rpm_target <= 6167:
         screen.blit(tachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 6167 and rpm_target <= 6334:
@@ -202,7 +243,7 @@ def tachometer():
     elif rpm_target > 6900 and rpm_target <= 7000:
         screen.blit(tachometer_5[6], (tachometerX, tachometerY))
 
-    #7000-8000
+    # 7000-8000
     if rpm_target > 7000 and rpm_target <= 7167:
         screen.blit(tachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 7167 and rpm_target <= 7334:
@@ -216,7 +257,7 @@ def tachometer():
     elif rpm_target > 7900 and rpm_target <= 8000:
         screen.blit(tachometer_5[6], (tachometerX, tachometerY))
 
-    #8000-9000
+    # 8000-9000
     if rpm_target > 8000 and rpm_target <= 8167:
         screen.blit(tachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 8167 and rpm_target <= 8334:
@@ -230,8 +271,9 @@ def tachometer():
     elif rpm_target > 8900 and rpm_target <= 9000:
         screen.blit(tachometer_5[6], (tachometerX, tachometerY))
 
+
 def stachometer():
-    #0-1000
+    # 0-1000
     if rpm_target == 0:
         screen.blit(stachometer_0[1], (tachometerX, tachometerY))
     elif rpm_target > 0 and rpm_target <= 167:
@@ -247,7 +289,7 @@ def stachometer():
     elif rpm_target > 900 and rpm_target <= 1000:
         screen.blit(stachometer_0[7], (tachometerX, tachometerY))
 
-    #1000-2000
+    # 1000-2000
     if rpm_target > 1000 and rpm_target <= 1167:
         screen.blit(stachometer_1[1], (tachometerX, tachometerY))
     elif rpm_target > 1167 and rpm_target <= 1334:
@@ -261,7 +303,7 @@ def stachometer():
     elif rpm_target > 1900 and rpm_target <= 2000:
         screen.blit(stachometer_1[6], (tachometerX, tachometerY))
 
-    #2000-3000
+    # 2000-3000
     if rpm_target > 2000 and rpm_target <= 2167:
         screen.blit(stachometer_2[1], (tachometerX, tachometerY))
     elif rpm_target > 2167 and rpm_target <= 2334:
@@ -275,7 +317,7 @@ def stachometer():
     elif rpm_target > 2900 and rpm_target <= 3000:
         screen.blit(stachometer_2[6], (tachometerX, tachometerY))
 
-    #3000-4000
+    # 3000-4000
     if rpm_target > 3000 and rpm_target <= 3167:
         screen.blit(stachometer_3[1], (tachometerX, tachometerY))
     elif rpm_target > 3167 and rpm_target <= 3334:
@@ -289,7 +331,7 @@ def stachometer():
     elif rpm_target > 3900 and rpm_target <= 4000:
         screen.blit(stachometer_3[6], (tachometerX, tachometerY))
 
-    #4000-5000
+    # 4000-5000
     if rpm_target > 4000 and rpm_target <= 4167:
         screen.blit(stachometer_4[1], (tachometerX, tachometerY))
     elif rpm_target > 4167 and rpm_target <= 4334:
@@ -303,7 +345,7 @@ def stachometer():
     elif rpm_target > 4900 and rpm_target <= 5000:
         screen.blit(stachometer_4[6], (tachometerX, tachometerY))
 
-    #5000-6000
+    # 5000-6000
     if rpm_target > 5000 and rpm_target <= 5167:
         screen.blit(stachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 5167 and rpm_target <= 5334:
@@ -317,7 +359,7 @@ def stachometer():
     elif rpm_target > 5900 and rpm_target <= 6000:
         screen.blit(stachometer_5[6], (tachometerX, tachometerY))
 
-    #6000-7000
+    # 6000-7000
     if rpm_target > 6000 and rpm_target <= 6167:
         screen.blit(stachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 6167 and rpm_target <= 6334:
@@ -331,7 +373,7 @@ def stachometer():
     elif rpm_target > 6900 and rpm_target <= 7000:
         screen.blit(stachometer_5[6], (tachometerX, tachometerY))
 
-    #7000-8000
+    # 7000-8000
     if rpm_target > 7000 and rpm_target <= 7167:
         screen.blit(stachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 7167 and rpm_target <= 7334:
@@ -345,7 +387,7 @@ def stachometer():
     elif rpm_target > 7900 and rpm_target <= 8000:
         screen.blit(stachometer_5[6], (tachometerX, tachometerY))
 
-    #8000-9000
+    # 8000-9000
     if rpm_target > 8000 and rpm_target <= 8167:
         screen.blit(stachometer_5[1], (tachometerX, tachometerY))
     elif rpm_target > 8167 and rpm_target <= 8334:
@@ -368,18 +410,18 @@ mphfont = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 rpm_font = pygame.font.Font('Fonts/pirulen rg.ttf', 34)
 srpmfont = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
 
-
-speedtextX0 = 500   #one's place
+speedtextX0 = 500  # one's place
 speedtextY0 = 255
 
-speedtextX10 = 489  #ten's place
+speedtextX10 = 489  # ten's place
 speedtextY10 = 255
 
-speedtextX100 = 480 #hundredth's place
+speedtextX100 = 480  # hundredth's place
 speedtextY100 = 255
 
 mphtextX = 488
 mphtextY = 325
+
 
 def display_speed():
     speed = speed_font.render(str(speed_value), True, (255, 255, 255))
@@ -394,24 +436,26 @@ def display_speed():
 
     screen.blit(mph, (mphtextX, mphtextY))
 
+
 def sdisplay_rpm():
     srpm = rpm_font.render(str(rpm_target), True, (255, 255, 255))
     rpm_text = srpmfont.render("RPM", True, (255, 255, 255))
 
     if rpm_target <= 9:
-        screen.blit(srpm, (speedtextX0, speedtextY0+15))
+        screen.blit(srpm, (speedtextX0, speedtextY0 + 15))
     elif rpm_target >= 10 and rpm_target <= 99:
-        screen.blit(srpm, (speedtextX10-5, speedtextY10+15))
+        screen.blit(srpm, (speedtextX10 - 5, speedtextY10 + 15))
     elif rpm_target >= 100 and rpm_target <= 999:
         screen.blit(srpm, (speedtextX10 - 20, speedtextY10 + 15))
     elif rpm_target >= 1000 and rpm_target <= 1999:
         screen.blit(srpm, (speedtextX10 - 22, speedtextY10 + 15))
     elif rpm_target >= 2000:
-        screen.blit(srpm, (speedtextX100-25, speedtextY100+15))
+        screen.blit(srpm, (speedtextX100 - 25, speedtextY100 + 15))
 
-    screen.blit(rpm_text, (mphtextX-10, mphtextY-10))
+    screen.blit(rpm_text, (mphtextX - 10, mphtextY - 10))
 
-#main display information
+
+# main display information
 def display_more_info():
     info_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
 
@@ -424,11 +468,12 @@ def display_more_info():
     mpg_avg_norm = info_font.render('MPG (Avg) ' + str(avg_mpg), True, (255, 255, 255))
     screen.blit(mpg_avg_norm, (775, 410))
 
-#sport display information
+
+# sport display information
 def display_more_info_sport():
     info_font = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
 
-    maf_sport = info_font.render('MAF ' + str(maf_reading) +' g/s', True, (255, 255, 255))
+    maf_sport = info_font.render('MAF ' + str(maf_reading) + ' g/s', True, (255, 255, 255))
     screen.blit(maf_sport, (755, 150))
 
     throttle_sport = info_font.render('Throttle ' + str(throttle_position) + '%', True, (255, 255, 255))
@@ -440,10 +485,11 @@ def display_more_info_sport():
     speed_sport = info_font.render('Speed ' + str(speed_value) + ' MPH', True, (255, 255, 255))
     screen.blit(speed_sport, (745, 380))
 
-#temperature guages
+
+# temperature guages
 temp_indicator_img = pygame.image.load('temp_gauge/indicator.png')
 temp_gauge_img = pygame.image.load('temp_gauge/Temp Gauge.png')
-temp_indicatorX = 140  #135 = middle, 240 = max, 30 = min
+temp_indicatorX = 140  # 135 = middle, 240 = max, 30 = min
 temp_indicatorY = 399
 temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
@@ -451,11 +497,12 @@ stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
 temp_txt_X = 30
 temp_txt_Y = 420
 
-#Intake Temp Gauge
+
+# Intake Temp Gauge
 def intake_temp_gauge():
     intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
     temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
-    screen.blit(temp_intake, (temp_txt_X , 245))
+    screen.blit(temp_intake, (temp_txt_X, 245))
 
     screen.blit(temp_gauge_img, (19, 220))
 
@@ -479,9 +526,9 @@ def intake_temp_gauge():
 
     screen.blit(intake_icon_img, (120, 145))
 
-#Coolant Temp Gauge
-def temp_gauge():
 
+# Coolant Temp Gauge
+def temp_gauge():
     if temp_value >= 200 and temp_value <= 220:
         screen.blit(temp_indicator_img, (temp_indicatorX, temp_indicatorY))
     elif temp_value >= 180 and temp_value < 200:
@@ -503,12 +550,14 @@ def display_temp():
 
     screen.blit(temp, (temp_txt_X, temp_txt_Y))
 
+
 def sdisplay_temp():
     temp = stemp_font.render(('Coolant ' + str(temp_value) + ' °F'), True, (255, 255, 255))
 
-    screen.blit(temp, (temp_txt_X-5, temp_txt_Y+5))
+    screen.blit(temp, (temp_txt_X - 5, temp_txt_Y + 5))
 
-#Framework
+
+# Framework
 framework_img = pygame.image.load('framework.png')
 frameworkX = 8
 frameworkY = 95
@@ -517,37 +566,44 @@ sframework_img = pygame.image.load('sport_mode/framework/Framework.png')
 frameworkX = 8
 frameworkY = 95
 
+
 def framework():
     screen.blit(framework_img, (frameworkX, frameworkY))
+
 
 def sframework():
     screen.blit(sframework_img, (frameworkX, frameworkY))
 
-#Gradient
+
+# Gradient
 gradient_img = pygame.image.load('Gradient.png')
 gradientX = 0
 gradientY = 0
 
-#Sports
+# Sports
 sport_img = pygame.image.load('Gradient_red.png')
 sportsX = 0
 sportsY = 0
 
+
 def gradient():
     screen.blit(gradient_img, (gradientX, gradientY))
 
+
 def sports():
     screen.blit(sport_img, (sportsX, sportsY))
+
 
 # Buttons
 normal_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 sports_font = pygame.font.Font('Fonts/pirulen rg.ttf', 13)
 
-#Button Text
+# Button Text
 sports_txt_X = 98
 sports_txt_Y = 530
 normal_txt_X = 97
 normal_txt_Y = 530
+
 
 def sports_button():
     if sports_button_press is True:
@@ -571,6 +627,7 @@ def back_button():
         back_img = pygame.image.load('Back Button.png')
     screen.blit(back_img, (10, 425))
 
+
 def reset_button():
     if reset_button_press is True:
         reset_img = pygame.image.load('Reset Interval Button Pressed.png')
@@ -578,12 +635,14 @@ def reset_button():
         reset_img = pygame.image.load('Reset Interval Button.png')
     screen.blit(reset_img, (700, 425))
 
+
 def interval_button():
     if interval_button_press is True:
         interval_img = pygame.image.load('Interval Button Pressed.png')
     else:
         interval_img = pygame.image.load('Interval Button.png')
     screen.blit(interval_img, (825, 425))
+
 
 # Colors button
 # colors_txt_X = 809
@@ -603,11 +662,12 @@ interval_txt_X = 220
 interval_txt_Y = 200
 interval_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
 
-def interval_text(interval_string, maintenance_interval, offset):
 
+def interval_text(interval_string, maintenance_interval, offset):
     interval_message = interval_font.render(interval_string + str(maintenance_interval), True, (255, 255, 255))
 
     screen.blit(interval_message, (interval_txt_X + offset, interval_txt_Y))
+
 
 # Oil change interval buttons
 def three_thousand():
@@ -617,12 +677,14 @@ def three_thousand():
         three_thousand_img = pygame.image.load('3000_NP.png')
     screen.blit(three_thousand_img, (115, 260))
 
+
 def five_thousand():
     if five_thousand_press is True:
         five_thousand_img = pygame.image.load('5000_P.png')
     else:
         five_thousand_img = pygame.image.load('5000_NP.png')
     screen.blit(five_thousand_img, (265, 260))
+
 
 def seven_thousand_five():
     if seven_thousand_five_press is True:
@@ -631,12 +693,14 @@ def seven_thousand_five():
         seven_thousand_five_img = pygame.image.load('7500_NP.png')
     screen.blit(seven_thousand_five_img, (415, 260))
 
+
 def ten_thousand():
     if ten_thousand_press is True:
         ten_thousand_img = pygame.image.load('10000_P.png')
     else:
         ten_thousand_img = pygame.image.load('10000_NP.png')
     screen.blit(ten_thousand_img, (565, 260))
+
 
 def fifteen_thousand():
     if fifteen_thousand_press is True:
@@ -645,12 +709,14 @@ def fifteen_thousand():
         fifteen_thousand_img = pygame.image.load('15000_NP.png')
     screen.blit(fifteen_thousand_img, (715, 260))
 
+
 def increment():
     if increment_press is True:
         increment_img = pygame.image.load('Plus Button Pressed.png')
     else:
         increment_img = pygame.image.load('Plus Button Not Pressed.png')
     screen.blit(increment_img, (600, 260))
+
 
 def decrement():
     if decrement_press is True:
@@ -659,9 +725,10 @@ def decrement():
         decrement_img = pygame.image.load('Subtract button Not pressed.png')
     screen.blit(decrement_img, (250, 260))
 
+
 # Maintenance Display
 
-#File Objects and Maintenance and Mileage Tracking
+# File Objects and Maintenance and Mileage Tracking
 with open('maintenance/interval.txt', 'r+') as int_file:
     oil_change_string = int_file.readline()
     oil_change_interval = int(oil_change_string)
@@ -686,29 +753,33 @@ with open('maintenance/brake_mileage.txt', 'r+') as mileage_file:
     brake_mileage_string = mileage_file.readline()
     brake_mileage = int(brake_mileage_string)
 
+
 def maintenance_counter(mileage, interval):
     maintenance_count = interval - mileage
     return maintenance_count
+
 
 oil_change_count = maintenance_counter(oil_mileage, oil_change_interval)
 transmission_oil_change_count = maintenance_counter(transmission_oil_mileage, transmission_oil_change_interval)
 brake_change_count = maintenance_counter(brake_mileage, brake_change_interval)
 
-def display_maintenance_distance(maintenance_string, past_due_string, maintenance_count, offset, offset_due):
 
+def display_maintenance_distance(maintenance_string, past_due_string, maintenance_count, offset, offset_due):
     maintenance_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 40)
     txt_X = 255
     txt_Y = 330
 
     if maintenance_count > 0:
-        maintenance_change = maintenance_font.render((maintenance_string + str(maintenance_count) + ' Miles'), True, (255, 255, 255))
+        maintenance_change = maintenance_font.render((maintenance_string + str(maintenance_count) + ' Miles'), True,
+                                                     (255, 255, 255))
         screen.blit(maintenance_change, (txt_X + offset, txt_Y))
     elif maintenance_count < 0:
-        maintenance_past_due = maintenance_font.render((past_due_string + str(maintenance_count * -1) + ' Miles'), True, (255, 255, 255))
+        maintenance_past_due = maintenance_font.render((past_due_string + str(maintenance_count * -1) + ' Miles'), True,
+                                                       (255, 255, 255))
         screen.blit(maintenance_past_due, (txt_X + offset_due, txt_Y))
 
 
-#Warning Indicator
+# Warning Indicator
 
 def display_warning_indicator(maintenance_count, maintenance_page):
     warning_big_img = pygame.image.load('maintenance/warning_big.png')
@@ -726,17 +797,17 @@ def display_warning_indicator(maintenance_count, maintenance_page):
             screen.blit(oil_img, (warning_bigX - 20, warning_bigY))
         elif maintenance_page == 2:
             screen.blit(transmission_img, (warning_bigX, warning_bigY - 15))
-        elif maintenance_page ==3:
+        elif maintenance_page == 3:
             screen.blit(brake_img, (warning_bigX, warning_bigY - 15))
 
 
-#Main Page Maintenance Indicators
+# Main Page Maintenance Indicators
 
 warning_small_img = pygame.image.load('maintenance/warning_small.png')
 everything_ok_img = pygame.image.load('maintenance/maintenance ok.png')
 
-def display_warning_indicator_small(oil_change_count, transmission_change_count, brake_change_count):
 
+def display_warning_indicator_small(oil_change_count, transmission_change_count, brake_change_count):
     warning_smallX = 120
     warning_smallY = 230
 
@@ -752,7 +823,7 @@ def display_warning_indicator_small(oil_change_count, transmission_change_count,
         screen.blit(everything_ok_img, (15, 200))
 
 
-#Maintenance Headings
+# Maintenance Headings
 vehicle_maint_heading_img = pygame.image.load('maintenance/maintenance_heading.png')
 maint_headingX = 210
 maint_headingY = 65
@@ -763,24 +834,29 @@ oil_change_int_heading_img = pygame.image.load('maintenance/oil_change_interval_
 transmission_oil_change_int_heading_img = pygame.image.load('maintenance/transmission_interval_heading.png')
 brake_change_int_heading_img = pygame.image.load('maintenance/brake_interval_heading.png')
 
+
 def display_maint_heading():
     screen.blit(vehicle_maint_heading_img, (maint_headingX, maint_headingY))
     screen.blit(next_maintenance, (765, 75))
     screen.blit(previous_maintenance, (210, 75))
 
+
 def display_int_heading(maintenance_heading_img):
     screen.blit(maintenance_heading_img, (maint_headingX, maint_headingY))
 
 
-#Diagnostic Display
+# Diagnostic Display
 diag_heading_img = pygame.image.load('diagnostics/vehicle_diagnostics_heading.png')
+
 
 def display_diag_heading():
     screen.blit(diag_heading_img, (maint_headingX, maint_headingY))
 
+
 # Diagnostics Display
 clear_dtc_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
 clear_dtc_button_label = clear_dtc_font.render('Clear DTC', True, (255, 255, 255))
+
 
 def clear_dtc_button():
     if clear_dtc_press is False:
@@ -799,7 +875,7 @@ error_symbol_small = pygame.image.load('engine_check_small.png')
 error_symbol = pygame.image.load('engine_check.png')
 
 
-#Display functions for UI
+# Display functions for UI
 def displays():
     sports_button()
     tachometer()
@@ -810,6 +886,7 @@ def displays():
     display_speed()
     display_more_info()
     display_logos()
+
 
 def sports_display():
     stachometer()
@@ -822,6 +899,7 @@ def sports_display():
     intake_temp_gauge()
     display_logos()
 
+
 def maintenance_display():
     reset_button()
     interval_button()
@@ -832,11 +910,13 @@ def maintenance_display():
         display_maintenance_distance('Oil Change Due In ', 'Oil Change Past Due by ', oil_change_count, 0, -50)
         display_warning_indicator(oil_change_count, 1)
     elif current_maintenance == 2:
-        display_maintenance_distance('Transmission Oil Change Due In ', 'Transmission Oil Change Past Due by ', transmission_oil_change_count, -100, -150)
+        display_maintenance_distance('Transmission Oil Change Due In ', 'Transmission Oil Change Past Due by ',
+                                     transmission_oil_change_count, -100, -150)
         display_warning_indicator(transmission_oil_change_count, 2)
     elif current_maintenance == 3:
         display_maintenance_distance('Brake Change Due In ', 'Brake Change Past Due by ', brake_change_count, -30, -60)
         display_warning_indicator(brake_change_count, 3)
+
 
 def interval_display():
     if current_maintenance == 1:
@@ -857,10 +937,12 @@ def interval_display():
         decrement()
         interval_text('Current Brake Change Interval: ', brake_change_interval, -20)
         display_int_heading(brake_change_int_heading_img)
-    #all pages
+    # all pages
     back_button()
 
+
 error_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
+
 
 def diag_display():
     display_diag_heading()
@@ -884,7 +966,8 @@ def diag_display():
         #     screen.blit(error_label, (465, 200 + (j * 20)))
         clear_dtc_button()
 
-#Redraw
+
+# Redraw
 def RedrawWindow():
     # Checks which background image to use
     if current_page == 2:
@@ -907,59 +990,69 @@ def RedrawWindow():
             diag_display()
 
     pygame.display.update()
-    
-#OBD Callback Definitions
+
+
+# OBD Callback Definitions
 def get_rpm(rpmRaw):
     if not rpmRaw.is_null():
         global rpm_target
         rpm_target = int(rpmRaw.value.magnitude)
 
+
 def get_speed(speedRaw):
     if not speedRaw.is_null():
         global speed_value
-        speed_value = int(speedRaw.value.magnitude * 0.621371) #to MPH instead of KMH
+        speed_value = int(speedRaw.value.magnitude * 0.621371)  # to MPH instead of KMH
+
 
 def get_temp(tempRaw):
     if not tempRaw.is_null():
         global temp_value
         temp_value = int((tempRaw.value.magnitude * 1.8) + 32)
 
+
 def get_throttle_position(throttlepositionRaw):
     if not throttlepositionRaw.is_null():
         global throttle_position
         throttle_position = int(throttlepositionRaw.value.magnitude)
+
 
 def get_maf(mafRaw):
     if not mafRaw.is_null():
         global maf_reading
         maf_reading = int(mafRaw.value.magnitude)
 
+
 def get_load(loadRaw):
     if not loadRaw.is_null():
         global load
         load = int(loadRaw.value.magnitude)
+
 
 def get_fuel_pressure(fuelpressureRaw):
     if not fuelpressureRaw.is_null():
         global fuel_pressure
         fuel_pressure = int(fuelpressureRaw.value.magnitude * 0.14503)
 
+
 def get_intake_temp(intaketempRaw):
     if not intaketempRaw.is_null():
         global intake_temp
         intake_temp = int((intaketempRaw.value.magnitude * 1.8) + 32)
+
 
 def get_trip_distance(tripdistanceRaw):
     if not tripdistanceRaw.is_null():
         global trip_distance
         trip_distance = int(tripdistanceRaw.value.magnitude * 0.621371)
 
+
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
 
 
-#OBD Connection Callbacks
+# OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
 connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
@@ -973,17 +1066,16 @@ connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
 
 connection.start()
 
-
-#Game Loop
+# Game Loop
 app_running = True
 while app_running:
     clock.tick(60)
 
-    #screen fill
+    # screen fill
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    #print(mouse)
+    # print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             connection.stop()
@@ -1019,7 +1111,6 @@ while app_running:
                 decrement_press = True
             elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
                 increment_press = True
-
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
@@ -1121,7 +1212,7 @@ while app_running:
             #     if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
             #         obd.commands.CLEAR_DTC
 
-#Mileage/Oil Change Interval Functions
+    # Mileage/Oil Change Interval Functions
 
     oil_change_count = maintenance_counter(oil_mileage, oil_change_interval)
     transmission_oil_change_count = maintenance_counter(transmission_oil_mileage, transmission_oil_change_interval)
@@ -1140,36 +1231,31 @@ while app_running:
     with open('maintenance/brake_mileage.txt', 'w') as mileage_file:
         mileage_file.write(convert_brake_mileage)
 
-#Redraw UI
+    # Redraw UI
     RedrawWindow()
 
-#instant mpg
+    # instant mpg
     if speed_value < 1:
         inst_mpg = 0
     elif speed_value >= 1 and maf_reading > 0.5:
-        if ((710.7 + speed_value)/maf_reading) > 100:
+        if ((710.7 + speed_value) / maf_reading) > 100:
             inst_mpg = 99
         else:
-            inst_mpg = round((710.7 + speed_value)/maf_reading)
+            inst_mpg = round((710.7 + speed_value) / maf_reading)
     else:
         inst_mpg = 0;
 
-#Where mileage should increment
+    # Where mileage should increment
     if trip_distance > prev_trip_distance + 1:
         oil_mileage = oil_mileage + 1
         transmission_oil_mileage = transmission_oil_mileage + 1
         brake_mileage = brake_mileage + 1
         prev_trip_distance = trip_distance
 
-
-#dtc boolean handling
+    # dtc boolean handling
     if not dtc_code is None:
         dtc_code_present = True
         print('I am true')
     else:
         dtc_code_present = False
         print('I am false')
-
-
-
-
