@@ -1623,10 +1623,8 @@ while app_running:
 
     if not dtc_code is None:
         dtc_code_present = True
-        print('I am true')
     else:
         dtc_code_present = False
-        print('I am false')
 
 
 
