@@ -1344,7 +1344,6 @@ def get_trip_distance(tripdistanceRaw):
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
-    return dtc_code
 
 
 dtc_code_present = False
