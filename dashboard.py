@@ -1167,7 +1167,7 @@ clear_dtc_button_label = clear_dtc_font.render('Clear DTC', True, (255, 255, 255
 
 def clear_dtc_button():
     if clear_dtc_press is False:
-        clear_dtc = pygame.image.load('Sport Button not pressed (no label).png')
+        clear_dtc = pygame.image.load('Sport button not pressed (no label).png')
     else:
         clear_dtc = pygame.image.load('Sport Button Pressed (no label).png')
     screen.blit(clear_dtc, (840, 425))
@@ -1257,18 +1257,18 @@ def diag_display():
         screen.blit(no_error_msg, (340, 300))
 
     elif current_page == 6:
-        # screen.blit(error_symbol_small, (465, 155))
-        # error_num_list = []
-        # error_description_list = []
-        # # Separates tuples into two lists
-        # for i in range(len(dtc_code)):
-        #     error_num, error_description = dtc_code[i]
-        #     error_num_list.append(error_num)
-        #     error_description_list.append(error_description)
-        # # Iterates through the two lists and prints list contents
-        # for j in range(len(dtc_code)):
-        #     error_label = error_font.render(error_num_list[j], True, (255, 255, 255))
-        #     screen.blit(error_label, (465, 200 + (j * 20)))
+        screen.blit(error_symbol_small, (465, 155))
+        error_num_list = []
+        error_description_list = []
+        # Separates tuples into two lists
+        for i in range(len(dtc_code)):
+            error_num, error_description = dtc_code[i]
+            error_num_list.append(error_num)
+            error_description_list.append(error_description)
+        # Iterates through the two lists and prints list contents
+        for j in range(len(dtc_code)):
+            error_label = error_font.render(error_num_list[j], True, (255, 255, 255))
+            screen.blit(error_label, (465, 200 + (j * 20)))
         clear_dtc_button()
 
 #Redraw
@@ -1623,7 +1623,7 @@ while app_running:
 ##    brake_mileage = brake_mileage + 1
 
 
-    if not dtc_code.is_null():
+    if not dtc_code is None:
         dtc_code_present = True
     else:
         dtc_code_present = False
