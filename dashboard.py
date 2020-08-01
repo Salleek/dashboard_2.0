@@ -80,8 +80,8 @@ def display_logos():
 
 
 # Tachometer
-tachometerX = 205
-tachometerY = 0
+tachometerX = 184
+tachometerY = 0 - 20
 
 tachometer_0 = [pygame.image.load('tach/norm/0/tach1.png'), pygame.image.load('tach/norm/0/tach2.png'), pygame.image.load('tach/norm/0/tach3.png'), pygame.image.load('tach/norm/0/tach4.png'), pygame.image.load('tach/norm/0/tach5.png'),pygame.image.load('tach/norm/0/tach6.png'), pygame.image.load('tach/norm/0/tach7.png')]
 tachometer_1 = [pygame.image.load('tach/norm/1000/tach1.png'), pygame.image.load('tach/norm/1000/tach2.png'), pygame.image.load('tach/norm/1000/tach3.png'), pygame.image.load('tach/norm/1000/tach4.png'), pygame.image.load('tach/norm/1000/tach5.png'),pygame.image.load('tach/norm/1000/tach6.png')]
@@ -454,6 +454,7 @@ temp_indicatorX = 140  # 135 = middle, 240 = max, 30 = min
 temp_indicatorY = 399
 temp_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
 stemp_font = pygame.font.Font('Fonts/pirulen rg.ttf', 20)
+stemp_font_fuel = pygame.font.Font('Fonts/pirulen rg.ttf', 18)
 
 temp_txt_X = 30
 temp_txt_Y = 420
@@ -463,26 +464,26 @@ temp_txt_Y = 420
 def intake_temp_gauge():
     intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
     temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
-    screen.blit(temp_intake, (temp_txt_X, 245))
+    screen.blit(temp_intake, (temp_txt_X - 10, 245))
 
     screen.blit(temp_gauge_img, (19, 220))
 
-    if intake_temp >= 180 and intake_temp <= 220:
+    if intake_temp >= 60 and intake_temp <= 80:
         screen.blit(temp_indicator_img, (temp_indicatorX, 220))
-    elif intake_temp >= 170 and intake_temp < 180:
+    elif intake_temp >= 40 and intake_temp < 60:
         screen.blit(temp_indicator_img, (temp_indicatorX - 10, 220))
-    elif intake_temp >= 100 and intake_temp < 170:
+    elif intake_temp >= 20 and intake_temp < 40:
         screen.blit(temp_indicator_img, (temp_indicatorX - 50, 220))
-    elif intake_temp >= 0 and intake_temp < 100:
+    elif intake_temp >= 0 and intake_temp < 20:
         screen.blit(temp_indicator_img, (temp_indicatorX - 105, 220))
-    elif intake_temp > 220 and intake_temp <= 250:
+    elif intake_temp > 80 and intake_temp <= 120:
         screen.blit(temp_indicator_img, (temp_indicatorX + 10, 220))
-    elif intake_temp > 250 and intake_temp <= 300:
+    elif intake_temp > 120 and intake_temp <= 150:
         screen.blit(temp_indicator_img, (temp_indicatorX + 70, 220))
-    elif intake_temp > 300:
+    elif intake_temp > 150:
         screen.blit(temp_indicator_img, (temp_indicatorX + 95, 220))
 
-    pressure_fuel = stemp_font.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
+    pressure_fuel = stemp_font_fuel.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
     screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
     screen.blit(intake_icon_img, (120, 145))
@@ -823,7 +824,7 @@ def clear_dtc_button():
     if clear_dtc_press is False:
         clear_dtc = pygame.image.load('Sport Button not pressed (no label).png')
     else:
-        clear_dtc = pygame.image.load('Sport Button pressed (no label).png')
+        clear_dtc = pygame.image.load('Sport button pressed (no label).png')
     screen.blit(clear_dtc, (840, 425))
     screen.blit(clear_dtc_button_label, (888, 500))
 
