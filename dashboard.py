@@ -45,7 +45,7 @@ ten_thousand_press = False
 fifteen_thousand_press = False
 clear_dtc_press = False
 dtc_code_present = False
-dtc_code = 'N/A'
+dtc_code = ''
 current_maintenance = 1
 increment_press = False
 decrement_press = False
@@ -1346,8 +1346,6 @@ def get_dtc_codes(dtcRaw):
     dtc_code = dtcRaw.value
 
 
-dtc_code_present = False
-
 #OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
 connection.watch(obd.commands.SPEED, callback=get_speed)
@@ -1625,6 +1623,11 @@ while app_running:
 
     if not dtc_code.is_null():
         dtc_code_present = True
+        print('I am true')
     else:
         dtc_code_present = False
+        print('I am false')
+
+
+
 
