@@ -912,21 +912,21 @@ def diag_display():
         screen.blit(no_error_symbol, (435, 175))
         screen.blit(no_error_msg, (340, 300))
 
-    elif current_page == 6:
-        # screen.blit(error_symbol_small, (465, 155))
-        # error_num_list = []
-        # error_description_list = []
-        # # Separates tuples into two lists
-        # for i in range(len(dtc_code)):
-        #     error_num, error_description = dtc_code[i]
-        #     error_num_list.append(error_num)
-        #     error_description_list.append(error_description)
-        # # Iterates through the two lists and prints list contents
-        # for j in range(len(dtc_code)):
-        #     error_label = error_font.render(error_num_list[j], True, (255, 255, 255))
-        #     screen.blit(error_label, (465, 200 + (j * 20)))
-        clear_dtc_button()
 
+    elif current_page == 6:
+        screen.blit(error_symbol_small, (465, 155))
+        error_num_list = []
+        error_description_list = []
+        # Separates tuples into two lists
+        for i in range(len(dtc_code)):
+            error_num, error_description = dtc_code[i]
+            error_num_list.append(error_num)
+            error_description_list.append(error_description)
+        # Iterates through the two lists and prints list contents
+        for j in range(len(dtc_code)):
+            error_label = error_font.render(error_num_list[j] + ' ' + error_description_list[j], True, (255, 255, 255))
+            screen.blit(error_label, (370, 250 + (j * 20)))
+        clear_dtc_button()
 
 # Redraw
 def RedrawWindow():
@@ -1169,9 +1169,9 @@ while app_running:
                     print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
-            # elif current_page == 6:
-            #     if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
-            #         obd.commands.CLEAR_DTC
+            elif current_page == 6:
+                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+                    obd.commands.CLEAR_DTC
 
     # Mileage/Oil Change Interval Functions
 
