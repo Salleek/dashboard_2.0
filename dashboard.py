@@ -17,7 +17,7 @@ trip_distance = 0
 prev_trip_distance = 0
 
 rpm_target = 0
-avg_mpg = 0
+voltage = 0
 inst_mpg = 0
 maf_reading = 0
 throttle_position = 0
@@ -427,7 +427,7 @@ def display_more_info():
     mpg_inst_norm = info_font.render('MPG ' + str(inst_mpg), True, (255, 255, 255))
     screen.blit(mpg_inst_norm, (775, 370))
 
-    mpg_avg_norm = info_font.render('MPG (Avg) ' + str(avg_mpg), True, (255, 255, 255))
+    mpg_avg_norm = info_font.render('Voltage ' + str(voltage) + ' V', True, (255, 255, 255))
     screen.blit(mpg_avg_norm, (775, 410))
 
 
@@ -463,7 +463,7 @@ temp_txt_Y = 420
 
 # Intake Temp Gauge
 def intake_temp_gauge():
-    intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
+    turbo_icon_img = pygame.image.load('sport_mode/turbo.png')
     temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
     screen.blit(temp_intake, (temp_txt_X - 22, 245))
 
@@ -487,7 +487,7 @@ def intake_temp_gauge():
     pressure_fuel = stemp_font_fuel.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
     screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
-    screen.blit(intake_icon_img, (120, 145))
+    screen.blit(turbo_icon_img, (120, 145))
 
 
 # Coolant Temp Gauge
