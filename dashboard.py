@@ -16,6 +16,7 @@ brake_mileage = 0
 trip_distance = 0
 prev_trip_distance = 0
 
+rpm_target = 0
 avg_mpg = 0
 inst_mpg = 0
 maf_reading = 0
@@ -464,7 +465,7 @@ temp_txt_Y = 420
 def intake_temp_gauge():
     intake_icon_img = pygame.image.load('temp_gauge/oil_white.png')
     temp_intake = stemp_font.render(('Intake Temp ' + str(intake_temp) + ' °F'), True, (255, 255, 255))
-    screen.blit(temp_intake, (temp_txt_X - 10, 245))
+    screen.blit(temp_intake, (temp_txt_X - 22, 245))
 
     screen.blit(temp_gauge_img, (19, 220))
 
@@ -1217,7 +1218,5 @@ while app_running:
     # dtc boolean handling
     if not dtc_code is None:
         dtc_code_present = True
-        print('I am true')
     else:
         dtc_code_present = False
-        print('I am false')
