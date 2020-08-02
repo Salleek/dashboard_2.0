@@ -1070,6 +1070,7 @@ while app_running:
                     fifteen_thousand_press = True
             elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
                 clear_dtc_press = True
+                print('Pressed')
             elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
                 decrement_press = True
             elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
@@ -1173,6 +1174,7 @@ while app_running:
                         interval_file.write(str(brake_change_interval))
             elif current_page == 6:
                 if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
+                    print('Not pressed')
                     obd.commands.CLEAR_DTC
 
     # Mileage/Oil Change Interval Functions
