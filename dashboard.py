@@ -416,6 +416,7 @@ def sdisplay_rpm():
 
     screen.blit(rpm_text, (mphtextX - 10, mphtextY - 10))
 
+main_page_check_engine_img = pygame.image.load('diagnostics/engine_check.png')
 
 # main display information
 def display_more_info():
@@ -429,6 +430,11 @@ def display_more_info():
 
     mpg_avg_norm = info_font.render('Voltage ' + str(voltage) + ' V', True, (255, 255, 255))
     screen.blit(mpg_avg_norm, (775, 410))
+
+
+    if dtc_code_present == True:
+        screen.blit(main_page_check_engine_img, (810, 250))
+
 
 
 # sport display information
@@ -904,7 +910,7 @@ def interval_display():
     back_button()
 
 
-error_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 20)
+error_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 30)
 
 
 def diag_display():
@@ -927,7 +933,7 @@ def diag_display():
         # Iterates through the two lists and prints list contents
         for j in range(len(dtc_code)):
             error_label = error_font.render(error_num_list[j] + ' ' + error_description_list[j], True, (255, 255, 255))
-            screen.blit(error_label, (370, 250 + (j * 20)))
+            screen.blit(error_label, (320, 250 + (j * 20)))
         clear_dtc_button()
 
 # Redraw

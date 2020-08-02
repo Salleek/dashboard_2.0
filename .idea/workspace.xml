@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40bc193c-a3a8-4bca-9d75-c884dccae832" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sport_mode/turbo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/diagnostics/engine_check.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
     </list>
@@ -45,16 +45,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sport_mode" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/diagnostics" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\diagnostics" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\tach\sport" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\tach\norm" />
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\maintenance" />
-      <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\temp_gauge" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mrjof\PycharmProjects\Github\dashboard_2.0\sport_mode\framework" />
