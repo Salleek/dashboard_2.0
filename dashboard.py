@@ -45,7 +45,16 @@ dtc_code = ''
 current_maintenance = 1
 increment_press = False
 decrement_press = False
-# colors_button_press = False
+colors_button_press = False
+red_press = False
+blue_press = False
+green_press = False
+grey_press = False
+mint_press = False
+pink_press = False
+purple_press = False
+current_color = 1
+colors = {1: 'Red', 2: 'Blue', 3: 'Green', 4: 'Grey', 5: 'Mint', 6: 'Pink', 7: 'Purple'}
 
 # initialize the interface
 pygame.init()
@@ -532,8 +541,6 @@ frameworkX = 8
 frameworkY = 95
 
 sframework_img = pygame.image.load('sport_mode/framework/Framework.png')
-frameworkX = 8
-frameworkY = 95
 
 
 def framework():
@@ -544,24 +551,38 @@ def sframework():
     screen.blit(sframework_img, (frameworkX, frameworkY))
 
 
-# Gradient
-gradient_img = pygame.image.load('Gradient.png')
+# Background colors
+gradient_img = pygame.image.load('backgrounds/Gradient.png')
 gradientX = 0
 gradientY = 0
 
-# Sports
-sport_img = pygame.image.load('Gradient_red.png')
-sportsX = 0
-sportsY = 0
-
+red_color = pygame.image.load('backgrounds/Gradient_red.png')
+blue_color = pygame.image.load('backgrounds/Gradient_blue.png')
+green_color = pygame.image.load('backgrounds/gradient green.png')
+grey_color = pygame.image.load('backgrounds/gradient grey.png')
+mint_color = pygame.image.load('backgrounds/gradient mint.png')
+pink_color = pygame.image.load('backgrounds/gradient pink.png')
+purple_color = pygame.image.load('backgrounds/gradient purple.png')
 
 def gradient():
     screen.blit(gradient_img, (gradientX, gradientY))
 
 
 def sports():
-    screen.blit(sport_img, (sportsX, sportsY))
-
+    if current_color == 1:
+        screen.blit(red_color, (gradientX, gradientY))
+    elif current_color == 2:
+        screen.blit(blue_color, (gradientX, gradientY))
+    elif current_color == 3:
+        screen.blit(green_color, (gradientX, gradientY))
+    elif current_color == 4:
+        screen.blit(grey_color, (gradientX, gradientY))
+    elif current_color == 5:
+        screen.blit(mint_color, (gradientX, gradientY))
+    elif current_color == 6:
+        screen.blit(pink_color, (gradientX, gradientY))
+    elif current_color == 7:
+        screen.blit(purple_color, (gradientX, gradientY))
 
 # Buttons
 normal_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 25)
@@ -576,9 +597,9 @@ normal_txt_Y = 530
 
 def sports_button():
     if sports_button_press is True:
-        button_img = pygame.image.load('Sport Button Pressed (no label).png')
+        button_img = pygame.image.load('buttons/Sport Button Pressed (no label).png')
     else:
-        button_img = pygame.image.load('Sport button not pressed (no label).png')
+        button_img = pygame.image.load('buttons/Sport button not pressed (no label).png')
     screen.blit(button_img, (45, 450))
     # Checks the state and changes the text accordingly
     if current_page != 2:
@@ -591,40 +612,33 @@ def sports_button():
 
 def back_button():
     if back_button_press is True:
-        back_img = pygame.image.load('Back Button Pressed.png')
+        back_img = pygame.image.load('buttons/Back Button Pressed.png')
     else:
-        back_img = pygame.image.load('Back Button.png')
+        back_img = pygame.image.load('buttons/Back Button.png')
     screen.blit(back_img, (10, 425))
 
 
 def reset_button():
     if reset_button_press is True:
-        reset_img = pygame.image.load('Reset Interval Button Pressed.png')
+        reset_img = pygame.image.load('buttons/Reset Interval Button Pressed.png')
     else:
-        reset_img = pygame.image.load('Reset Interval Button.png')
+        reset_img = pygame.image.load('buttons/Reset Interval Button.png')
     screen.blit(reset_img, (700, 425))
 
 
 def interval_button():
     if interval_button_press is True:
-        interval_img = pygame.image.load('Interval Button Pressed.png')
+        interval_img = pygame.image.load('buttons/Interval Button Pressed.png')
     else:
-        interval_img = pygame.image.load('Interval Button.png')
+        interval_img = pygame.image.load('buttons/Interval Button.png')
     screen.blit(interval_img, (825, 425))
 
-
-# Colors button
-# colors_txt_X = 809
-# colors_txt_Y = 530
-#
-# def colors_button():
-#     if colors_button_press is True:
-#         colors_img = pygame.image.load('Sport Button Pressed (no label).png')
-#     else:
-#         colors_img = pygame.image.load('Sport button not pressed (no label).png')
-#     screen.blit(colors_img, (754, 450))
-#     colors_label = sports_font.render('Colors', True, (255, 255, 255))
-#     screen.blit(colors_label, (colors_txt_X, colors_txt_Y))
+def colors_button():
+    if colors_button_press is True:
+        colors_img = pygame.image.load('buttons/color shift pressed.png')
+    else:
+        colors_img = pygame.image.load('buttons/color shift not pressed.png')
+    screen.blit(colors_img, (754, 450))
 
 # Current interval text
 interval_txt_X = 220
@@ -641,57 +655,57 @@ def interval_text(interval_string, maintenance_interval, offset):
 # Oil change interval buttons
 def three_thousand():
     if three_thousand_press is True:
-        three_thousand_img = pygame.image.load('3000_P.png')
+        three_thousand_img = pygame.image.load('buttons/3000_P.png')
     else:
-        three_thousand_img = pygame.image.load('3000_NP.png')
+        three_thousand_img = pygame.image.load('buttons/3000_NP.png')
     screen.blit(three_thousand_img, (115, 260))
 
 
 def five_thousand():
     if five_thousand_press is True:
-        five_thousand_img = pygame.image.load('5000_P.png')
+        five_thousand_img = pygame.image.load('buttons/5000_P.png')
     else:
-        five_thousand_img = pygame.image.load('5000_NP.png')
+        five_thousand_img = pygame.image.load('buttons/5000_NP.png')
     screen.blit(five_thousand_img, (265, 260))
 
 
 def seven_thousand_five():
     if seven_thousand_five_press is True:
-        seven_thousand_five_img = pygame.image.load('7500_P.png')
+        seven_thousand_five_img = pygame.image.load('buttons/7500_P.png')
     else:
-        seven_thousand_five_img = pygame.image.load('7500_NP.png')
+        seven_thousand_five_img = pygame.image.load('buttons/7500_NP.png')
     screen.blit(seven_thousand_five_img, (415, 260))
 
 
 def ten_thousand():
     if ten_thousand_press is True:
-        ten_thousand_img = pygame.image.load('10000_P.png')
+        ten_thousand_img = pygame.image.load('buttons/10000_P.png')
     else:
-        ten_thousand_img = pygame.image.load('10000_NP.png')
+        ten_thousand_img = pygame.image.load('buttons/10000_NP.png')
     screen.blit(ten_thousand_img, (565, 260))
 
 
 def fifteen_thousand():
     if fifteen_thousand_press is True:
-        fifteen_thousand_img = pygame.image.load('15000_P.png')
+        fifteen_thousand_img = pygame.image.load('buttons/15000_P.png')
     else:
-        fifteen_thousand_img = pygame.image.load('15000_NP.png')
+        fifteen_thousand_img = pygame.image.load('buttons/15000_NP.png')
     screen.blit(fifteen_thousand_img, (715, 260))
 
 
 def increment():
     if increment_press is True:
-        increment_img = pygame.image.load('Plus Button Pressed.png')
+        increment_img = pygame.image.load('buttons/Plus Button Pressed.png')
     else:
-        increment_img = pygame.image.load('Plus Button Not Pressed.png')
+        increment_img = pygame.image.load('buttons/Plus Button Not Pressed.png')
     screen.blit(increment_img, (600, 260))
 
 
 def decrement():
     if decrement_press is True:
-        decrement_img = pygame.image.load('Subtract Button Pressed.png')
+        decrement_img = pygame.image.load('buttons/Subtract Button Pressed.png')
     else:
-        decrement_img = pygame.image.load('Subtract button Not pressed.png')
+        decrement_img = pygame.image.load('buttons/Subtract button Not pressed.png')
     screen.blit(decrement_img, (250, 260))
 
 
@@ -796,8 +810,8 @@ def display_warning_indicator_small(oil_change_count, transmission_change_count,
 vehicle_maint_heading_img = pygame.image.load('maintenance/maintenance_heading.png')
 maint_headingX = 210
 maint_headingY = 65
-next_maintenance = pygame.image.load('next.png')
-previous_maintenance = pygame.image.load('back.png')
+next_maintenance = pygame.image.load('buttons/next.png')
+previous_maintenance = pygame.image.load('buttons/back.png')
 
 oil_change_int_heading_img = pygame.image.load('maintenance/oil_change_interval_heading.png')
 transmission_oil_change_int_heading_img = pygame.image.load('maintenance/transmission_interval_heading.png')
@@ -829,9 +843,9 @@ clear_dtc_button_label = clear_dtc_font.render('Clear DTC', True, (255, 255, 255
 
 def clear_dtc_button():
     if clear_dtc_press is False:
-        clear_dtc = pygame.image.load('Sport button not pressed (no label).png')
+        clear_dtc = pygame.image.load('buttons/Sport button not pressed (no label).png')
     else:
-        clear_dtc = pygame.image.load('Sport Button Pressed (no label).png')
+        clear_dtc = pygame.image.load('buttons/Sport Button Pressed (no label).png')
     screen.blit(clear_dtc, (840, 425))
     screen.blit(clear_dtc_button_label, (888, 500))
 
@@ -867,7 +881,7 @@ def sports_display():
     display_more_info_sport()
     intake_temp_gauge()
     display_logos()
-
+    colors_button()
 
 def maintenance_display():
     reset_button()
@@ -936,6 +950,85 @@ def diag_display():
             screen.blit(error_label, (200, 250 + (j * 40)))
         clear_dtc_button()
 
+# Change background colors page
+color_heading = pygame.image.load('logos_headings/Background Colors Heading.png')
+color_font = pygame.font.Font('Fonts/pirulen rg.ttf', 25)
+with open('backgrounds/current_background.txt', 'r+') as background_file:
+    background_color_string = background_file.readline()
+    if background_color_string:
+        current_color = int(background_color_string)
+    # Defaults to red if text file is empty
+    else:
+        current_color = 1
+
+def display_color_heading():
+    screen.blit(color_heading, (maint_headingX, maint_headingY))
+
+def display_current_color(current_color):
+    color_label = color_font.render('Current color: ' + colors.get(current_color), True, (255, 255, 255))
+    screen.blit(color_label, (300, 170))
+
+def red_button():
+    if red_press is True:
+        red = pygame.image.load('buttons/Red P.png')
+    else:
+        red = pygame.image.load('buttons/Red NP.png')
+    screen.blit(red, (190, 200))
+
+def blue_button():
+    if blue_press is True:
+        blue = pygame.image.load('buttons/Blue P.png')
+    else:
+        blue = pygame.image.load('buttons/Blue NP.png')
+    screen.blit(blue, (340, 200))
+
+def green_button():
+    if green_press is True:
+        green = pygame.image.load('buttons/Green P.png')
+    else:
+        green = pygame.image.load('buttons/Green NP.png')
+    screen.blit(green, (490, 200))
+
+def grey_button():
+    if grey_press is True:
+        grey = pygame.image.load('buttons/Grey P.png')
+    else:
+        grey = pygame.image.load('buttons/Grey NP.png')
+    screen.blit(grey, (640, 200))
+
+def mint_button():
+    if mint_press is True:
+        mint = pygame.image.load('buttons/Mint P.png')
+    else:
+        mint = pygame.image.load('buttons/Mint NP.png')
+    screen.blit(mint, (265, 320))
+
+def pink_button():
+    if pink_press is True:
+        pink = pygame.image.load('buttons/Pink P.png')
+    else:
+        pink = pygame.image.load('buttons/Pink NP.png')
+    screen.blit(pink, (415, 320))
+
+def purple_button():
+    if purple_press is True:
+        purple = pygame.image.load('buttons/Purple P.png')
+    else:
+        purple = pygame.image.load('buttons/Purple NP.png')
+    screen.blit(purple, (565, 320))
+
+def color_display():
+    display_color_heading()
+    display_current_color(current_color)
+    back_button()
+    red_button()
+    blue_button()
+    green_button()
+    grey_button()
+    mint_button()
+    pink_button()
+    purple_button()
+
 # Redraw
 def RedrawWindow():
     # Checks which background image to use
@@ -955,6 +1048,8 @@ def RedrawWindow():
             maintenance_display()
         elif current_page == 4:
             interval_display()
+        elif current_page == 7:
+            color_display()
         else:
             diag_display()
 
@@ -1019,9 +1114,9 @@ def get_trip_distance(tripdistanceRaw):
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
-    
+
 def clear_dtc_codes(clearRaw):
-    global dtc_code 
+    global dtc_code
 
 def get_elm_voltage(voltageRaw):
     if not voltageRaw.is_null():
@@ -1040,7 +1135,6 @@ connection.watch(obd.commands.INTAKE_TEMP, callback=get_intake_temp)
 connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
 connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
 connection.watch(obd.commands.ELM_VOLTAGE, callback=get_elm_voltage)
-#connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
 connection.start()
 
 def clearDTC():
@@ -1081,6 +1175,8 @@ while app_running:
             # mouse[0] is the x coordinate, mouse[1] is the y
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
                 sports_button_press = True
+            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585 and current_page == 2:
+                colors_button_press = True
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
                 back_button_press = True
             elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
@@ -1093,7 +1189,6 @@ while app_running:
                 #connection.query(obd.commands.CLEAR_DTC)
                 #connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
                 #connection.start()
-                print('Pressed')
             elif current_page == 4:
                 if current_maintenance == 1:
                     if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
@@ -1111,6 +1206,21 @@ while app_running:
                         decrement_press = True
                     elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
                         increment_press = True
+            elif current_page == 7:
+                if 235 < mouse[0] < 325 and 245 < mouse[1] < 335:
+                    red_press = True
+                elif 385 < mouse[0] < 475 and 245 < mouse[1] < 335:
+                    blue_press = True
+                elif 535 < mouse[0] < 625 and 245 < mouse[1] < 335:
+                    green_press = True
+                elif 685 < mouse[0] < 775 and 245 < mouse[1] < 335:
+                    grey_press = True
+                elif 310 < mouse[0] < 400 and 365 < mouse[1] < 455:
+                    mint_press = True
+                elif 460 < mouse[0] < 550 and 365 < mouse[1] < 455:
+                    pink_press = True
+                elif 610 < mouse[0] < 700 and 365 < mouse[1] < 455:
+                    purple_press = True
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
@@ -1118,6 +1228,8 @@ while app_running:
             three_thousand_press = five_thousand_press = seven_thousand_five_press = ten_thousand_press = fifteen_thousand_press = False
             decrement_press = increment_press = False
             clear_dtc_press = False
+            colors_button_press = False
+            red_press = blue_press = green_press = grey_press = mint_press = pink_press = purple_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1125,6 +1237,9 @@ while app_running:
                     current_page = 2
                 else:
                     current_page = 1
+            # Goes to change background color page
+            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585 and current_page == 2:
+                current_page = 7
             # Goes to vehicle maintenance
             elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page == 1:
                 current_page = 3
@@ -1152,6 +1267,8 @@ while app_running:
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561:
                 if current_page == 3 or current_page == 5 or current_page == 6:
                     current_page = 1
+                elif current_page == 7:
+                    current_page = 2
                 else:
                     current_page -= 1
             # Reset button
@@ -1208,12 +1325,35 @@ while app_running:
                     print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
-            elif current_page == 6:
-                if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
-                    print('Not pressed')
-                    #connection.query(obd.commands.CLEAR_DTC)
-                    #connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
-                    #connection.start()
+            elif current_page == 7:
+                if 235 < mouse[0] < 325 and 245 < mouse[1] < 335:
+                    current_color = 1
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 385 < mouse[0] < 475 and 245 < mouse[1] < 335:
+                    current_color = 2
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 535 < mouse[0] < 625 and 245 < mouse[1] < 335:
+                    current_color = 3
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 685 < mouse[0] < 775 and 245 < mouse[1] < 335:
+                    current_color = 4
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 310 < mouse[0] < 400 and 365 < mouse[1] < 455:
+                    current_color = 5
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 460 < mouse[0] < 550 and 365 < mouse[1] < 455:
+                    current_color = 6
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
+                elif 610 < mouse[0] < 700 and 365 < mouse[1] < 455:
+                    current_color = 7
+                    with open('backgrounds/current_background.txt', 'w') as background_file:
+                        background_file.write(str(current_color))
 
     # Mileage/Oil Change Interval Functions
 
@@ -1258,7 +1398,5 @@ while app_running:
     # dtc boolean handling
     if dtc_code:
         dtc_code_present = True
-        print(dtc_code)
     else:
         dtc_code_present = False
-        print(dtc_code)
