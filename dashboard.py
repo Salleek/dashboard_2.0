@@ -1057,24 +1057,26 @@ while app_running:
                 reset_button_press = True
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 interval_button_press = True
-            elif current_maintenance == 1:
-                if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
-                    three_thousand_press = True
-                elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
-                    five_thousand_press = True
-                elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
-                    seven_thousand_five_press = True
-                elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
-                    ten_thousand_press = True
-                elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
-                    fifteen_thousand_press = True
             elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
                 clear_dtc_press = True
                 print('Pressed')
-            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
-                decrement_press = True
-            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
-                increment_press = True
+            elif current_page == 4:
+                if current_maintenance == 1:
+                    if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
+                        three_thousand_press = True
+                    elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
+                        five_thousand_press = True
+                    elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
+                        seven_thousand_five_press = True
+                    elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
+                        ten_thousand_press = True
+                    elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
+                        fifteen_thousand_press = True
+                else:
+                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
+                        decrement_press = True
+                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
+                        increment_press = True
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
