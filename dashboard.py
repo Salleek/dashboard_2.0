@@ -1014,6 +1014,13 @@ def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
 
+def clear_dtc_codes(clearRaw):
+    global dtc_code
+
+def get_elm_voltage(voltageRaw):
+    if not voltageRaw.is_null():
+        global voltage
+        voltage = int(voltageRaw.value.magnitude)
 
 # OBD Connection Callbacks
 connection.watch(obd.commands.RPM, callback=get_rpm)
@@ -1026,7 +1033,8 @@ connection.watch(obd.commands.FUEL_PRESSURE, callback=get_fuel_pressure)
 connection.watch(obd.commands.INTAKE_TEMP, callback=get_intake_temp)
 connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
 connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
-
+connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
+connection.watch(obd.commands.ELM_VOLTAGE, callback=get_elm_voltage)
 connection.start()
 
 # Game Loop
@@ -1177,7 +1185,7 @@ while app_running:
             elif current_page == 6:
                 if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
                     print('Not pressed')
-                    obd.commands.CLEAR_DTC
+                    response = connection.query(obd.commands.CLEAR_DTC)
 
     # Mileage/Oil Change Interval Functions
 
