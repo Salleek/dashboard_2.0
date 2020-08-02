@@ -487,7 +487,7 @@ def intake_temp_gauge():
     pressure_fuel = stemp_font_fuel.render(('Fuel Pressure ' + str(fuel_pressure) + ' PSI'), True, (255, 255, 255))
     screen.blit(pressure_fuel, (temp_txt_X - 20, 185))
 
-    screen.blit(turbo_icon_img, (120, 145))
+    screen.blit(turbo_icon_img, (120, 135))
 
 
 # Coolant Temp Gauge
@@ -1013,9 +1013,9 @@ def get_trip_distance(tripdistanceRaw):
 def get_dtc_codes(dtcRaw):
     global dtc_code
     dtc_code = dtcRaw.value
-
+    
 def clear_dtc_codes(clearRaw):
-    global dtc_code
+    global dtc_code 
 
 def get_elm_voltage(voltageRaw):
     if not voltageRaw.is_null():
@@ -1033,9 +1033,25 @@ connection.watch(obd.commands.FUEL_PRESSURE, callback=get_fuel_pressure)
 connection.watch(obd.commands.INTAKE_TEMP, callback=get_intake_temp)
 connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
 connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
-connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
 connection.watch(obd.commands.ELM_VOLTAGE, callback=get_elm_voltage)
+#connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
 connection.start()
+
+def clearDTC():
+    connection.stop()
+    connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
+    connection.watch(obd.commands.RPM, callback=get_rpm)
+    connection.watch(obd.commands.SPEED, callback=get_speed)
+    connection.watch(obd.commands.COOLANT_TEMP, callback=get_temp)
+    connection.watch(obd.commands.THROTTLE_POS, callback=get_throttle_position)
+    connection.watch(obd.commands.MAF, callback=get_maf)
+    connection.watch(obd.commands.ENGINE_LOAD, callback=get_load)
+    connection.watch(obd.commands.FUEL_PRESSURE, callback=get_fuel_pressure)
+    connection.watch(obd.commands.INTAKE_TEMP, callback=get_intake_temp)
+    connection.watch(obd.commands.DISTANCE_SINCE_DTC_CLEAR, callback=get_trip_distance)
+    connection.watch(obd.commands.GET_DTC, callback=get_dtc_codes)
+    connection.watch(obd.commands.ELM_VOLTAGE, callback=get_elm_voltage)
+    connection.start()
 
 # Game Loop
 app_running = True
@@ -1067,6 +1083,10 @@ while app_running:
                 interval_button_press = True
             elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
                 clear_dtc_press = True
+                clearDTC()
+                #connection.query(obd.commands.CLEAR_DTC)
+                #connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
+                #connection.start()
                 print('Pressed')
             elif current_page == 4:
                 if current_maintenance == 1:
@@ -1185,7 +1205,9 @@ while app_running:
             elif current_page == 6:
                 if 885 < mouse[0] < 975 and 470 < mouse[1] < 560:
                     print('Not pressed')
-                    response = connection.query(obd.commands.CLEAR_DTC)
+                    #connection.query(obd.commands.CLEAR_DTC)
+                    #connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
+                    #connection.start()
 
     # Mileage/Oil Change Interval Functions
 
@@ -1228,7 +1250,9 @@ while app_running:
         prev_trip_distance = trip_distance
 
     # dtc boolean handling
-    if not dtc_code is None:
+    if dtc_code:
         dtc_code_present = True
+        print(dtc_code)
     else:
         dtc_code_present = False
+        print(dtc_code)
