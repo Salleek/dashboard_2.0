@@ -433,7 +433,7 @@ def display_more_info():
 
 
     if dtc_code_present == True:
-        screen.blit(main_page_check_engine_img, (810, 250))
+        screen.blit(main_page_check_engine_img, (830, 175))
 
 
 
@@ -933,7 +933,7 @@ def diag_display():
         # Iterates through the two lists and prints list contents
         for j in range(len(dtc_code)):
             error_label = error_font.render(error_num_list[j] + ' ' + error_description_list[j], True, (255, 255, 255))
-            screen.blit(error_label, (320, 250 + (j * 20)))
+            screen.blit(error_label, (200, 250 + (j * 40)))
         clear_dtc_button()
 
 # Redraw
