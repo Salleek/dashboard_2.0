@@ -55,6 +55,8 @@ pink_press = False
 purple_press = False
 current_color = 1
 colors = {1: 'Red', 2: 'Blue', 3: 'Green', 4: 'Grey', 5: 'Mint', 6: 'Pink', 7: 'Purple'}
+yes_press = False
+no_press = False
 
 # initialize the interface
 pygame.init()
@@ -1029,6 +1031,44 @@ def color_display():
     pink_button()
     purple_button()
 
+# Confirm reset page
+reset_heading = pygame.image.load('maintenance/Confirm Reset Heading.png')
+reset_font = pygame.font.Font('Fonts/LeelUIsl.ttf', 35)
+
+def confirm_reset_heading():
+    screen.blit(reset_heading, (maint_headingX, maint_headingY))
+
+def confirm_reset_message(current_maintenance):
+    if current_maintenance == 1:
+        reset_message = reset_font.render('Do you want to reset the oil maintenance interval?', True, (255, 255, 255))
+        screen.blit(reset_message, (140, 180))
+    elif current_maintenance == 2:
+        reset_message = reset_font.render('Do you want to reset the transmission maintenance interval?', True, (255, 255, 255))
+        screen.blit(reset_message, (70, 180))
+    elif current_maintenance == 3:
+        reset_message = reset_font.render('Do you want to reset the brake maintenance interval?', True, (255, 255, 255))
+        screen.blit(reset_message, (120, 180))
+
+def yes_button():
+    if yes_press is True:
+        yes = pygame.image.load('buttons/Yes P.png')
+    else:
+        yes = pygame.image.load('buttons/Yes NP.png')
+    screen.blit(yes, (250, 260))
+
+def no_button():
+    if no_press is True:
+        no = pygame.image.load('buttons/No P.png')
+    else:
+        no = pygame.image.load('buttons/No NP.png')
+    screen.blit(no, (600, 260))
+
+def confirm_display():
+    confirm_reset_heading()
+    confirm_reset_message(current_maintenance)
+    yes_button()
+    no_button()
+
 # Redraw
 def RedrawWindow():
     # Checks which background image to use
@@ -1050,6 +1090,8 @@ def RedrawWindow():
             interval_display()
         elif current_page == 7:
             color_display()
+        elif current_page == 8:
+            confirm_display()
         else:
             diag_display()
 
@@ -1162,7 +1204,7 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    # print(mouse)
+    print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             connection.stop()
@@ -1221,6 +1263,11 @@ while app_running:
                     pink_press = True
                 elif 610 < mouse[0] < 700 and 365 < mouse[1] < 455:
                     purple_press = True
+            elif current_page == 8:
+                if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+                    yes_press = True
+                elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                    no_press = True
 
         # Checks for when we let go of the mouse button
         if event.type == pygame.MOUSEBUTTONUP:
@@ -1230,6 +1277,7 @@ while app_running:
             clear_dtc_press = False
             colors_button_press = False
             red_press = blue_press = green_press = grey_press = mint_press = pink_press = purple_press = False
+            yes_press = no_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1273,12 +1321,19 @@ while app_running:
                     current_page -= 1
             # Reset button
             elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
+                current_page = 8
+            # Yes button
+            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                 if current_maintenance == 1:
                     oil_mileage = 0
                 elif current_maintenance == 2:
                     transmission_oil_mileage = 0
                 elif current_maintenance == 3:
                     brake_mileage = 0
+                current_page = 3
+            # No button
+            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+                current_page = 3
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
                 current_page = 4
