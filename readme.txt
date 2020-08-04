@@ -12,4 +12,4 @@ Once you have acquired all these components and have your Raspberry Pi running o
 3. Run the following command: pip3 install pygame
 4. Run the following command: pip3 isntall obd
 
-Once all this is done, run the python file dashboard.py and Dashboard 2.0 will launch.
+Once all this is done, open the directory with all the Dashboard 2.0 files run the python file dashboard.py and Dashboard 2.0 will launch.
