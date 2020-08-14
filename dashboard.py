@@ -69,7 +69,7 @@ infoObject = pygame.display.Info()
 display_width = infoObject.current_w
 display_height = infoObject.current_h
 
-screen = pygame.display.set_mode((display_width, display_height))
+screen = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
 # screen = pygame.display.set_mode((1024, 600))
 # screen = pygame.display.set_mode((800, 480))
 
@@ -1204,7 +1204,8 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+    #print(mouse)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             connection.stop()
