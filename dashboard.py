@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import obd
 import pygame
 import time
@@ -71,15 +73,14 @@ display_width = infoObject.current_w
 display_height = infoObject.current_h
 
 screen = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
-# screen = pygame.display.set_mode((1024, 600))
-# screen = pygame.display.set_mode((800, 480))
+
 
 # Title of app
 pygame.display.set_caption("Dashboard 2.0")
 
 # OBD Initilization
 # connection = obd.Async(fast=False, check_voltage=True)
-connection = obd.Async(fast=False)     
+connection = obd.Async(fast=False)
 # connection = obd.OBD()
 
 # logo and project heading
@@ -1239,26 +1240,23 @@ while app_running:
                 interval_button_press = True
             elif 885 < mouse[0] < 975 and 470 < mouse[1] < 560 and current_page == 6:
                 clear_dtc_press = True
-                clearDTC()
-                #connection.query(obd.commands.CLEAR_DTC)
-                #connection.watch(obd.commands.CLEAR_DTC, callback=clear_dtc_codes)
-                #connection.start()
+                # clearDTC()
             elif current_page == 4:
                 if current_maintenance == 1:
-                    if 160 < mouse[0] < 250 and 305 < mouse[1] < 395 and current_page == 4:
+                    if 160 < mouse[0] < 250 and 305 < mouse[1] < 395:
                         three_thousand_press = True
-                    elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395 and current_page == 4:
+                    elif 310 < mouse[0] < 400 and 305 < mouse[1] < 395:
                         five_thousand_press = True
-                    elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395 and current_page == 4:
+                    elif 460 < mouse[0] < 550 and 305 < mouse[1] < 395:
                         seven_thousand_five_press = True
-                    elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395 and current_page == 4:
+                    elif 610 < mouse[0] < 700 and 305 < mouse[1] < 395:
                         ten_thousand_press = True
-                    elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395 and current_page == 4:
+                    elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
                         fifteen_thousand_press = True
                 else:
-                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 4:
+                    if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                         decrement_press = True
-                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 4:
+                    elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
                         increment_press = True
             elif current_page == 7:
                 if 235 < mouse[0] < 325 and 245 < mouse[1] < 335:
@@ -1342,7 +1340,7 @@ while app_running:
             elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
                 current_page = 8
             # Yes button
-            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
+            elif 295 < mouse[0] < 385 and 305 < mouse[1] < 395 and current_page == 8:
                 if current_maintenance == 1:
                     oil_mileage = 0
                 elif current_maintenance == 2:
@@ -1351,7 +1349,7 @@ while app_running:
                     brake_mileage = 0
                 current_page = 3
             # No button
-            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
+            elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395 and current_page == 8:
                 current_page = 3
             # Interval button
             elif 870 < mouse[0] < 960 and 471 < mouse[1] < 561 and current_page == 3:
@@ -1380,23 +1378,19 @@ while app_running:
             elif current_maintenance == 2 and current_page == 4:
                 if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                     transmission_oil_change_interval = transmission_oil_change_interval - 500
-                    print(transmission_oil_change_interval)
                     with open('maintenance/transmission_interval.txt', 'w') as interval_file:
                         interval_file.write(str(transmission_oil_change_interval))
                 elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
                     transmission_oil_change_interval = transmission_oil_change_interval + 500
-                    print(transmission_oil_change_interval)
                     with open('maintenance/transmission_interval.txt', 'w') as interval_file:
                         interval_file.write(str(transmission_oil_change_interval))
             elif current_maintenance == 3 and current_page == 4:
                 if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                     brake_change_interval = brake_change_interval - 500
-                    print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
                 elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
                     brake_change_interval = brake_change_interval + 500
-                    print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
             elif current_page == 7:
