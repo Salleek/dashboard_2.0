@@ -57,6 +57,7 @@ current_color = 1
 colors = {1: 'Red', 2: 'Blue', 3: 'Green', 4: 'Grey', 5: 'Mint', 6: 'Pink', 7: 'Purple'}
 yes_press = False
 no_press = False
+exit_press = False
 
 # initialize the interface
 pygame.init()
@@ -69,7 +70,7 @@ infoObject = pygame.display.Info()
 display_width = infoObject.current_w
 display_height = infoObject.current_h
 
-screen = pygame.display.set_mode((display_width, display_height))
+screen = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
 # screen = pygame.display.set_mode((1024, 600))
 # screen = pygame.display.set_mode((800, 480))
 
@@ -78,7 +79,7 @@ pygame.display.set_caption("Dashboard 2.0")
 
 # OBD Initilization
 # connection = obd.Async(fast=False, check_voltage=True)
-connection = obd.Async(fast=False)
+connection = obd.Async(fast=False)     
 # connection = obd.OBD()
 
 # logo and project heading
@@ -611,6 +612,12 @@ def sports_button():
         button_label = sports_font.render('Normal', True, (255, 255, 255))
         screen.blit(button_label, (normal_txt_X, normal_txt_Y))
 
+def exit_button():
+    if exit_press is True:
+        exit_img = pygame.image.load('buttons/exit button pressed.png')
+    else:
+        exit_img = pygame.image.load('buttons/exit button not pressed.png')
+    screen.blit(exit_img, (754, 450))
 
 def back_button():
     if back_button_press is True:
@@ -871,6 +878,7 @@ def displays():
     display_speed()
     display_more_info()
     display_logos()
+    exit_button()
 
 
 def sports_display():
@@ -1197,6 +1205,7 @@ def clearDTC():
 
 # Game Loop
 app_running = True
+pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 while app_running:
     clock.tick(60)
 
@@ -1204,12 +1213,12 @@ while app_running:
     screen.fill((0, 0, 0))
 
     mouse = pygame.mouse.get_pos()
-    print(mouse)
+    #print(mouse)
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            connection.stop()
-            connection.close()
-            app_running = False
+        # if event.type == pygame.QUIT:
+        #     connection.stop()
+        #     connection.close()
+        #     app_running = False
 
         # Checks for when we press the mouse button down
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -1217,8 +1226,11 @@ while app_running:
             # mouse[0] is the x coordinate, mouse[1] is the y
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
                 sports_button_press = True
-            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585 and current_page == 2:
-                colors_button_press = True
+            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585:
+                if current_page == 2:
+                    colors_button_press = True
+                else:
+                    exit_press = True
             elif 56 < mouse[0] < 146 and 471 < mouse[1] < 561 and current_page > 2:
                 back_button_press = True
             elif 745 < mouse[0] < 835 and 471 < mouse[1] < 561 and current_page == 3:
@@ -1278,6 +1290,7 @@ while app_running:
             colors_button_press = False
             red_press = blue_press = green_press = grey_press = mint_press = pink_press = purple_press = False
             yes_press = no_press = False
+            exit_press = False
             # current_page condition is used to prevent users from going to pages in the wrong order
             # ex. Going from maintenance to sports mode
             if 90 < mouse[0] < 180 and 495 < mouse[1] < 585 and current_page < 3:
@@ -1285,9 +1298,15 @@ while app_running:
                     current_page = 2
                 else:
                     current_page = 1
-            # Goes to change background color page
-            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585 and current_page == 2:
-                current_page = 7
+            elif 800 < mouse[0] < 890 and 495 < mouse[1] < 585 and current_page < 3:
+                # Goes to change background color page
+                if current_page == 2:
+                    current_page = 7
+                # Exits program
+                elif current_page == 1:
+                    connection.stop()
+                    connection.close()
+                    app_running = False
             # Goes to vehicle maintenance
             elif 10 < mouse[0] < 270 and 130 < mouse[1] < 300 and current_page == 1:
                 current_page = 3
