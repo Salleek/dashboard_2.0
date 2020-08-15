@@ -1215,10 +1215,10 @@ while app_running:
     mouse = pygame.mouse.get_pos()
     #print(mouse)
     for event in pygame.event.get():
-        # if event.type == pygame.QUIT:
-        #     connection.stop()
-        #     connection.close()
-        #     app_running = False
+        if event.type == pygame.QUIT:
+             connection.stop()
+             connection.close()
+             app_running = False
 
         # Checks for when we press the mouse button down
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -1460,7 +1460,7 @@ while app_running:
         else:
             inst_mpg = round((710.7 + speed_value) / maf_reading)
     else:
-        inst_mpg = 0;
+        inst_mpg = 0
 
     # Where mileage should increment
     if trip_distance > prev_trip_distance + 1:
