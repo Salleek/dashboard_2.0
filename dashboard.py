@@ -705,7 +705,7 @@ def fifteen_thousand():
 
 def increment():
     if increment_press is True:
-        increment_img = pygame.image.load('buttons/Plus Button Pressed.png')
+        increment_img = pygame.image.load('buttons/Plus button Pressed.png')
     else:
         increment_img = pygame.image.load('buttons/Plus Button Not Pressed.png')
     screen.blit(increment_img, (600, 260))
@@ -1206,7 +1206,7 @@ def clearDTC():
 
 # Game Loop
 app_running = True
-pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+#pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 while app_running:
     clock.tick(60)
 
@@ -1216,10 +1216,10 @@ while app_running:
     mouse = pygame.mouse.get_pos()
     #print(mouse)
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-             connection.stop()
-             connection.close()
-             app_running = False
+    #     if event.type == pygame.QUIT:
+    #          connection.stop()
+    #          connection.close()
+    #          app_running = False
 
         # Checks for when we press the mouse button down
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -1253,7 +1253,7 @@ while app_running:
                         ten_thousand_press = True
                     elif 760 < mouse[0] < 850 and 305 < mouse[1] < 395:
                         fifteen_thousand_press = True
-                else:
+                elif current_maintenance == 2 or current_maintenance == 3:
                     if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                         decrement_press = True
                     elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
