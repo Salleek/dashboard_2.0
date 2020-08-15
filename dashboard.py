@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import obd
 import pygame
 import time
@@ -71,8 +73,7 @@ display_width = infoObject.current_w
 display_height = infoObject.current_h
 
 screen = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
-# screen = pygame.display.set_mode((1024, 600))
-# screen = pygame.display.set_mode((800, 480))
+
 
 # Title of app
 pygame.display.set_caption("Dashboard 2.0")
@@ -1377,23 +1378,19 @@ while app_running:
             elif current_maintenance == 2 and current_page == 4:
                 if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                     transmission_oil_change_interval = transmission_oil_change_interval - 500
-                    print(transmission_oil_change_interval)
                     with open('maintenance/transmission_interval.txt', 'w') as interval_file:
                         interval_file.write(str(transmission_oil_change_interval))
                 elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
                     transmission_oil_change_interval = transmission_oil_change_interval + 500
-                    print(transmission_oil_change_interval)
                     with open('maintenance/transmission_interval.txt', 'w') as interval_file:
                         interval_file.write(str(transmission_oil_change_interval))
             elif current_maintenance == 3 and current_page == 4:
                 if 295 < mouse[0] < 385 and 305 < mouse[1] < 395:
                     brake_change_interval = brake_change_interval - 500
-                    print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
                 elif 645 < mouse[0] < 735 and 305 < mouse[1] < 395:
                     brake_change_interval = brake_change_interval + 500
-                    print(brake_change_interval)
                     with open('maintenance/brake_interval.txt', 'w') as interval_file:
                         interval_file.write(str(brake_change_interval))
             elif current_page == 7:
